@@ -26,12 +26,18 @@ const routes: RouteRecordRaw[] = [
 const RouterInstance = createRouter({
   history: createWebHistory(),
   routes,
-  scrollBehavior: (_, __, savedPos) => {
+  scrollBehavior: (to, _, savedPos) => {
     if (savedPos) {
       return savedPos;
-    } else {
-      return { left: 0, top: 0 };
     }
+    if (to.hash) {
+      return {
+        el: to.hash,
+        behavior: "smooth",
+      };
+    }
+
+    return { left: 0, top: 0 };
   },
 });
 
