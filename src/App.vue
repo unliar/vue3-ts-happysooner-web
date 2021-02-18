@@ -1,16 +1,17 @@
 <template>
-  <div class="happy-app">
-    <router-view />
-  </div>
+  <router-view />
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-
+import { useStore } from "vuex"
 export default defineComponent({
   name: 'App',
-  components: {
-  }
+  setup() {
+    const store = useStore()
+    console.log(store.state)
+  },
+
 })
 </script>
 

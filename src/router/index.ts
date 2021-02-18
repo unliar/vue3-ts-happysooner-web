@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 
-import homeComponent from "../views/home/index.vue";
+import homeComponent from "../views/home/index";
 import postDetail from "../views/post/pid";
 
 const routes: RouteRecordRaw[] = [

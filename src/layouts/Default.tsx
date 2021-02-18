@@ -8,9 +8,7 @@ const DefaultLayout = defineComponent({
       <>
         <div class="default-layout">
           <div>默认布局</div>
-          <div>
-            {this.$slots && this.$slots.default && this.$slots.default()}
-          </div>
+          <div>{this.$slots.default?.()}</div>
         </div>
       </>
     );
