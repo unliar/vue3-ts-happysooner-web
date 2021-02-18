@@ -1,4 +1,4 @@
-## vue3-ts-happysooner-web
+## vue3-ts-happysooner-web ![deploy](https://github.com/unliar/vue3-ts-happysooner-web/workflows/deploy/badge.svg)
 
 这是一个 happysooner.com 的 vue3 精简项目, 主要目的是为了学习 Vue3
 
