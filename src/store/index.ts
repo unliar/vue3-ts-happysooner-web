@@ -44,8 +44,6 @@ const Store = createStore({
           Nickname: data.Nickname,
           Roles: data.Roles,
         });
-      } else {
-        console.log(ACTIONS.GET_AUTHED_USER_INFO, "failed", r.data);
       }
     },
   },
