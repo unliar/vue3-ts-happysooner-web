@@ -1,6 +1,5 @@
 import axios from "axios";
 import { GetTokenCookies } from "../utils/cookie";
-import { ElNotification } from "element-plus";
 const Axios = axios.create({
   headers: {
     "Content-Type": "application/json",
@@ -24,15 +23,8 @@ Axios.interceptors.response.use(
   (res) => {
     if (res?.data?.ErrorCode === 403) {
       console.log("当前接口需要权限");
-      ElNotification({
-        message: `${res.config.url} - 需要登录权限`,
-        type: "error",
-      });
     } else if (res?.data?.ErrorCode !== 200) {
-      ElNotification({
-        message: `当前操作无数据`,
-        type: "warning",
-      });
+      console.log("当前操作无数据");
     }
     return res;
   },
