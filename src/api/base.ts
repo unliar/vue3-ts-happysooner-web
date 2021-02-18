@@ -1,6 +1,10 @@
 import axios from "axios";
 import { GetTokenCookies } from "../utils/cookie";
 const Axios = axios.create({
+  baseURL:
+    import.meta.env.MODE === "production"
+      ? (import.meta.env.VITE_BASE_HOST as string)
+      : "/",
   headers: {
     "Content-Type": "application/json",
   },
