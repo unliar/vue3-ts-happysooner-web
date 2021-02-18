@@ -1,7 +1,8 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 
-import homeComponent from "../views/home/index";
-import postDetail from "../views/post/pid";
+const homeComponent = () => import("../views/home/index");
+const postDetail = () => import("../views/post/pid");
+const signin = () => import("../views/signin/index");
 
 const routes: RouteRecordRaw[] = [
   {
@@ -14,6 +15,11 @@ const routes: RouteRecordRaw[] = [
     name: "post-detail",
     component: postDetail,
     props: true,
+  },
+  {
+    path: "/signin",
+    name: "signin",
+    component: signin,
   },
 ];
 

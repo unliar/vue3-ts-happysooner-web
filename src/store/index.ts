@@ -1,4 +1,5 @@
 import { createStore } from "vuex";
+import { ACTIONS, MUTATIONS } from "./type";
 
 export const InitUserStore = {
   UserID: 0,
@@ -17,19 +18,21 @@ const Store = createStore({
   },
   mutations: {
     // 更新store
-    UpdateStore(state: UserStoreType, payload: UserStoreType) {
-      state = {
-        ...payload,
-      };
+    [MUTATIONS.UPDATE_STORE](state: UserStoreType, payload: UserStoreType) {
+      state.Avatar = payload.Avatar;
+      state.Nickname = payload.Nickname;
+      state.Roles = payload.Roles;
+      state.UserID = payload.UserID;
     },
     // 重置store
-    ResetStore(state: UserStoreType) {
-      Store.commit("UpdateStore", { ...InitUserStore });
+    [MUTATIONS.RESET_STORE]() {
+      Store.commit(MUTATIONS.UPDATE_STORE, { ...InitUserStore });
     },
   },
   actions: {
-    GetAuthedUserInfo(ctx) {
-      console.log(ctx);
+    // 获取认证用户信息
+    [ACTIONS.GET_AUTHED_USER_INFO](ctx) {
+      console.log("GetAuthedUserInfo", ctx);
     },
   },
 });
