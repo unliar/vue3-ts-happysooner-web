@@ -13,6 +13,7 @@ const routes: RouteRecordRaw[] = [
     path: "/post/:pid",
     name: "post-detail",
     component: postDetail,
+    props: true,
   },
 ];
 
