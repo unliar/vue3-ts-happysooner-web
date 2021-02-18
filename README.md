@@ -1,6 +1,6 @@
 ## vue3-ts-happysooner-web
 
-这是一个 happysooner.com 的 vue3 项目
+这是一个 happysooner.com 的 vue3 精简项目, 主要目的是为了学习 Vue3
 
 ### 注意事项
 
