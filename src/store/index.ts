@@ -1,4 +1,5 @@
 import { createStore } from "vuex";
+import { GetUserInfo } from "../api/user";
 import { RemoveTokenCookies } from "../utils/cookie";
 import { ACTIONS, MUTATIONS } from "./type";
 
@@ -33,8 +34,19 @@ const Store = createStore({
   },
   actions: {
     // 获取认证用户信息
-    [ACTIONS.GET_AUTHED_USER_INFO](ctx) {
-      console.log("GetAuthedUserInfo", ctx);
+    async [ACTIONS.GET_AUTHED_USER_INFO](ctx) {
+      const r = await GetUserInfo();
+      const data = r?.data.Result;
+      if (data) {
+        ctx.dispatch(MUTATIONS.UPDATE_STORE, {
+          UserID: data.Id,
+          Avatar: data.Avatar,
+          Nickname: data.Nickname,
+          Roles: data.Roles,
+        });
+      } else {
+        console.log(ACTIONS.GET_AUTHED_USER_INFO, "failed", r.data);
+      }
     },
   },
 });

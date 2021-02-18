@@ -10,7 +10,7 @@ export default defineComponent({
   name: 'App',
   setup() {
     const store = useStore()
-    onMounted(() => {
+    onMounted(async () => {
       store.dispatch(ACTIONS.GET_AUTHED_USER_INFO)
       console.log("oooops", "app.vue mounted")
     })
