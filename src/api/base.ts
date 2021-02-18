@@ -1,4 +1,5 @@
 import axios from "axios";
+import { HAPPY_AUTH_TOKEN } from "../constants";
 import { GetTokenCookies } from "../utils/cookie";
 const Axios = axios.create({
   baseURL: (import.meta.env.VITE_BASE_HOST as string) || "/",
@@ -10,7 +11,7 @@ const Axios = axios.create({
 
 Axios.interceptors.request.use(
   (req) => {
-    req.headers["happy-auth-token"] = GetTokenCookies();
+    req.headers[HAPPY_AUTH_TOKEN] = GetTokenCookies();
     return req;
   },
   (err) => ({
