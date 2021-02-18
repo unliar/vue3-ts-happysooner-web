@@ -9,4 +9,9 @@ export default defineConfig({
       "/api": "https://happysooner.com",
     },
   },
+  css: {
+    modules: {
+      scopeBehaviour: "local",
+    },
+  },
 });

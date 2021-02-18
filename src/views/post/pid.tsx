@@ -1,4 +1,5 @@
 import { defineComponent, ref } from "vue";
+import styles from "./pid.module.css";
 
 const PostDetail = defineComponent({
   name: "post-detail",
@@ -14,17 +15,19 @@ const PostDetail = defineComponent({
     const Add = () => {
       pid.value = `${+pid.value + 1}`;
     };
-    // 当使用jsx语法 需要pid.value
-    return () => (
-      <>
-        <div onClick={() => Add()}>文章详情{pid.value}</div>
-      </>
+    return {
+      Add,
+      pid,
+    };
+  },
+  render() {
+    const { Add, pid } = this;
+    return (
+      <div class={styles.btn} onClick={() => Add()}>
+        文章详情{pid}
+      </div>
     );
   },
-  //   render() {
-  //     const { Add, pid } = this;
-  //     return <div onClick={() => Add()}>文章详情{pid}</div>;
-  //   },
 });
 
 export default PostDetail;
