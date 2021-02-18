@@ -7,11 +7,13 @@
     "serve": "vite preview"
   },
   "dependencies": {
+    "js-cookie": "^2.2.1",
     "vue": "^3.0.5",
     "vue-router": "^4.0.3",
     "vuex": "^4.0.0"
   },
   "devDependencies": {
+    "@types/js-cookie": "^2.2.6",
     "@vitejs/plugin-vue": "^1.1.4",
     "@vitejs/plugin-vue-jsx": "^1.1.0",
     "@vue/compiler-sfc": "^3.0.5",

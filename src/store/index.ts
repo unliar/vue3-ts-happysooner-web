@@ -1,4 +1,5 @@
 import { createStore } from "vuex";
+import { RemoveTokenCookies } from "../utils/cookie";
 import { ACTIONS, MUTATIONS } from "./type";
 
 export const InitUserStore = {
@@ -27,6 +28,7 @@ const Store = createStore({
     // 重置store
     [MUTATIONS.RESET_STORE]() {
       Store.commit(MUTATIONS.UPDATE_STORE, { ...InitUserStore });
+      RemoveTokenCookies();
     },
   },
   actions: {
