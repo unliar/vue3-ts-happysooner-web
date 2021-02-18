@@ -53,6 +53,7 @@ jobs:
           XIMAGE="${{ secrets.DOCKER_REGISTRY }}/${{ github.repository }}:${{ github.sha }}"
           sed -i "s#HAPPYIMAGE#$XIMAGE#g" ./chart/config.yaml
           sed -i "s#HAPPYREPO#${{ github.event.repository.name }}#g" ./chart/config.yaml
+          sed -i "s#BOT_API#${{ secrets.BOT_API }}#g" ./chart/config.yaml
 
       - name: k3s-apply-deployment
         uses: steebchen/kubectl@master
