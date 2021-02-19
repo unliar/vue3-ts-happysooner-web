@@ -1,6 +1,6 @@
 export const MUTATIONS = {
-  UPDATE_STORE: "UpdateStore",
-  RESET_STORE: "ResetStore",
+  UPDATE_USER_STORE: "UpdateUserStore",
+  RESET_USER_STORE: "ResetUserStore",
 };
 
 export const ACTIONS = {

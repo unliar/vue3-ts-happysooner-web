@@ -1,4 +1,6 @@
+import ContentLayout from "../../layouts/Content";
 import DefaultLayout from "../../layouts/Default";
+
 import { defineComponent, onMounted } from "vue";
 import { useRouter } from "vue-router";
 
@@ -13,19 +15,22 @@ export default defineComponent({
     const router = useRouter();
     return (
       <DefaultLayout>
-        <main>
-          <div
-            onClick={() => {
-              router.push("/post/1");
-            }}
-          >
-            Home Page!
-          </div>
-        </main>
+        <ContentLayout>
+          <main>
+            <div
+              onClick={() => {
+                router.push("/post/1");
+              }}
+            >
+              Home Page!
+            </div>
+          </main>
+        </ContentLayout>
       </DefaultLayout>
     );
   },
   components: {
+    ContentLayout,
     DefaultLayout,
   },
 });

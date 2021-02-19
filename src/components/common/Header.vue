@@ -8,7 +8,7 @@
                 <!-- <FontIcon iconClass="iconsousuo" /> -->
             </div>
             <div class="tools-container">
-                <span v-if="isLogin" class="tools-user user-center">
+                <span v-if="!!userId" class="tools-user user-center">
                     <router-link :to="`/users/${userId}`">
                         <Avatar :src="avatar" size="40px"></Avatar>
                     </router-link>
@@ -23,7 +23,7 @@
 <script lang="ts">
 import { defineComponent, computed } from 'vue'
 import { useStore } from 'vuex';
-import { UserStoreType } from '../../store';
+import { StoreType } from '../../store';
 // import FontIcon from "./FontIcon.vue"
 import Avatar from "./Avatar.vue"
 export default defineComponent({
@@ -41,21 +41,20 @@ export default defineComponent({
         Avatar
     },
     setup(props, _) {
-        const store = useStore<UserStoreType>()
+        const { state: {
+            User
+        } } = useStore<StoreType>()
         // 判断用户是否作者
-        const isAuthor = computed(() => !!store.state.Roles.find((i: API.USERS.Role) => i.Title == "Author"))
-        // 判断用户是否登录
-        const isLogin = computed(() => store.state.UserID > 0)
+        const isAuthor = computed(() => !!User?.Roles?.find((i: API.USERS.Role) => i.Title == "Author"))
         // 获取用户ID
-        const userId = computed(() => store.state.UserID)
+        const userId = computed(() => User.Id ?? 0)
         // 获取用户昵称
-        const avatar = computed(() => store.state.Avatar)
+        const avatar = computed(() => User.Nickname ?? "")
 
         return {
             title: props.title,
-            brief: props.brief ?? "摘要",
+            brief: props.brief,
             isAuthor: isAuthor,
-            isLogin: isLogin,
             userId: userId,
             avatar: avatar,
         }
