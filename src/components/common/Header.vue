@@ -8,7 +8,7 @@
                 <!-- <FontIcon iconClass="iconsousuo" /> -->
             </div>
             <div class="tools-container">
-                <span v-if="!!userId" class="tools-user user-center">
+                <span v-if="userId > 0" class="tools-user user-center">
                     <router-link :to="`/users/${userId}`">
                         <Avatar :src="avatar" size="40px"></Avatar>
                     </router-link>
