@@ -1,5 +1,5 @@
 <script lang="ts">
-import { defineComponent, } from 'vue'
+import { defineComponent, render, } from 'vue'
 
 export default defineComponent({
     props: {
@@ -9,16 +9,23 @@ export default defineComponent({
     },
     setup(props) {
         return {
-            scale: props.scale ?? 1,
-            size: props.size ?? "32px",
-            src: props.src ?? `https://happysooner.com/api/v1/tools/ident-icon`
+            scale: props.scale || 1,
+            size: props.size || "32px",
+            src: props.src || `https://happysooner.com/api/v1/tools/ident-icon`
         }
+    },
+    methods: {
+        // x(e: Event) {
+        //     e.preventDefault();
+        //     console.error("qqqd");
+        //     (<HTMLInputElement>e.target).src = this.src
+        // }
     }
 })
 </script>
 
 <template>
-    <img :src="src" alt="avatar" />
+    <img alt="avatar" :src="src" />
 </template>
 
 <style scoped  >

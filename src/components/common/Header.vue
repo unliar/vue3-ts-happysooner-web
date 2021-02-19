@@ -8,8 +8,10 @@
                 <!-- <FontIcon iconClass="iconsousuo" /> -->
             </div>
             <div class="tools-container">
-                <span v-if="isLogin" class="tools-user user-center">
-                    <a>登录/注册</a>
+                <span v-if="!isLogin" class="tools-user user-center">
+                    <router-link :to="`/users/${userId}`">
+                        <Avatar :src="avatar" size="40px"></Avatar>
+                    </router-link>
                 </span>
                 <span v-else class="tools-user user-action-btn">
                     <router-link to="/signin">登录/注册</router-link>
@@ -22,7 +24,7 @@
 import { defineComponent, computed } from 'vue'
 import { useStore } from 'vuex';
 import { UserStoreType } from '../../store';
-import FontIcon from "./FontIcon.vue"
+// import FontIcon from "./FontIcon.vue"
 import Avatar from "./Avatar.vue"
 export default defineComponent({
     name: "common-header",
@@ -36,7 +38,7 @@ export default defineComponent({
         }
     },
     components: {
-        FontIcon, Avatar
+        Avatar
     },
     setup(props, _) {
         const store = useStore<UserStoreType>()
@@ -47,7 +49,7 @@ export default defineComponent({
         // 获取用户ID
         const userId = computed(() => store.state.UserID)
         // 获取用户昵称
-        const nickname = computed(() => store.state.Nickname)
+        const avatar = computed(() => store.state.Avatar)
 
         return {
             title: props.title,
@@ -55,7 +57,7 @@ export default defineComponent({
             isAuthor: isAuthor,
             isLogin: isLogin,
             userId: userId,
-            nickname: nickname,
+            avatar: avatar,
         }
     },
     methods: {
