@@ -1,5 +1,5 @@
 <script lang="ts">
-import { defineComponent, render, } from 'vue'
+import { defineComponent } from 'vue'
 
 export default defineComponent({
     props: {
