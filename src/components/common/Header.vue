@@ -48,7 +48,6 @@ export default defineComponent({
         const userId = computed(() => store.state.User.Id ?? 0)
         // 获取用户头像
         const avatar = computed(() => store.state.User.Avatar ?? "")
-        console.log("qqqq", userId.value)
         return {
             title: props.title,
             brief: props.brief,
