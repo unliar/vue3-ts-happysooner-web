@@ -1,8 +1,8 @@
-import ContentLayout from "../../layouts/Content";
-import DefaultLayout from "../../layouts/Default";
-
 import { defineComponent, watch, reactive } from "vue";
 import { useRouter } from "vue-router";
+
+import ContentLayout from "../../layouts/Content";
+import DefaultLayout from "../../layouts/Default";
 
 export default defineComponent({
   name: "App",
