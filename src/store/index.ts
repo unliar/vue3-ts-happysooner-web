@@ -38,7 +38,7 @@ const Store = createStore({
       const r = await GetUserInfo();
       const data = r?.Result;
       if (data) {
-        ctx.dispatch(MUTATIONS.UPDATE_STORE, {
+        ctx.commit(MUTATIONS.UPDATE_STORE, {
           UserID: data.Id,
           Avatar: data.Avatar,
           Nickname: data.Nickname,

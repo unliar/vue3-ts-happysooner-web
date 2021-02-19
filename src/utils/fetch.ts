@@ -23,10 +23,15 @@ Axios.interceptors.request.use(
 
 Axios.interceptors.response.use(
   (res) => {
+    const url = res.config.url;
     if (res?.data?.ErrorCode === 403) {
-      console.log("当前接口需要权限");
-    } else if (res?.data?.ErrorCode !== 200) {
-      console.log("当前操作无数据");
+      console.error("权限错误❌");
+      console.error("请求接口: ", url);
+      console.error("错误信息: ", res?.data?.ErrorMsg);
+    } else if (!!res?.data?.ErrorCode) {
+      console.error("其他错误❌");
+      console.error("请求接口: ", url);
+      console.error("错误数据", JSON.stringify(res?.data ?? "{}"));
     }
     return res;
   },
