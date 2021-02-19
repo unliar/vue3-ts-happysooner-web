@@ -38,6 +38,7 @@ const Store = createStore({
       const r = await GetUserInfo();
       const data = r?.Result;
       if (data) {
+        console.info("用户信息获取成功", data);
         ctx.commit(MUTATIONS.UPDATE_STORE, {
           UserID: data.Id,
           Avatar: data.Avatar,
