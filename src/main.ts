@@ -4,7 +4,8 @@ import RouterInstance from "./router";
 import Store from "./store/index";
 import "nprogress/nprogress.css"; // 这个
 import Ng from "nprogress";
-Ng.configure({
-  showSpinner: false,
-});
+import { AddNProgress } from "./utils/routerHook";
+
+AddNProgress(RouterInstance);
+
 createApp(App).use(RouterInstance).use(Store).mount("#lsp");
