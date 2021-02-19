@@ -3,7 +3,8 @@ import { GetArticles } from "../../api/article";
 
 import ContentLayout from "../../layouts/Content";
 import DefaultLayout from "../../layouts/Default";
-import ArticleItem from "../../components/article/item.vue";
+import ArticleItem from "../../components/article/Item.vue";
+import LoadingBall from "../../components/common/LoadingBall.vue";
 export default defineComponent({
   name: "App",
   props: {
@@ -15,35 +16,56 @@ export default defineComponent({
     const data = reactive<{
       List: API.ARTICLE.ArticleInfo[];
       q: API.ARTICLE.GetArticleListRequest;
+      loading: boolean;
     }>({
       List: [],
       q: props.query || {},
+      loading: false,
     });
+
     // 获取数据
-    const getList = (req: API.ARTICLE.GetArticleListRequest) =>
-      GetArticles(req).then((r) => r.Result?.Articles ?? []);
+    const getList = (req: API.ARTICLE.GetArticleListRequest) => {
+      data.loading = true;
+      data.List = [];
+      return GetArticles(req)
+        .then((r) => {
+          data.List = [...(r.Result?.Articles ?? [])];
+        })
+        .finally(() => {
+          data.loading = false;
+        });
+    };
 
     onMounted(async () => {
-      const list = await getList(props.query ?? {});
-      data.List = [...list];
+      await getList(props.query ?? {});
     });
     watch(
       () => props.query,
       async (next, _) => {
         data.q = next || {};
-        const list = await getList(next ?? {});
-        data.List = [...list];
+        await getList(next ?? {});
       }
     );
 
     return { data };
   },
   render() {
-    const { List, q } = this.data;
+    const { List, q, loading } = this.data;
     return (
       <DefaultLayout>
         <ContentLayout>
-          {List.length === 0 && <div>无数据</div>}
+          {loading && (
+            <div
+              style={{
+                padding: "30vh 0",
+              }}
+            >
+              <LoadingBall
+                // key={`${loading}`}
+                loading={loading}
+              ></LoadingBall>
+            </div>
+          )}
           {List.map((i) => (
             <ArticleItem key={i.Id} info={i}></ArticleItem>
           ))}
@@ -79,5 +101,6 @@ export default defineComponent({
     ContentLayout,
     DefaultLayout,
     ArticleItem,
+    LoadingBall,
   },
 });
