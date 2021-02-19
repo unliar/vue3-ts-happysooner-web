@@ -11,8 +11,11 @@ export default defineComponent({
   setup() {
     const store = useStore()
     onMounted(async () => {
+      // 应用初始化 Store 数据
+      // 用户登录信息
       store.dispatch(ACTIONS.GET_AUTHED_USER_INFO)
-      //  store.dispatch(ACTIONS.GET_CATEGORY_LIST)
+      // 用户主题信息
+      store.dispatch(ACTIONS.GET_CATEGORY_LIST)
       console.log("oooops", "app.vue mounted")
     })
   }

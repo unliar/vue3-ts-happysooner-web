@@ -1,22 +1,19 @@
-import { defineComponent, onMounted, reactive } from "vue";
+import { defineComponent, computed } from "vue";
+import { useStore } from "vuex";
 
-import { GetCategories } from "../../api/article";
+import { StoreType } from "../../store";
 
 import "./index.css";
 const DefaultLayout = defineComponent({
   name: "content-layout",
   setup() {
-    let r = reactive<{ list: API.Article.Category[] }>({ list: [] });
-    onMounted(async () => {
-      const d = await GetCategories();
-      r.list = d.Result?.List ?? [];
-    });
+    const store = useStore<StoreType>();
     return {
-      r,
+      CategoryList: computed(() => store.state.Article.CategoryList),
     };
   },
   render() {
-    const { r } = this;
+    const { CategoryList } = this;
     return (
       <div class="content-layout-container">
         <div class="content-layout-child-container">
@@ -26,7 +23,7 @@ const DefaultLayout = defineComponent({
           <div class="widget-category">
             <div class="category-title">目录分类</div>
             <ul class="category-list">
-              {r.list.map((i) => (
+              {CategoryList.map((i) => (
                 <li class="category-item" key={i.Id}>
                   <router-link to={`/?CategoryID=${i.Id}`}>
                     <>{i.CN}</>

@@ -9,6 +9,7 @@ const routes: RouteRecordRaw[] = [
     path: "/",
     name: "home-page",
     component: homeComponent,
+    props: (r) => ({ query: r.query }),
   },
   {
     path: "/post/:pid",

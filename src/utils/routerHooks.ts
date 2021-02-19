@@ -8,7 +8,7 @@ NProgress.configure({
 export const AddNProgress = (r: Router) => {
   r.beforeEach((to, from, next) => {
     NProgress.start();
-    console.log("from:", from.path, "--->", to.path);
+    console.log("from:", from.fullPath, "--->", to.fullPath);
     next();
   });
 
