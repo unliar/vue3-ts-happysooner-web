@@ -36,7 +36,7 @@ const Store = createStore({
     // 获取认证用户信息
     async [ACTIONS.GET_AUTHED_USER_INFO](ctx) {
       const r = await GetUserInfo();
-      const data = r?.data.Result;
+      const data = r?.Result;
       if (data) {
         ctx.dispatch(MUTATIONS.UPDATE_STORE, {
           UserID: data.Id,
