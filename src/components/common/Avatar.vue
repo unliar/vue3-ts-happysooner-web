@@ -1,5 +1,4 @@
 <script lang="ts">
-import src from '*.jpg'
 import { defineComponent, } from 'vue'
 
 export default defineComponent({
@@ -14,9 +13,6 @@ export default defineComponent({
             size: props.size ?? "32px",
             src: props.src ?? `https://happysooner.com/api/v1/tools/ident-icon`
         }
-    },
-    methods: {
-
     }
 })
 </script>
