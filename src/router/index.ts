@@ -4,6 +4,8 @@ const homeComponent = () => import("../views/home/index");
 const postDetail = () => import("../views/post/pid");
 const signin = () => import("../views/signin/index");
 const about = () => import("../views/about/index.vue");
+const NotFound = () => import("../views/404/index.vue");
+
 const routes: RouteRecordRaw[] = [
   {
     path: "/",
@@ -26,6 +28,11 @@ const routes: RouteRecordRaw[] = [
     path: "/about",
     name: "about",
     component: about,
+  },
+  {
+    path: "/:pathMatch(.*)*",
+    name: "not-found",
+    component: NotFound,
   },
 ];
 
