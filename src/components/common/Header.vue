@@ -41,16 +41,14 @@ export default defineComponent({
         Avatar
     },
     setup(props, _) {
-        const { state: {
-            User
-        } } = useStore<StoreType>()
+        const store = useStore<StoreType>()
         // 判断用户是否作者
-        const isAuthor = computed(() => !!User?.Roles?.find((i) => i.Title == "Author"))
+        const isAuthor = computed(() => !!store.state.User?.Roles?.find((i) => i.Title == "Author"))
         // 获取用户ID
-        const userId = computed(() => User.Id ?? 0)
+        const userId = computed(() => store.state.User.Id ?? 0)
         // 获取用户头像
-        const avatar = computed(() => User.Avatar ?? "")
-
+        const avatar = computed(() => store.state.User.Avatar ?? "")
+        console.log("qqqq", userId.value)
         return {
             title: props.title,
             brief: props.brief,
