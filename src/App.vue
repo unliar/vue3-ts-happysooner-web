@@ -7,15 +7,14 @@ import { defineComponent, onMounted } from 'vue'
 import { useStore } from "vuex"
 import { ACTIONS } from './store/type'
 export default defineComponent({
-  name: 'App',
+  name: 'happy-app',
   setup() {
     const store = useStore()
     onMounted(async () => {
       store.dispatch(ACTIONS.GET_AUTHED_USER_INFO)
       console.log("oooops", "app.vue mounted")
     })
-  },
-
+  }
 })
 </script>
 
