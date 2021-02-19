@@ -3,7 +3,7 @@ import { GetArticles } from "../../api/article";
 
 import ContentLayout from "../../layouts/Content";
 import DefaultLayout from "../../layouts/Default";
-import ArticleItrm from "../../components/article/item.vue";
+import ArticleItem from "../../components/article/item.vue";
 export default defineComponent({
   name: "App",
   props: {
@@ -45,7 +45,7 @@ export default defineComponent({
         <ContentLayout>
           {List.length === 0 && <div>无数据</div>}
           {List.map((i) => (
-            <ArticleItrm key={i.Id} info={i}></ArticleItrm>
+            <ArticleItem key={i.Id} info={i}></ArticleItem>
           ))}
           <div
             style={{
@@ -78,5 +78,6 @@ export default defineComponent({
   components: {
     ContentLayout,
     DefaultLayout,
+    ArticleItem,
   },
 });
