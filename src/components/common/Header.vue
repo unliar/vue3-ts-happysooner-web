@@ -62,7 +62,8 @@ export default defineComponent({
     },
     methods: {
         ToIndex() {
-            window.location.href = "/"
+            this.$router.push("/")
+            // window.location.href = "/"
         }
     },
 })
