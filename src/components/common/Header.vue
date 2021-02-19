@@ -12,7 +12,7 @@
                     <a>登录/注册</a>
                 </span>
                 <span v-else class="tools-user user-action-btn">
-                    <a>登录/注册</a>
+                    <router-link to="/signin">登录/注册</router-link>
                 </span>
             </div>
         </div>
@@ -23,6 +23,7 @@ import { defineComponent, computed } from 'vue'
 import { useStore } from 'vuex';
 import { UserStoreType } from '../../store';
 import FontIcon from "./FontIcon.vue"
+import Avatar from "./Avatar.vue"
 export default defineComponent({
     name: "common-header",
     props: {
@@ -35,7 +36,7 @@ export default defineComponent({
         }
     },
     components: {
-        FontIcon
+        FontIcon, Avatar
     },
     setup(props, _) {
         const store = useStore<UserStoreType>()
