@@ -7,7 +7,7 @@ import { ACTIONS, MUTATIONS } from "./type";
 export type StoreType = {
   User: Partial<API.USERS.UserInfo>; // 所有变成可选参数  oooops  Required
   Article: {
-    CategoryList: API.Article.Category[];
+    CategoryList: API.ARTICLE.Category[];
   };
 };
 
@@ -38,7 +38,7 @@ const Store = createStore<StoreType>({
     // 更新主题列表
     [MUTATIONS.UPDATE_CATEGORY_LIST](
       state: StoreType,
-      payload: API.Article.Category[]
+      payload: API.ARTICLE.Category[]
     ) {
       state.Article.CategoryList = payload;
     },

@@ -28,7 +28,7 @@ export default defineComponent({
   padding: 0;
   word-break: break-word;
 }
-#lsp {
+#vue-next {
   min-height: 100vh;
   background: #fafafa;
 }
@@ -50,6 +50,25 @@ a:hover {
   height: 1em;
   vertical-align: -0.15em;
   fill: currentColor;
+  overflow: hidden;
+}
+.article-title {
+  font-size: 16px;
+  font-weight: bold;
+  color: #21756c;
+}
+.content-limit-one {
+  display: -webkit-box;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.content-limit-two {
+  display: -webkit-box;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
   overflow: hidden;
 }
 </style>
