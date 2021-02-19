@@ -6,4 +6,4 @@ import { AddNProgress } from "./utils/routerHooks";
 
 AddNProgress(RouterInstance);
 
-createApp(App).use(RouterInstance).use(Store).mount("#lsp");
+createApp(App).use(RouterInstance).use(Store).mount("#vue-next");
