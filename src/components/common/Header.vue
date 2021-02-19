@@ -49,7 +49,7 @@ export default defineComponent({
         // 获取用户ID
         const userId = computed(() => User.Id ?? 0)
         // 获取用户昵称
-        const avatar = computed(() => User.Nickname ?? "")
+        const avatar = computed(() => User.Avatar ?? "")
 
         return {
             title: props.title,
