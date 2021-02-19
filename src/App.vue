@@ -12,6 +12,7 @@ export default defineComponent({
     const store = useStore()
     onMounted(async () => {
       store.dispatch(ACTIONS.GET_AUTHED_USER_INFO)
+      store.dispatch(ACTIONS.GET_CATEGORY_LIST)
       console.log("oooops", "app.vue mounted")
     })
   }
