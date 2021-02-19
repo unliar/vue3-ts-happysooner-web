@@ -3,7 +3,7 @@ import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 const homeComponent = () => import("../views/home/index");
 const postDetail = () => import("../views/post/pid");
 const signin = () => import("../views/signin/index");
-
+const about = () => import("../views/about/index.vue");
 const routes: RouteRecordRaw[] = [
   {
     path: "/",
@@ -20,6 +20,11 @@ const routes: RouteRecordRaw[] = [
     path: "/signin",
     name: "signin",
     component: signin,
+  },
+  {
+    path: "/about",
+    name: "about",
+    component: about,
   },
 ];
 
