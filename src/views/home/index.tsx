@@ -1,12 +1,13 @@
 import { defineComponent, watch, onMounted, reactive } from "vue";
-import { GetArticles } from "../../api/article";
 
+import { GetArticles } from "../../api/article";
 import ContentLayout from "../../layouts/Content";
 import DefaultLayout from "../../layouts/Default";
 import ArticleItem from "../../components/article/Item.vue";
 import LoadingBall from "../../components/common/LoadingBall.vue";
+
 export default defineComponent({
-  name: "App",
+  name: "home-views",
   props: {
     query: {
       type: Object as () => API.ARTICLE.GetArticleListRequest,
