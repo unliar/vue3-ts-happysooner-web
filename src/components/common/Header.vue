@@ -45,7 +45,7 @@ export default defineComponent({
             User
         } } = useStore<StoreType>()
         // 判断用户是否作者
-        const isAuthor = computed(() => !!User?.Roles?.find((i: API.USERS.Role) => i.Title == "Author"))
+        const isAuthor = computed(() => !!User?.Roles?.find((i) => i.Title == "Author"))
         // 获取用户ID
         const userId = computed(() => User.Id ?? 0)
         // 获取用户头像
