@@ -20,4 +20,26 @@ export default defineComponent({
 </script>
 
 <style>
+* {
+  margin: 0;
+  padding: 0;
+  word-break: break-word;
+}
+#lsp {
+  min-height: 100vh;
+  background: #fafafa;
+}
+html,
+body {
+  -webkit-overflow-scrolling: touch;
+  font-family: "Noto Sans SC", sans-serif;
+}
+a {
+  text-decoration: none;
+  color: #000;
+  -webkit-tap-highlight-color: transparent;
+}
+a:hover {
+  font-weight: bold;
+}
 </style>
