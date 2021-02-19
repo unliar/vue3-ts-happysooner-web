@@ -10,7 +10,7 @@ export const InitUserStore = {
   Roles: [],
 };
 
-type UserStoreType = typeof InitUserStore;
+export type UserStoreType = typeof InitUserStore;
 
 const Store = createStore({
   state() {

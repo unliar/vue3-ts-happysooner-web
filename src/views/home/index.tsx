@@ -13,13 +13,15 @@ export default defineComponent({
     const router = useRouter();
     return (
       <DefaultLayout>
-        <div
-          onClick={() => {
-            router.push("/post/1");
-          }}
-        >
-          Home Page!
-        </div>
+        <main>
+          <div
+            onClick={() => {
+              router.push("/post/1");
+            }}
+          >
+            Home Page!
+          </div>
+        </main>
       </DefaultLayout>
     );
   },

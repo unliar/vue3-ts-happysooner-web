@@ -9,11 +9,13 @@ const DefaultLayout = defineComponent({
   render() {
     return (
       <>
-        <div class="default-layout">
-          <Header title="远浅"></Header>
-          <main class="main-container">{this.$slots.default?.()}</main>
-          <Footer></Footer>
+        <div class="main-container">
+          <div class="sticky-container">
+            <Header title="远浅" brief="理解他人，内省自己。"></Header>
+          </div>
+          <div class="default-layout-container">{this.$slots.default?.()}</div>
         </div>
+        <Footer></Footer>
       </>
     );
   },
