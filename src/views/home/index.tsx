@@ -4,11 +4,15 @@ import { useRouter } from "vue-router";
 import ContentLayout from "../../layouts/Content";
 import DefaultLayout from "../../layouts/Default";
 
+type HomePageQuery = {
+  CategoryID: number;
+};
+
 export default defineComponent({
   name: "App",
   props: {
     query: {
-      type: Object,
+      type: Object as () => HomePageQuery,
     },
   },
   setup(props) {
