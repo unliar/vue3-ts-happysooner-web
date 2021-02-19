@@ -48,7 +48,7 @@ export default defineComponent({
         const isAuthor = computed(() => !!User?.Roles?.find((i: API.USERS.Role) => i.Title == "Author"))
         // 获取用户ID
         const userId = computed(() => User.Id ?? 0)
-        // 获取用户昵称
+        // 获取用户头像
         const avatar = computed(() => User.Avatar ?? "")
 
         return {
