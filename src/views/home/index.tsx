@@ -3,7 +3,7 @@ import { defineComponent, watch, onMounted, reactive } from "vue";
 import { GetArticles } from "../../api/article";
 import ContentLayout from "../../layouts/Content";
 import DefaultLayout from "../../layouts/Default";
-import ArticleItem from "../../components/article/Item.vue";
+import SimpleInfoItem from "../../components/article/SimpleInfoItem.vue";
 import LoadingBall from "../../components/common/LoadingBall.vue";
 
 export default defineComponent({
@@ -68,7 +68,7 @@ export default defineComponent({
             </div>
           )}
           {List.map((i) => (
-            <ArticleItem key={i.Id} info={i}></ArticleItem>
+            <SimpleInfoItem key={i.Id} info={i}></SimpleInfoItem>
           ))}
           <div
             style={{
@@ -101,7 +101,7 @@ export default defineComponent({
   components: {
     ContentLayout,
     DefaultLayout,
-    ArticleItem,
+    SimpleInfoItem,
     LoadingBall,
   },
 });

@@ -2,6 +2,7 @@
 import { defineComponent } from 'vue'
 import { FromNow } from "../../utils/time"
 export default defineComponent({
+  name: "Simple-Info-item",
   props: {
     info: {
       type: Object as () => API.ARTICLE.ArticleInfo,
