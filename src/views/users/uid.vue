@@ -4,7 +4,7 @@
         <main>
             <div class="user-header-container">
                 <div class="avatar-container">
-                    <Avatar size="150px" :src="user.data.Avatar" :key="user.data.Avatar" />
+                    <Avatar size="150px" :src="user?.data?.Avatar" />
                 </div>
                 <div class="user-info-container">
                     <div class="user-info">

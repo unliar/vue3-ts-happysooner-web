@@ -1,5 +1,5 @@
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, reactive, watch } from 'vue'
 
 export default defineComponent({
     props: {
@@ -8,10 +8,19 @@ export default defineComponent({
         scale: Number
     },
     setup(props) {
-        return {
+
+        const d = reactive({
             scale: props.scale || 1,
             size: props.size || "32px",
             src: props.src || `https://happysooner.com/api/v1/tools/ident-icon`
+        })
+
+        watch(() => props.src, (next) => {
+            d.src = next || `https://happysooner.com/api/v1/tools/ident-icon`;
+        })
+
+        return {
+            d
         }
     },
     methods: {
@@ -25,12 +34,12 @@ export default defineComponent({
 </script>
 
 <template>
-    <img alt="avatar" :src="src" />
+    <img alt="avatar" :src="d.src || ''" :key="d.src" />
 </template>
 
 <style scoped  >
 img {
-    --size: v-bind(size);
+    --size: v-bind(d.size);
 }
 img {
     border-radius: 50%;
