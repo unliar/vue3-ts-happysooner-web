@@ -26,7 +26,7 @@ export const GetArticles = (req: API.ARTICLE.GetArticleListRequest) =>
  *
  * @param pid 文章ID
  */
-export const GetArticleById = (pid: number | string) => {
+export const GetArticleById = async (pid: number | string) => {
   return Axios.get<API.BaseResponse<API.ARTICLE.ArticleInfo>>(
     `${API_PROFIX}/writing/articles/${pid}`
   ).then((r) => r?.data);
@@ -37,7 +37,7 @@ export const GetArticleById = (pid: number | string) => {
  * @param type random or day
  * @param date 20180811
  */
-export const GetMeiRiYiWen = (type: string, date?: string) => {
+export const GetMeiRiYiWen = async (type: string, date?: string) => {
   return Axios.get<API.BaseResponse<API.ARTICLE.MeiRiYiWenData>>(
     `${API_PROFIX}/proxy/meiriyiwen/${type}/articles?date=${date}`
   ).then((r) => r?.data);

@@ -7,8 +7,8 @@
 <script lang="ts">
 import { defineComponent, reactive } from 'vue'
 
-import DefaultLayout from "../../layouts/Default";
-import LoadingBall from "../../components/common/LoadingBall.vue";
+import DefaultLayout from "~/layouts/Default";
+import LoadingBall from "~/components/common/LoadingBall.vue";
 import { useHead } from '@vueuse/head';
 
 export default defineComponent({
@@ -31,7 +31,8 @@ export default defineComponent({
         }
     },
     components: {
-        DefaultLayout
+        DefaultLayout,
+        LoadingBall
     }
 })
 </script>

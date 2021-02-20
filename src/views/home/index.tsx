@@ -1,11 +1,11 @@
 import { defineComponent, watch, onMounted, reactive } from "vue";
 import { useHead } from "@vueuse/head";
 
-import { GetArticles } from "../../api/article";
-import ContentLayout from "../../layouts/Content";
-import DefaultLayout from "../../layouts/Default";
-import SimpleInfoItem from "../../components/article/SimpleInfoItem.vue";
-import LoadingBall from "../../components/common/LoadingBall.vue";
+import { GetArticles } from "~/api/article";
+import ContentLayout from "~/layouts/Content";
+import DefaultLayout from "~/layouts/Default";
+import SimpleInfoItem from "~/components/article/SimpleInfoItem.vue";
+import LoadingBall from "~/components/common/LoadingBall.vue";
 
 export default defineComponent({
   name: "home-views",

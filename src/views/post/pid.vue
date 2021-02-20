@@ -30,11 +30,11 @@ import { computed, defineComponent, onMounted, reactive, } from 'vue'
 import { useToast } from "vue-toastification";
 import { useHead } from '@vueuse/head'
 
-import markdownIt from "../../utils/md"
-import DefaultLayout from "../../layouts/Default";
-import { GetArticleById } from '../../api/article';
-import LoadingBall from "../../components/common/LoadingBall.vue"
-import { FromNow } from '../../utils/time';
+import markdownIt from "~/utils/md"
+import DefaultLayout from "~/layouts/Default";
+import { GetArticleById } from '~/api/article';
+import LoadingBall from "~/components/common/LoadingBall.vue"
+import { FromNow } from '~/utils/time';
 
 
 export default defineComponent({

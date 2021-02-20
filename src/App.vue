@@ -6,7 +6,7 @@
 import { useHead } from '@vueuse/head'
 import { defineComponent, onMounted } from 'vue'
 import { useStore } from "vuex"
-import { ACTIONS } from './store/type'
+import { ACTIONS } from '~/store/type'
 export default defineComponent({
   name: 'happy-app',
   setup() {
