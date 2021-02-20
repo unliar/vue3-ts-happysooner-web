@@ -1,32 +1,35 @@
 <script lang="ts">
-import { useHead } from '@vueuse/head';
-import { defineComponent, onMounted, onUnmounted, ref } from 'vue'
-import { useRouter } from 'vue-router';
+import { useHead } from "@vueuse/head"
+import { defineComponent, onMounted, onUnmounted, ref } from "vue"
+import { useRouter } from "vue-router"
 
 export default defineComponent({
     setup() {
         const sec = ref(5);
         let id: number;
+
         useHead({
             title: "404 not found",
         });
+
         onMounted(() => {
-            const router = useRouter()
+            const router = useRouter();
             id = setInterval(() => {
-                sec.value = sec.value - 1
+                sec.value = sec.value - 1;
                 if (sec.value <= 0) {
-                    router.replace("/")
+                    router.replace("/");
                 }
-            }, 1000)
+            }, 1000);
         })
+
         onUnmounted(() => {
-            console.log("clear")
-            clearInterval(id)
-        })
+            clearInterval(id);
+        });
+
         return {
-            sec
+            sec,
         }
-    }
+    },
 })
 </script>
 

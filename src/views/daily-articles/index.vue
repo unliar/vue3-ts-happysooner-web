@@ -20,14 +20,14 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, watch, reactive, computed } from 'vue'
-import { useHead } from '@vueuse/head'
+import { defineComponent, onMounted, watch, reactive, computed } from "vue"
+import { useHead } from "@vueuse/head"
 
 
-import { GetMeiRiYiWen } from '~/api/article';
+import { GetMeiRiYiWen } from "~/api/article";
 import DefaultLayout from "~/layouts/Default";
 import LoadingBall from "~/components/common/LoadingBall.vue";
-import { useToast } from 'vue-toastification';
+import { useToast } from "vue-toastification";
 
 export default defineComponent({
     components: {
