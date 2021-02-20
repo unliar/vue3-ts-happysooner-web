@@ -19,7 +19,7 @@ const routes: RouteRecordRaw[] = [
         path: '/post/:pid',
         name: 'post-detail',
         component: postDetail,
-        props: (r) => ({ uid: +r.params.pid }),
+        props: (r) => ({ pid: +r.params.pid }),
     },
     {
         path: '/users/:uid',
