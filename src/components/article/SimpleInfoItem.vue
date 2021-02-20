@@ -1,6 +1,7 @@
 <script lang="ts">
 import { defineComponent } from "vue";
-import { FromNow } from "../../utils/time";
+import { FromNow } from "~/utils/time";
+
 export default defineComponent({
     name: "Simple-Info-item",
     props: {
@@ -31,9 +32,9 @@ export default defineComponent({
                 <span>{{ info.Category.CN }}</span>
                 <span class="item-dot">·</span>
                 <span>
-                    <router-link :to="`/users/${info.AuthorInfo.UID}`">
-                        {{ info.AuthorInfo.Nickname }}
-                    </router-link>
+                    <router-link :to="`/users/${info.AuthorInfo.UID}`">{{
+                        info.AuthorInfo.Nickname
+                    }}</router-link>
                 </span>
             </span>
             <span class="article-info-time">{{ CreatedAt }}</span>

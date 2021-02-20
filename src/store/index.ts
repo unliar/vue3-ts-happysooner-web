@@ -1,7 +1,7 @@
 import { createStore } from "vuex";
-import { GetCategories } from "../api/article";
-import { GetUserInfo } from "../api/user";
-import { RemoveTokenCookies } from "../utils/cookie";
+import { GetCategories } from "~/api/article";
+import { GetUserInfo } from "~/api/user";
+import { RemoveTokenCookies } from "~/utils/cookie";
 import { ACTIONS, MUTATIONS } from "./type";
 
 export type StoreType = {

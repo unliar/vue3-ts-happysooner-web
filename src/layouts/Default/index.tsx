@@ -1,7 +1,7 @@
 import { defineComponent } from "vue";
-import { DEFAULT_LAYOUT_NAME } from "../../constants";
-import Footer from "../../components/common/Footer.vue";
-import Header from "../../components/common/Header.vue";
+import { DEFAULT_LAYOUT_NAME } from "~/constants";
+import Footer from "~/components/common/Footer.vue";
+import Header from "~/components/common/Header.vue";
 
 import "./index.css";
 const DefaultLayout = defineComponent({
