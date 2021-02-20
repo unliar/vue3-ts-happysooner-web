@@ -24,9 +24,9 @@
                 <div
                     class="more-list"
                     @click="loadMore"
-                    v-if="articles.list.length > 0 && articles.loaded === false"
+                    v-if="articles.list.length > 0 && !articles.loaded && !articles.loading"
                 >加载更多</div>
-                <LoadingBall :loading="articles.list.length > 0 && articles.loading"></LoadingBall>
+                <LoadingBall v-if="articles.list.length > 0 && articles.loading" :loading="true"></LoadingBall>
                 <EmptyContent title="世界终有尽头~" v-if="articles.loaded"></EmptyContent>
             </div>
         </main>
@@ -122,6 +122,7 @@ export default defineComponent({
         // 加载更多
         const loadMore = () => {
             articles.loading = true;
+
             GetArticles({
                 UID: user.data.Id,
                 Page: articles.page + 1
