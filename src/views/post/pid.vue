@@ -26,8 +26,9 @@
     </DefaultLayout>
 </template>
 <script lang="ts">
-import { defineComponent, onMounted, reactive, } from 'vue'
+import { computed, defineComponent, onMounted, reactive, } from 'vue'
 import { useToast } from "vue-toastification";
+import { useHead } from '@vueuse/head'
 
 import markdownIt from "../../utils/md"
 import DefaultLayout from "../../layouts/Default";
@@ -56,7 +57,18 @@ export default defineComponent({
             loading: false,
             fromNow: ""
         })
-
+        useHead({
+            title: computed(() => `${r.data?.Title ?? ""}`),
+            meta: [
+                {
+                    name: `description`,
+                    content: computed(() => `${r.data?.AuthorInfo?.Nickname}发表了${r.data?.Title},${r.data?.Summary}`),
+                }, {
+                    name: "author",
+                    content: computed(() => `${r.data?.AuthorInfo?.Nickname}`)
+                }
+            ],
+        })
         onMounted(async () => {
             r.loading = true
             GetArticleById(props.pid).then((data) => {

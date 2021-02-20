@@ -1,5 +1,5 @@
 import { createApp } from "vue";
-
+import { createHead } from "@vueuse/head";
 import Toast, { PluginOptions, POSITION } from "vue-toastification";
 import "vue-toastification/dist/index.css";
 import "@geist-ui/themes";
@@ -19,9 +19,10 @@ const options: PluginOptions = {
   newestOnTop: true,
   transition: "Vue-Toastification__fade",
 };
-
+const head = createHead();
 createApp(App)
   .use(Toast, options)
+  .use(head)
   .use(RouterInstance)
   .use(Highlight)
   .use(Store)

@@ -1,4 +1,5 @@
 <script lang="ts">
+import { useHead } from '@vueuse/head';
 import { defineComponent, onMounted, onUnmounted, ref } from 'vue'
 import { useRouter } from 'vue-router';
 
@@ -6,6 +7,9 @@ export default defineComponent({
     setup() {
         const sec = ref(5);
         let id: number;
+        useHead({
+            title: "404 not found",
+        });
         onMounted(() => {
             const router = useRouter()
             id = setInterval(() => {

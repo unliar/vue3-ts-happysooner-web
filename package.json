@@ -9,6 +9,7 @@
   "dependencies": {
     "@geist-ui/themes": "^1.0.1",
     "@geist-ui/typography": "^1.0.1",
+    "@vueuse/head": "^0.2.3",
     "axios": "^0.21.1",
     "dayjs": "^1.10.4",
     "highlight.js": "^10.6.0",

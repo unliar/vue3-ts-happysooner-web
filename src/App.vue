@@ -3,6 +3,7 @@
 </template>
 
 <script lang="ts">
+import { useHead } from '@vueuse/head'
 import { defineComponent, onMounted } from 'vue'
 import { useStore } from "vuex"
 import { ACTIONS } from './store/type'
@@ -10,6 +11,10 @@ export default defineComponent({
   name: 'happy-app',
   setup() {
     const store = useStore()
+    useHead({
+      title: "远浅 - 给世界献上美好的祝福 - Vue3实战项目",
+
+    })
     onMounted(async () => {
       // 应用初始化 Store 数据
       // 用户登录信息

@@ -20,9 +20,11 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, watch, reactive } from 'vue'
-import { GetMeiRiYiWen } from '../../api/article';
+import { defineComponent, onMounted, watch, reactive, computed } from 'vue'
+import { useHead } from '@vueuse/head'
 
+
+import { GetMeiRiYiWen } from '../../api/article';
 import DefaultLayout from "../../layouts/Default";
 import LoadingBall from "../../components/common/LoadingBall.vue";
 import { useToast } from 'vue-toastification';
@@ -46,6 +48,16 @@ export default defineComponent({
             data: {},
             loading: false,
             q: props.query
+        })
+        useHead({
+            title: computed(() => `每日阅读 - ${r.data?.title} - ${r.data?.author}`),
+            meta: [
+                {
+                    name: `description`,
+                    content: computed(() => `${r.data?.digest}`),
+                },
+            ],
+
         })
         const getData = (req: typeof props.query) => {
             r.loading = true

@@ -9,6 +9,7 @@ import { defineComponent, reactive } from 'vue'
 
 import DefaultLayout from "../../layouts/Default";
 import LoadingBall from "../../components/common/LoadingBall.vue";
+import { useHead } from '@vueuse/head';
 
 export default defineComponent({
     props: {
@@ -21,6 +22,9 @@ export default defineComponent({
     setup(props) {
         const user = reactive({
 
+        })
+        useHead({
+            title: "用户中心"
         })
         return {
             user

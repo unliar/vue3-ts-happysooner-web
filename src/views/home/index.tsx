@@ -1,4 +1,5 @@
 import { defineComponent, watch, onMounted, reactive } from "vue";
+import { useHead } from "@vueuse/head";
 
 import { GetArticles } from "../../api/article";
 import ContentLayout from "../../layouts/Content";
@@ -23,7 +24,9 @@ export default defineComponent({
       q: props.query || {},
       loading: false,
     });
-
+    useHead({
+      title: "远浅 - 给世界献上美好的祝福 - Vue3实战项目",
+    });
     // 获取数据
     const getList = (req: API.ARTICLE.GetArticleListRequest) => {
       data.loading = true;
