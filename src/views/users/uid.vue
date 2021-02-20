@@ -1,39 +1,219 @@
 
 <template>
     <DefaultLayout>
-        <div>222</div>
+        <main>
+            <div class="user-header-container">
+                <div class="avatar-container">
+                    <Avatar size="150px" :src="user.data.Avatar" :key="user.data.Avatar" />
+                </div>
+                <div class="user-info-container">
+                    <div class="user-info">
+                        <span class="nickname-op">
+                            <span class="nickname">{{ user?.data.Nickname }}</span>
+                        </span>
+                        <span class="op-btn" v-if="isCurrentUser" @click="removeLogin">退出</span>
+                    </div>
+                    <div>{{ user?.data.Location }} · {{ user?.data.Profession }}</div>
+                    <div>{{ user?.data.Brief }}</div>
+                </div>
+            </div>
+            <div class="user-article-cotainer">
+                <template v-for="item in articles.list" :key="item.Id">
+                    <SimpleInfoItem :info="item"></SimpleInfoItem>
+                </template>
+                <div
+                    class="more-list"
+                    @click="loadMore"
+                    v-if="articles.list.length > 0 && articles.loaded === false"
+                >加载更多</div>
+                <LoadingBall :loading="articles.list.length > 0 && articles.loading"></LoadingBall>
+                <EmptyContent title="世界终有尽头~" v-if="articles.loaded"></EmptyContent>
+            </div>
+        </main>
     </DefaultLayout>
 </template>
 <script lang="ts">
-import { defineComponent, reactive } from 'vue'
-
+import { defineComponent, reactive, onMounted, computed, watch } from 'vue'
+import { useHead } from '@vueuse/head';
+import { useStore } from 'vuex';
+import { useToast } from 'vue-toastification';
+// - - 项目内import
 import DefaultLayout from "~/layouts/Default";
 import LoadingBall from "~/components/common/LoadingBall.vue";
-import { useHead } from '@vueuse/head';
+import Avatar from "~/components/common/Avatar.vue"
+import EmptyContent from "~/components/common/EmptyContent.vue"
+import SimpleInfoItem from "~/components/article/SimpleInfoItem.vue";
+import { GetUserInfoByID } from '~/api/user';
+import { StoreType } from '~/store';
+import { MUTATIONS } from '~/store/type';
+import { GetArticles } from '~/api/article';
 
 export default defineComponent({
     props: {
         uid: {
             required: true, // props 是否必要
-            type: String, // props 类型
+            type: Number, // props 类型
             validator: (v: String) => !isNaN(+v), // 自定义校验器
         },
     },
     setup(props) {
-        const user = reactive({
+        const store = useStore<StoreType>()
 
+        const user = reactive<{
+            data: Partial<API.USERS.UserInfo>
+        }>({
+            data: {}
         })
+
+        const articles = reactive<{
+            list: API.ARTICLE.ArticleInfo[];
+            page: number;
+            loading: boolean;
+            loaded: boolean;
+        }>({
+            list: [],
+            page: 1,
+            loading: false,
+            loaded: false
+        })
+
+        // 判断用户是否是
+        const isCurrentUser = computed(() => store.state.User.Id === user.data.Id);
+
         useHead({
-            title: "用户中心"
+            title: computed(() => `${user.data.Nickname}的个人中心`)
         })
+
+        // 注销登录
+        const removeLogin = () => {
+            console.log("退出登录");
+            store.commit(MUTATIONS.RESET_USER_STORE);
+            useToast().success("退出登录成功~");
+        }
+
+        // 获取用户信息
+        const fetchUserInfo = (uid: number) => {
+            GetUserInfoByID(uid).then(r => {
+                user.data = {
+                    ...r.Result
+                }
+            })
+        }
+
+        // 获取文章列表
+        const fetchArticleList = (uid: number, page: number) => {
+            articles.loading = true;
+            page = page || 1;
+            GetArticles({ UID: uid, Page: page }).then(r => {
+                const list = r.Result?.Articles ?? [];
+                articles.page = page;
+                articles.list = list;
+                if (list.length === 0) {
+                    articles.loaded = true;
+                } else {
+                    articles.loaded = false;
+
+                }
+            }).finally(() => {
+                articles.loading = false;
+            });
+        }
+
+        // 加载更多
+        const loadMore = () => {
+            articles.loading = true;
+            GetArticles({
+                UID: user.data.Id,
+                Page: articles.page + 1
+            }).then(r => {
+                const list = r.Result?.Articles ?? []
+                if (list.length === 0) {
+                    articles.loaded = true;
+                    return;
+                }
+                articles.page += 1;
+                articles.list = [...articles.list, ...r.Result?.Articles ?? []]
+            }).finally(() => {
+                articles.loading = false;
+
+            })
+        }
+
+        onMounted(() => {
+            fetchUserInfo(props.uid);
+            fetchArticleList(props.uid, 1);
+        })
+
+        watch(() => props.uid, (next) => {
+            fetchUserInfo(next);
+            fetchArticleList(next, 1);
+        })
+
         return {
-            user
+            user,
+            articles,
+            isCurrentUser,
+            removeLogin,
+            loadMore
         }
     },
     components: {
         DefaultLayout,
-        LoadingBall
+        LoadingBall,
+        Avatar,
+        SimpleInfoItem,
+        EmptyContent
     }
 })
 </script>
+
+<style scoped>
+@media (max-width: 750px) {
+    .avatar-container {
+        display: none;
+    }
+}
+@media (min-width: 1024px) {
+    .user-header-container {
+        padding: 40px;
+    }
+}
+.user-header-container {
+    display: flex;
+    padding: 10px 0;
+}
+.user-info-container {
+    width: 400px;
+    line-height: 1.5;
+    padding: 10px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.avatar-container {
+    margin-right: 30px;
+}
+.user-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 45px;
+}
+.logout {
+    cursor: pointer;
+}
+.nickname {
+    font-size: 28px;
+}
+.social-info {
+    display: none;
+    justify-content: space-between;
+    padding: 10px 0;
+}
+.more-list {
+    text-align: center;
+    padding: 20px;
+    cursor: pointer;
+}
+</style>
  
