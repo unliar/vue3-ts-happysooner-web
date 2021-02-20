@@ -2,11 +2,14 @@ import { createApp } from "vue";
 
 import Toast, { PluginOptions, POSITION } from "vue-toastification";
 import "vue-toastification/dist/index.css";
+import "@geist-ui/themes";
+import "@geist-ui/typography";
 
 import App from "./App.vue";
 import RouterInstance from "./router";
 import Store from "./store/index";
 import { AddNProgress } from "./utils/routerHooks";
+import Highlight from "./utils/highlight";
 
 AddNProgress(RouterInstance);
 
@@ -20,5 +23,6 @@ const options: PluginOptions = {
 createApp(App)
   .use(Toast, options)
   .use(RouterInstance)
+  .use(Highlight)
   .use(Store)
   .mount("#vue-next");

@@ -1,5 +1,5 @@
 import { createStore } from "vuex";
-import { useToast } from "vue-toastification";
+import { useToast, POSITION } from "vue-toastification";
 
 import { GetCategories } from "../api/article";
 import { GetUserInfo } from "../api/user";
@@ -53,7 +53,7 @@ const Store = createStore<StoreType>({
       const data = r?.Result;
       if (data) {
         console.info("用户信息获取成功", data);
-        toast.success("获取用户信息成功");
+        toast.success("获取用户信息成功", { position: POSITION.TOP_RIGHT });
         ctx.commit(MUTATIONS.UPDATE_USER_STORE, data);
       }
     },
