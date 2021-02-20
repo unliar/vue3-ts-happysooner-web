@@ -6,7 +6,8 @@
     "build": "vuedx-typecheck . && vite build",
     "serve": "vite preview",
     "lint": "pretty-quick --staged",
-    "wlint":"prettier --write ./src"
+    "wlint":"prettier --write ./src",
+    "postinstall": "husky install"
   },
   "dependencies": {
     "@geist-ui/themes": "^1.0.1",
@@ -41,7 +42,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "pretty-quick --staged"
+      "pre-commit": "npm run xlint && git add ."
     }
   }
 }
