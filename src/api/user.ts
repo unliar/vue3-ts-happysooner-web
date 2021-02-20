@@ -1,5 +1,5 @@
-import Axios from '~/utils/fetch'
-import { API_PROFIX } from '~/constants'
+import Axios from "~/utils/fetch"
+import { API_PROFIX } from "~/constants"
 
 export const GetUserInfo = async () => {
     return Axios.get<API.BaseResponse<API.USERS.UserInfo>>(

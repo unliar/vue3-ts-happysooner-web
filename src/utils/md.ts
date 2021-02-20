@@ -1,5 +1,5 @@
-import MarkdownIt from "markdown-it";
+import MarkdownIt from "markdown-it"
 
-const MD = new MarkdownIt();
+const MD = new MarkdownIt()
 
-export default MD;
+export default MD

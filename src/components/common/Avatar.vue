@@ -1,27 +1,29 @@
 <script lang="ts">
-import { defineComponent, reactive, watch } from 'vue'
-
+import { defineComponent, reactive, watch } from "vue"
 
 export default defineComponent({
     props: {
         size: String,
         src: String,
-        scale: Number
+        scale: Number,
     },
     setup(props) {
-
         const d = reactive({
             scale: props.scale || 1,
             size: props.size || "32px",
-            src: props.src || `https://happysooner.com/api/v1/tools/ident-icon`
+            src: props.src || `https://happysooner.com/api/v1/tools/ident-icon`,
         })
 
-        watch(() => props.src, (next) => {
-            d.src = next || `https://happysooner.com/api/v1/tools/ident-icon`;
-        })
+        watch(
+            () => props.src,
+            (next) => {
+                d.src =
+                    next || `https://happysooner.com/api/v1/tools/ident-icon`
+            }
+        )
 
         return {
-            d
+            d,
         }
     },
     methods: {
@@ -30,7 +32,7 @@ export default defineComponent({
         //     console.error("qqqd");
         //     (<HTMLInputElement>e.target).src = this.src
         // }
-    }
+    },
 })
 </script>
 
@@ -38,7 +40,7 @@ export default defineComponent({
     <img alt="avatar" :src="d.src || ''" :key="d.src" />
 </template>
 
-<style scoped  >
+<style scoped>
 img {
     --size: v-bind(d.size);
 }

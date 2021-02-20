@@ -10,7 +10,9 @@
                     </router-link>
                 </div>
             </div>
-            <div class="signin-info">直接输入登录名称开始探险叭~我们很智能哒~会自动帮你切换登录/注册</div>
+            <div class="signin-info">
+                直接输入登录名称开始探险叭~我们很智能哒~会自动帮你切换登录/注册
+            </div>
             <div class="signin-form">
                 <div class="form-account">
                     <input
@@ -45,15 +47,26 @@
                         class="btn-login-register"
                         v-if="isNewUser"
                         @click="Regist"
-                    >立即注册</button>
-                    <button type="button" class="btn-login-register" v-else @click="Login">立即登录</button>
+                    >
+                        立即注册
+                    </button>
+                    <button
+                        type="button"
+                        class="btn-login-register"
+                        v-else
+                        @click="Login"
+                    >
+                        立即登录
+                    </button>
                 </div>
             </div>
             <div class="summary">
                 注册一下不会有任何损失,甚至会变得更加
                 <del>沙雕</del>
                 快乐。
-                <template v-if="currentUserID">很少有人让我心动 但你是第{{ currentUserID }}个。</template>
+                <template v-if="currentUserID"
+                    >很少有人让我心动 但你是第{{ currentUserID }}个。</template
+                >
             </div>
         </div>
     </div>

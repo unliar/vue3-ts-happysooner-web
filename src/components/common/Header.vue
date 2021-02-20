@@ -1,4 +1,3 @@
-
 <template>
     <header class="happy-header-container">
         <div class="happy-header-wrapper">
@@ -21,9 +20,9 @@
     </header>
 </template>
 <script lang="ts">
-import { defineComponent, computed } from 'vue'
-import { useStore } from 'vuex';
-import { StoreType } from '../../store';
+import { defineComponent, computed } from "vue"
+import { useStore } from "vuex"
+import { StoreType } from "../../store"
 // import FontIcon from "./FontIcon.vue"
 import Avatar from "./Avatar.vue"
 export default defineComponent({
@@ -31,19 +30,21 @@ export default defineComponent({
     props: {
         title: {
             type: String,
-            required: true
+            required: true,
         },
         brief: {
             type: String,
-        }
+        },
     },
     components: {
-        Avatar
+        Avatar,
     },
     setup(props, _) {
         const store = useStore<StoreType>()
         // 判断用户是否作者
-        const isAuthor = computed(() => !!store.state.User?.Roles?.find((i) => i.Title == "Author"))
+        const isAuthor = computed(
+            () => !!store.state.User?.Roles?.find((i) => i.Title == "Author")
+        )
         // 获取用户ID
         const userId = computed(() => store.state.User.Id ?? 0)
         // 获取用户头像
@@ -60,7 +61,7 @@ export default defineComponent({
         ToIndex() {
             this.$router.push("/")
             // window.location.href = "/"
-        }
+        },
     },
 })
 </script>

@@ -1,14 +1,14 @@
-import { defineComponent, watch, onMounted, reactive } from 'vue'
-import { useHead } from '@vueuse/head'
+import { defineComponent, watch, onMounted, reactive } from "vue"
+import { useHead } from "@vueuse/head"
 
-import { GetArticles } from '~/api/article'
-import ContentLayout from '~/layouts/Content'
-import DefaultLayout from '~/layouts/Default'
-import SimpleInfoItem from '~/components/article/SimpleInfoItem.vue'
-import LoadingBall from '~/components/common/LoadingBall.vue'
+import { GetArticles } from "~/api/article"
+import ContentLayout from "~/layouts/Content"
+import DefaultLayout from "~/layouts/Default"
+import SimpleInfoItem from "~/components/article/SimpleInfoItem.vue"
+import LoadingBall from "~/components/common/LoadingBall.vue"
 
 export default defineComponent({
-    name: 'home-views',
+    name: "home-views",
     props: {
         query: {
             type: Object as () => API.ARTICLE.GetArticleListRequest,
@@ -25,7 +25,7 @@ export default defineComponent({
             loading: false,
         })
         useHead({
-            title: '远浅 - 给世界献上美好的祝福 - Vue3实战项目',
+            title: "远浅 - 给世界献上美好的祝福 - Vue3实战项目",
         })
         // 获取数据
         const getList = (req: API.ARTICLE.GetArticleListRequest) => {
@@ -61,7 +61,7 @@ export default defineComponent({
                     {loading && (
                         <div
                             style={{
-                                padding: '30vh 0',
+                                padding: "30vh 0",
                             }}
                         >
                             <LoadingBall
@@ -75,14 +75,14 @@ export default defineComponent({
                     ))}
                     <div
                         style={{
-                            padding: '20px',
-                            textAlign: 'center',
+                            padding: "20px",
+                            textAlign: "center",
                         }}
                     >
                         {q.Page && q.Page >= 2 ? (
                             <router-link
                                 to={`/?Page=${q.Page - 1}&OrderType=${
-                                    q.OrderType || 'desc'
+                                    q.OrderType || "desc"
                                 }`}
                             >
                                 <>上一页</>
@@ -93,7 +93,7 @@ export default defineComponent({
                             <router-link
                                 to={`/?Page=${
                                     q.Page ? +q.Page + 1 : 2
-                                }&OrderType=${q.OrderType || 'desc'}`}
+                                }&OrderType=${q.OrderType || "desc"}`}
                             >
                                 <>下一页</>
                             </router-link>

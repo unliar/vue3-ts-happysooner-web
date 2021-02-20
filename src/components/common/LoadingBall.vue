@@ -1,24 +1,24 @@
 <script lang="ts">
-import { defineComponent, reactive } from 'vue'
+import { defineComponent, reactive } from "vue"
 
 export default defineComponent({
     props: {
         info: String,
         color: String,
         size: String,
-        loading: Boolean
+        loading: Boolean,
     },
     setup(props) {
         const r = reactive({
             info: props.info,
             color: props.color ?? "#888",
             size: props.size,
-            loading: props.loading
+            loading: props.loading,
         })
         return {
-            r
+            r,
         }
-    }
+    },
 })
 </script>
 

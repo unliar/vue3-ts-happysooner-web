@@ -15,13 +15,15 @@
                 <span>
                     分类:
                     <router-link :to="`/?CategoryID=${r.data?.Category?.Id}`">
-                        {{
-                            r.data?.Category?.CN
-                        }}
+                        {{ r.data?.Category?.CN }}
                     </router-link>
                 </span>
             </div>
-            <div v-html="r.data?.Content" class="article-container" v-highlight></div>
+            <div
+                v-html="r.data?.Content"
+                class="article-container"
+                v-highlight
+            ></div>
             <div class="article-navi">
                 <div>
                     <router-link

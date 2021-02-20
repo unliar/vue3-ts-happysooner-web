@@ -1,4 +1,3 @@
-
 <template>
     <footer class="footer-container">
         <div class="footer-info content-limit-three">
@@ -9,7 +8,8 @@
                     target="_blank"
                     class="icp-link"
                     rel="nofollow"
-                >粤ICP备20013375号-1</a>
+                    >粤ICP备20013375号-1</a
+                >
             </div>
             <div>本网站不保证网站内容更新完全跟得上时代潮流，请自行求证。</div>
             <div class="site-status">
@@ -47,7 +47,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, onUnmounted, reactive, ref } from 'vue'
+import { defineComponent, onMounted, onUnmounted, reactive, ref } from "vue"
 
 export default defineComponent({
     setup() {
@@ -61,14 +61,14 @@ export default defineComponent({
         let id: number
         onMounted(() => {
             id = setInterval(() => {
-                const Y = new Date().getFullYear();
-                const start = 1567180800000;
-                const now = Date.now();
-                const leftTime = Math.floor((now - start) / 1000);
-                const day = Math.floor(leftTime / 60 / 60 / 24);
-                const hour = Math.floor(leftTime / 60 / 60) % 24;
-                const min = Math.floor(leftTime / 60) % 60;
-                const sec = Math.floor(leftTime % 60);
+                const Y = new Date().getFullYear()
+                const start = 1567180800000
+                const now = Date.now()
+                const leftTime = Math.floor((now - start) / 1000)
+                const day = Math.floor(leftTime / 60 / 60 / 24)
+                const hour = Math.floor(leftTime / 60 / 60) % 24
+                const min = Math.floor(leftTime / 60) % 60
+                const sec = Math.floor(leftTime % 60)
                 TimeShow.day = day
                 TimeShow.hour = hour
 
@@ -76,18 +76,15 @@ export default defineComponent({
 
                 TimeShow.sec = sec
             })
-
-
         })
         onUnmounted(() => {
             clearInterval(id)
         })
         return {
             Year,
-            TimeShow
+            TimeShow,
         }
-    }
-
+    },
 })
 </script>
 

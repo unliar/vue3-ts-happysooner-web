@@ -1,17 +1,16 @@
-
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent } from "vue"
 
 export default defineComponent({
     props: {
-        iconClass: String
+        iconClass: String,
     },
     setup(props, _) {
         console.log(props.iconClass)
         return {
-            iconClass: props.iconClass
+            iconClass: props.iconClass,
         }
-    }
+    },
 })
 </script>
 

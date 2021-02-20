@@ -9,14 +9,19 @@
                     <div class="user-info">
                         <span class="nickname-op">
                             <span class="nickname">
-                                {{
-                                    user?.data.Nickname
-                                }}
+                                {{ user?.data.Nickname }}
                             </span>
                         </span>
-                        <span class="op-btn" v-if="isCurrentUser" @click="removeLogin">退出</span>
+                        <span
+                            class="op-btn"
+                            v-if="isCurrentUser"
+                            @click="removeLogin"
+                            >退出</span
+                        >
                     </div>
-                    <div>{{ user?.data.Location }} · {{ user?.data.Profession }}</div>
+                    <div>
+                        {{ user?.data.Location }} · {{ user?.data.Profession }}
+                    </div>
                     <div>{{ user?.data.Brief }}</div>
                 </div>
             </div>
@@ -32,9 +37,17 @@
                         !articles.loaded &&
                         !articles.loading
                     "
-                >加载更多</div>
-                <LoadingBall v-if="articles.list.length > 0 && articles.loading" :loading="true"></LoadingBall>
-                <EmptyContent title="世界终有尽头~" v-if="articles.loaded"></EmptyContent>
+                >
+                    加载更多
+                </div>
+                <LoadingBall
+                    v-if="articles.list.length > 0 && articles.loading"
+                    :loading="true"
+                ></LoadingBall>
+                <EmptyContent
+                    title="世界终有尽头~"
+                    v-if="articles.loaded"
+                ></EmptyContent>
             </div>
         </main>
     </DefaultLayout>

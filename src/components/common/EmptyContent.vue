@@ -1,13 +1,11 @@
-
 <script lang="ts">
 import { defineComponent } from "vue"
 export default defineComponent({
     props: {
-        title: String
-    }
+        title: String,
+    },
 })
 </script>
-
 
 <template>
     <div class="tips">{{ $props.title }}~</div>
