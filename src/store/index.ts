@@ -1,6 +1,4 @@
 import { createStore } from "vuex";
-import { useToast, POSITION } from "vue-toastification";
-
 import { GetCategories } from "../api/article";
 import { GetUserInfo } from "../api/user";
 import { RemoveTokenCookies } from "../utils/cookie";
@@ -12,7 +10,6 @@ export type StoreType = {
     CategoryList: API.ARTICLE.Category[];
   };
 };
-const toast = useToast();
 
 const Store = createStore<StoreType>({
   state() {
@@ -53,7 +50,6 @@ const Store = createStore<StoreType>({
       const data = r?.Result;
       if (data) {
         console.info("用户信息获取成功", data);
-        toast.success("获取用户信息成功", { position: POSITION.TOP_RIGHT });
         ctx.commit(MUTATIONS.UPDATE_USER_STORE, data);
       }
     },

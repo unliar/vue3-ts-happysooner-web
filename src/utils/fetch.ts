@@ -1,6 +1,7 @@
 import axios from "axios";
 import { HAPPY_AUTH_TOKEN } from "../constants";
 import { GetTokenCookies } from "./cookie";
+
 const Axios = axios.create({
   baseURL: (import.meta.env.VITE_BASE_HOST as string) || "/",
   headers: {

@@ -4,7 +4,7 @@
         <div style="padding: 30vh 0" v-if="r.loading">
             <LoadingBall :loading="true"></LoadingBall>
         </div>
-        <main>
+        <main v-else>
             <h1 class="article-title">{{ r.data?.title }}</h1>
             <div>作者：{{ r.data?.author }}</div>
             <div class="article-container" v-html="r.data?.content"></div>
@@ -25,6 +25,7 @@ import { GetMeiRiYiWen } from '../../api/article';
 
 import DefaultLayout from "../../layouts/Default";
 import LoadingBall from "../../components/common/LoadingBall.vue";
+import { useToast } from 'vue-toastification';
 
 export default defineComponent({
     components: {
@@ -52,6 +53,9 @@ export default defineComponent({
             GetMeiRiYiWen(type, req?.date).then((data) => {
                 r.data = data?.Result
                 r.q = req
+                if (data.ErrorCode) {
+                    useToast().error(data.ErrorMsg)
+                }
             }).finally(() => {
                 r.loading = false
             })
