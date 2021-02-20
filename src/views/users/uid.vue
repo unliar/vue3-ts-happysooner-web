@@ -57,7 +57,8 @@ export default defineComponent({
         },
     },
     setup(props) {
-        const store = useStore<StoreType>()
+        const store = useStore<StoreType>();
+        const toast = useToast();
 
         const user = reactive<{
             data: Partial<API.USERS.UserInfo>
@@ -88,14 +89,18 @@ export default defineComponent({
         const removeLogin = () => {
             console.log("退出登录");
             store.commit(MUTATIONS.RESET_USER_STORE);
-            useToast().success("退出登录成功~");
+            toast.success("退出登录成功~");
         }
 
         // 获取用户信息
         const fetchUserInfo = (uid: number) => {
             GetUserInfoByID(uid).then(r => {
+                if (r.ErrorCode) {
+                    toast.error(r.ErrorMsg ?? "系统错误")
+                    return
+                }
                 user.data = {
-                    ...r.Result
+                    ...r.Result ?? {}
                 }
             })
         }
@@ -105,7 +110,7 @@ export default defineComponent({
             articles.loading = true;
             page = page || 1;
             GetArticles({ UID: uid, Page: page }).then(r => {
-                const list = r.Result?.Articles ?? [];
+                const list = r?.Result?.Articles ?? [];
                 articles.page = page;
                 articles.list = list;
                 if (list.length === 0) {
