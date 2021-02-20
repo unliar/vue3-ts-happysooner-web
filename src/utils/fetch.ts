@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { useToast } from '_vue-toastification@2.0.0-rc.1@vue-toastification'
+import { useToast } from 'vue-toastification'
 import { HAPPY_AUTH_TOKEN } from '../constants'
 import { GetTokenCookies } from './cookie'
 const toast = useToast()
