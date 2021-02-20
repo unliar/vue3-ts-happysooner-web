@@ -22,11 +22,25 @@
                 </span>
             </div>
             <div v-html="r.data?.Content" class="article-container" v-highlight></div>
+            <div class="article-navi">
+                <div>
+                    <router-link
+                        v-if="r.data?.Navigation?.Prev?.Id"
+                        :to="`/post/${r.data?.Navigation?.Prev?.Id}`"
+                    >上一篇 « {{ r.data?.Navigation?.Prev?.Title }}</router-link>
+                </div>
+                <div>
+                    <router-link
+                        v-if="r.data?.Navigation?.Next?.Id"
+                        :to="`/post/${r.data?.Navigation?.Next?.Id}`"
+                    >下一篇 « {{ r.data?.Navigation?.Next?.Title }}</router-link>
+                </div>
+            </div>
         </main>
     </DefaultLayout>
 </template>
 <script lang="ts">
-import { computed, defineComponent, onMounted, reactive, } from 'vue'
+import { computed, defineComponent, onMounted, reactive, watch } from 'vue'
 import { useToast } from "vue-toastification";
 import { useHead } from '@vueuse/head'
 
@@ -57,6 +71,7 @@ export default defineComponent({
             loading: false,
             fromNow: ""
         })
+
         useHead({
             title: computed(() => `${r.data?.Title ?? ""}`),
             meta: [
@@ -69,9 +84,9 @@ export default defineComponent({
                 }
             ],
         })
-        onMounted(async () => {
+        const fetchData = (id: string) => {
             r.loading = true
-            GetArticleById(props.pid).then((data) => {
+            GetArticleById(id).then((data) => {
                 if (data?.Result?.Content) {
                     data.Result.Content = markdownIt.render(data.Result.Content)
                 } else {
@@ -84,8 +99,15 @@ export default defineComponent({
                 r.loading = false
 
             })
+        }
+
+        onMounted(async () => {
+            fetchData(props.pid)
         })
 
+        watch(() => props.pid, (next) => {
+            fetchData(next)
+        })
 
         return {
             r
@@ -109,5 +131,22 @@ main {
     padding-right: 10px;
     color: #666;
     font-size: 14px;
+}
+.article-navi {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 14px;
+    padding: 20px 0;
+}
+.article-navi div {
+    width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.article-navi div a {
+    color: #008080;
+    border-bottom: 1px solid #008080;
 }
 </style>
