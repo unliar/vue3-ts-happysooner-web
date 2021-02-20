@@ -1,6 +1,6 @@
 <script lang="ts">
-import { defineComponent } from "vue"
-import { FromNow } from "../../utils/time"
+import { defineComponent } from "vue";
+import { FromNow } from "../../utils/time";
 export default defineComponent({
     name: "Simple-Info-item",
     props: {
@@ -10,13 +10,13 @@ export default defineComponent({
         },
     },
     setup(props) {
-        const CreatedAt = FromNow((props as any).info.CreatedAt)
+        const CreatedAt = FromNow((props as any).info.CreatedAt);
         return {
             info: props.info,
             CreatedAt,
-        }
+        };
     },
-})
+});
 </script>
 
 <template>

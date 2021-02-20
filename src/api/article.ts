@@ -1,5 +1,5 @@
-import { API_PROFIX } from "../constants"
-import Axios from "../utils/fetch"
+import { API_PROFIX } from "../constants";
+import Axios from "../utils/fetch";
 
 /**
  * 获取所有标签
@@ -7,7 +7,7 @@ import Axios from "../utils/fetch"
 export const GetCategories = () =>
     Axios.get<API.BaseResponse<API.ARTICLE.Categories>>(
         `${API_PROFIX}/writing/categories`
-    ).then((r) => r?.data)
+    ).then(r => r?.data);
 
 /*
  * 获取列表文章
@@ -19,7 +19,7 @@ export const GetArticles = (req: API.ARTICLE.GetArticleListRequest) =>
         {
             params: req,
         }
-    ).then((r) => r?.data)
+    ).then(r => r?.data);
 
 /**
  * 获取文章详情
@@ -29,8 +29,8 @@ export const GetArticles = (req: API.ARTICLE.GetArticleListRequest) =>
 export const GetArticleById = async (pid: number | string) => {
     return Axios.get<API.BaseResponse<API.ARTICLE.ArticleInfo>>(
         `${API_PROFIX}/writing/articles/${pid}`
-    ).then((r) => r?.data)
-}
+    ).then(r => r?.data);
+};
 
 /**
  * 获取每日一文文章
@@ -40,5 +40,5 @@ export const GetArticleById = async (pid: number | string) => {
 export const GetMeiRiYiWen = async (type: string, date?: string) => {
     return Axios.get<API.BaseResponse<API.ARTICLE.MeiRiYiWenData>>(
         `${API_PROFIX}/proxy/meiriyiwen/${type}/articles?date=${date}`
-    ).then((r) => r?.data)
-}
+    ).then(r => r?.data);
+};

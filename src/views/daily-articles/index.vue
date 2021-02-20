@@ -21,13 +21,13 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, watch, reactive, computed } from "vue"
-import { useHead } from "@vueuse/head"
+import { defineComponent, onMounted, watch, reactive, computed } from "vue";
+import { useHead } from "@vueuse/head";
 
-import { GetMeiRiYiWen } from "~/api/article"
-import DefaultLayout from "~/layouts/Default"
-import LoadingBall from "~/components/common/LoadingBall.vue"
-import { useToast } from "vue-toastification"
+import { GetMeiRiYiWen } from "~/api/article";
+import DefaultLayout from "~/layouts/Default";
+import LoadingBall from "~/components/common/LoadingBall.vue";
+import { useToast } from "vue-toastification";
 
 export default defineComponent({
     components: {
@@ -41,14 +41,14 @@ export default defineComponent({
     },
     setup(props) {
         const r = reactive<{
-            data?: Partial<API.ARTICLE.MeiRiYiWenData>
-            loading: boolean
-            q: typeof props.query
+            data?: Partial<API.ARTICLE.MeiRiYiWenData>;
+            loading: boolean;
+            q: typeof props.query;
         }>({
             data: {},
             loading: false,
             q: props.query,
-        })
+        });
         useHead({
             title: computed(
                 () => `每日阅读 - ${r.data?.title} - ${r.data?.author}`
@@ -59,36 +59,36 @@ export default defineComponent({
                     content: computed(() => `${r.data?.digest}`),
                 },
             ],
-        })
+        });
         const getData = (req: typeof props.query) => {
-            r.loading = true
-            const type = req?.date ? "day" : "random"
+            r.loading = true;
+            const type = req?.date ? "day" : "random";
             GetMeiRiYiWen(type, req?.date)
-                .then((data) => {
-                    r.data = data?.Result
-                    r.q = req
+                .then(data => {
+                    r.data = data?.Result;
+                    r.q = req;
                     if (data.ErrorCode) {
-                        useToast().error(data.ErrorMsg)
+                        useToast().error(data.ErrorMsg);
                     }
                 })
                 .finally(() => {
-                    r.loading = false
-                })
-        }
+                    r.loading = false;
+                });
+        };
         onMounted(() => {
-            getData(r.q)
-        })
+            getData(r.q);
+        });
         watch(
             () => props.query,
             async (next, _) => {
-                await getData(next)
+                await getData(next);
             }
-        )
+        );
         return {
             r,
-        }
+        };
     },
-})
+});
 </script>
 
 <style scoped>

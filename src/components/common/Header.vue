@@ -20,11 +20,11 @@
     </header>
 </template>
 <script lang="ts">
-import { defineComponent, computed } from "vue"
-import { useStore } from "vuex"
-import { StoreType } from "../../store"
+import { defineComponent, computed } from "vue";
+import { useStore } from "vuex";
+import { StoreType } from "../../store";
 // import FontIcon from "./FontIcon.vue"
-import Avatar from "./Avatar.vue"
+import Avatar from "./Avatar.vue";
 export default defineComponent({
     name: "common-header",
     props: {
@@ -40,30 +40,30 @@ export default defineComponent({
         Avatar,
     },
     setup(props, _) {
-        const store = useStore<StoreType>()
+        const store = useStore<StoreType>();
         // 判断用户是否作者
         const isAuthor = computed(
-            () => !!store.state.User?.Roles?.find((i) => i.Title == "Author")
-        )
+            () => !!store.state.User?.Roles?.find(i => i.Title == "Author")
+        );
         // 获取用户ID
-        const userId = computed(() => store.state.User.Id ?? 0)
+        const userId = computed(() => store.state.User.Id ?? 0);
         // 获取用户头像
-        const avatar = computed(() => store.state.User.Avatar ?? "")
+        const avatar = computed(() => store.state.User.Avatar ?? "");
         return {
             title: props.title,
             brief: props.brief,
             isAuthor: isAuthor,
             userId: userId,
             avatar: avatar,
-        }
+        };
     },
     methods: {
         ToIndex() {
-            this.$router.push("/")
+            this.$router.push("/");
             // window.location.href = "/"
         },
     },
-})
+});
 </script>
 
 <style scoped>

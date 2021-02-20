@@ -1,11 +1,11 @@
-import { defineComponent, watch, onMounted, reactive } from "vue"
-import { useHead } from "@vueuse/head"
+import { defineComponent, watch, onMounted, reactive } from "vue";
+import { useHead } from "@vueuse/head";
 
-import { GetArticles } from "~/api/article"
-import ContentLayout from "~/layouts/Content"
-import DefaultLayout from "~/layouts/Default"
-import SimpleInfoItem from "~/components/article/SimpleInfoItem.vue"
-import LoadingBall from "~/components/common/LoadingBall.vue"
+import { GetArticles } from "~/api/article";
+import ContentLayout from "~/layouts/Content";
+import DefaultLayout from "~/layouts/Default";
+import SimpleInfoItem from "~/components/article/SimpleInfoItem.vue";
+import LoadingBall from "~/components/common/LoadingBall.vue";
 
 export default defineComponent({
     name: "home-views",
@@ -16,45 +16,45 @@ export default defineComponent({
     },
     setup(props) {
         const data = reactive<{
-            List: API.ARTICLE.ArticleInfo[]
-            q: API.ARTICLE.GetArticleListRequest
-            loading: boolean
+            List: API.ARTICLE.ArticleInfo[];
+            q: API.ARTICLE.GetArticleListRequest;
+            loading: boolean;
         }>({
             List: [],
             q: props.query || {},
             loading: false,
-        })
+        });
         useHead({
             title: "远浅 - 给世界献上美好的祝福 - Vue3实战项目",
-        })
+        });
         // 获取数据
         const getList = (req: API.ARTICLE.GetArticleListRequest) => {
-            data.loading = true
-            data.List = []
+            data.loading = true;
+            data.List = [];
             return GetArticles(req)
-                .then((r) => {
-                    data.List = [...(r.Result?.Articles ?? [])]
+                .then(r => {
+                    data.List = [...(r.Result?.Articles ?? [])];
                 })
                 .finally(() => {
-                    data.loading = false
-                })
-        }
+                    data.loading = false;
+                });
+        };
 
         onMounted(async () => {
-            await getList(props.query ?? {})
-        })
+            await getList(props.query ?? {});
+        });
         watch(
             () => props.query,
             async (next, _) => {
-                data.q = next || {}
-                await getList(next ?? {})
+                data.q = next || {};
+                await getList(next ?? {});
             }
-        )
+        );
 
-        return { data }
+        return { data };
     },
     render() {
-        const { List, q, loading } = this.data
+        const { List, q, loading } = this.data;
         return (
             <DefaultLayout>
                 <ContentLayout>
@@ -70,7 +70,7 @@ export default defineComponent({
                             ></LoadingBall>
                         </div>
                     )}
-                    {List.map((i) => (
+                    {List.map(i => (
                         <SimpleInfoItem key={i.Id} info={i}></SimpleInfoItem>
                     ))}
                     <div
@@ -101,7 +101,7 @@ export default defineComponent({
                     </div>
                 </ContentLayout>
             </DefaultLayout>
-        )
+        );
     },
     components: {
         ContentLayout,
@@ -109,4 +109,4 @@ export default defineComponent({
         SimpleInfoItem,
         LoadingBall,
     },
-})
+});

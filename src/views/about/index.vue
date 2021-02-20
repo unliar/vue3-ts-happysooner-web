@@ -1,11 +1,11 @@
 <script lang="ts">
-import { defineComponent } from "vue"
-import DefaulLayout from "~/layouts/Default/index"
+import { defineComponent } from "vue";
+import DefaulLayout from "~/layouts/Default/index";
 export default defineComponent({
     components: {
         DefaulLayout,
     },
-})
+});
 </script>
 
 <template>

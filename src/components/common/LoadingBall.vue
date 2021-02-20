@@ -1,5 +1,5 @@
 <script lang="ts">
-import { defineComponent, reactive } from "vue"
+import { defineComponent, reactive } from "vue";
 
 export default defineComponent({
     props: {
@@ -14,12 +14,12 @@ export default defineComponent({
             color: props.color ?? "#888",
             size: props.size,
             loading: props.loading,
-        })
+        });
         return {
             r,
-        }
+        };
     },
-})
+});
 </script>
 
 <template>

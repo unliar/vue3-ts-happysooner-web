@@ -1,5 +1,5 @@
 <script lang="ts">
-import { defineComponent, reactive, watch } from "vue"
+import { defineComponent, reactive, watch } from "vue";
 
 export default defineComponent({
     props: {
@@ -12,19 +12,19 @@ export default defineComponent({
             scale: props.scale || 1,
             size: props.size || "32px",
             src: props.src || `https://happysooner.com/api/v1/tools/ident-icon`,
-        })
+        });
 
         watch(
             () => props.src,
-            (next) => {
+            next => {
                 d.src =
-                    next || `https://happysooner.com/api/v1/tools/ident-icon`
+                    next || `https://happysooner.com/api/v1/tools/ident-icon`;
             }
-        )
+        );
 
         return {
             d,
-        }
+        };
     },
     methods: {
         // x(e: Event) {
@@ -33,7 +33,7 @@ export default defineComponent({
         //     (<HTMLInputElement>e.target).src = this.src
         // }
     },
-})
+});
 </script>
 
 <template>

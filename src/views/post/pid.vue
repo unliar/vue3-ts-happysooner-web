@@ -48,15 +48,15 @@
     </DefaultLayout>
 </template>
 <script lang="ts">
-import { computed, defineComponent, onMounted, reactive, watch } from "vue"
-import { useToast } from "vue-toastification"
-import { useHead } from "@vueuse/head"
+import { computed, defineComponent, onMounted, reactive, watch } from "vue";
+import { useToast } from "vue-toastification";
+import { useHead } from "@vueuse/head";
 
-import markdownIt from "~/utils/md"
-import DefaultLayout from "~/layouts/Default"
-import { GetArticleById } from "~/api/article"
-import LoadingBall from "~/components/common/LoadingBall.vue"
-import { FromNow } from "~/utils/time"
+import markdownIt from "~/utils/md";
+import DefaultLayout from "~/layouts/Default";
+import { GetArticleById } from "~/api/article";
+import LoadingBall from "~/components/common/LoadingBall.vue";
+import { FromNow } from "~/utils/time";
 
 export default defineComponent({
     props: {
@@ -67,17 +67,17 @@ export default defineComponent({
         },
     },
     setup(props) {
-        const toast = useToast()
+        const toast = useToast();
 
         const r = reactive<{
-            data?: Partial<API.ARTICLE.ArticleInfo>
-            loading: boolean
-            fromNow: string
+            data?: Partial<API.ARTICLE.ArticleInfo>;
+            loading: boolean;
+            fromNow: string;
         }>({
             data: {},
             loading: false,
             fromNow: "",
-        })
+        });
 
         useHead({
             title: computed(() => `${r.data?.Title ?? ""}`),
@@ -94,48 +94,48 @@ export default defineComponent({
                     content: computed(() => `${r.data?.AuthorInfo?.Nickname}`),
                 },
             ],
-        })
+        });
         const fetchData = (id: number) => {
-            r.loading = true
+            r.loading = true;
             GetArticleById(id)
-                .then((data) => {
+                .then(data => {
                     if (data?.Result?.Content) {
                         data.Result.Content = markdownIt.render(
                             data.Result.Content
-                        )
+                        );
                     } else {
-                        toast.error(data.ErrorMsg ?? "请求该文章出错")
-                        return
+                        toast.error(data.ErrorMsg ?? "请求该文章出错");
+                        return;
                     }
-                    r.data = data.Result
-                    r.fromNow = FromNow(data.Result.CreatedAt)
+                    r.data = data.Result;
+                    r.fromNow = FromNow(data.Result.CreatedAt);
                 })
                 .finally(() => {
-                    r.loading = false
-                })
-        }
+                    r.loading = false;
+                });
+        };
 
         onMounted(async () => {
-            fetchData(props.pid)
-        })
+            fetchData(props.pid);
+        });
 
         watch(
             () => props.pid,
-            (next) => {
-                fetchData(next)
+            next => {
+                fetchData(next);
             }
-        )
+        );
 
         return {
             r,
-        }
+        };
     },
     components: {
         DefaultLayout,
         LoadingBall,
     },
     directives: {},
-})
+});
 </script>
 <style scoped>
 main {

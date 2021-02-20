@@ -47,45 +47,45 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, onUnmounted, reactive, ref } from "vue"
+import { defineComponent, onMounted, onUnmounted, reactive, ref } from "vue";
 
 export default defineComponent({
     setup() {
-        const Year = ref("2021")
+        const Year = ref("2021");
         const TimeShow = reactive({
             day: 0,
             hour: 0,
             min: 0,
             sec: 0,
-        })
-        let id: number
+        });
+        let id: number;
         onMounted(() => {
             id = setInterval(() => {
-                const Y = new Date().getFullYear()
-                const start = 1567180800000
-                const now = Date.now()
-                const leftTime = Math.floor((now - start) / 1000)
-                const day = Math.floor(leftTime / 60 / 60 / 24)
-                const hour = Math.floor(leftTime / 60 / 60) % 24
-                const min = Math.floor(leftTime / 60) % 60
-                const sec = Math.floor(leftTime % 60)
-                TimeShow.day = day
-                TimeShow.hour = hour
+                const Y = new Date().getFullYear();
+                const start = 1567180800000;
+                const now = Date.now();
+                const leftTime = Math.floor((now - start) / 1000);
+                const day = Math.floor(leftTime / 60 / 60 / 24);
+                const hour = Math.floor(leftTime / 60 / 60) % 24;
+                const min = Math.floor(leftTime / 60) % 60;
+                const sec = Math.floor(leftTime % 60);
+                TimeShow.day = day;
+                TimeShow.hour = hour;
 
-                TimeShow.min = min
+                TimeShow.min = min;
 
-                TimeShow.sec = sec
-            })
-        })
+                TimeShow.sec = sec;
+            });
+        });
         onUnmounted(() => {
-            clearInterval(id)
-        })
+            clearInterval(id);
+        });
         return {
             Year,
             TimeShow,
-        }
+        };
     },
-})
+});
 </script>
 
 <style scoped>

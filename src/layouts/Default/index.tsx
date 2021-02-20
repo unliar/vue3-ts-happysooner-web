@@ -1,9 +1,9 @@
-import { defineComponent } from "vue"
-import { DEFAULT_LAYOUT_NAME } from "../../constants"
-import Footer from "../../components/common/Footer.vue"
-import Header from "../../components/common/Header.vue"
+import { defineComponent } from "vue";
+import { DEFAULT_LAYOUT_NAME } from "../../constants";
+import Footer from "../../components/common/Footer.vue";
+import Header from "../../components/common/Header.vue";
 
-import "./index.css"
+import "./index.css";
 const DefaultLayout = defineComponent({
     name: DEFAULT_LAYOUT_NAME,
     render() {
@@ -22,8 +22,8 @@ const DefaultLayout = defineComponent({
                 </div>
                 <Footer></Footer>
             </>
-        )
+        );
     },
-})
+});
 
-export default DefaultLayout
+export default DefaultLayout;
