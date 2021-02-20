@@ -55,7 +55,7 @@ export default defineComponent({
     props: {
         pid: {
             required: true, // props 是否必要
-            type: String, // props 类型
+            type: Number, // props 类型
             validator: (v: String) => !isNaN(+v), // 自定义校验器
         },
     },
@@ -84,7 +84,7 @@ export default defineComponent({
                 }
             ],
         })
-        const fetchData = (id: string) => {
+        const fetchData = (id: number) => {
             r.loading = true
             GetArticleById(id).then((data) => {
                 if (data?.Result?.Content) {
