@@ -1,8 +1,6 @@
 import axios from 'axios'
-import { useToast } from 'vue-toastification'
 import { HAPPY_AUTH_TOKEN } from '../constants'
 import { GetTokenCookies } from './cookie'
-const toast = useToast()
 
 const Axios = axios.create({
     baseURL: (import.meta.env.VITE_BASE_HOST as string) || '/',
@@ -39,11 +37,13 @@ Axios.interceptors.response.use(
         return res
     },
     (err: Error) => {
-        toast.error(err.message)
+        console.error('系统错误❌', err)
         return Promise.resolve({
-            ErrorCode: -1,
-            ErrorMsg: JSON.stringify(err),
-            Result: null,
+            data: {
+                ErrorCode: -1,
+                ErrorMsg: err.message,
+                Result: null,
+            },
         })
     }
 )
