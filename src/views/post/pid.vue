@@ -59,7 +59,7 @@ export default defineComponent({
 
         onMounted(async () => {
             r.loading = true
-            GetArticleById(props.pid).then(({ data }) => {
+            GetArticleById(props.pid).then((data) => {
                 if (data?.Result?.Content) {
                     data.Result.Content = markdownIt.render(data.Result.Content)
                 } else {

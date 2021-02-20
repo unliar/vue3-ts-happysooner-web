@@ -29,7 +29,7 @@ export const GetArticles = (req: API.ARTICLE.GetArticleListRequest) =>
 export const GetArticleById = (pid: number | string) => {
   return Axios.get<API.BaseResponse<API.ARTICLE.ArticleInfo>>(
     `${API_PROFIX}/writing/articles/${pid}`
-  );
+  ).then((r) => r?.data);
 };
 
 /**
@@ -40,5 +40,5 @@ export const GetArticleById = (pid: number | string) => {
 export const GetMeiRiYiWen = (type: string, date?: string) => {
   return Axios.get<API.BaseResponse<API.ARTICLE.MeiRiYiWenData>>(
     `${API_PROFIX}/proxy/meiriyiwen/${type}/articles?date=${date}`
-  );
+  ).then((r) => r?.data);
 };

@@ -49,7 +49,7 @@ export default defineComponent({
         const getData = (req: typeof props.query) => {
             r.loading = true
             const type = req?.date ? "day" : "random";
-            GetMeiRiYiWen(type, req?.date).then(({ data }) => {
+            GetMeiRiYiWen(type, req?.date).then((data) => {
                 r.data = data?.Result
                 r.q = req
             }).finally(() => {

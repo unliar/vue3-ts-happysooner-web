@@ -4,8 +4,9 @@ const homeComponent = () => import("../views/home/index");
 const postDetail = () => import("../views/post/pid.vue");
 const signin = () => import("../views/signin/index");
 const about = () => import("../views/about/index.vue");
-const NotFound = () => import("../views/404/index.vue");
-const DailyRead = () => import("../views/daily-articles/index.vue");
+const notFound = () => import("../views/404/index.vue");
+const dailyRead = () => import("../views/daily-articles/index.vue");
+const userDetail = () => import("../views/users/uid.vue");
 
 const routes: RouteRecordRaw[] = [
   {
@@ -21,9 +22,15 @@ const routes: RouteRecordRaw[] = [
     props: true,
   },
   {
+    path: "/users/:uid",
+    name: "user-details",
+    component: userDetail,
+    props: true,
+  },
+  {
     path: "/daily-articles",
     name: "daily-read",
-    component: DailyRead,
+    component: dailyRead,
     props: (r) => ({ query: r.query }),
   },
   {
@@ -39,7 +46,7 @@ const routes: RouteRecordRaw[] = [
   {
     path: "/:pathMatch(.*)*",
     name: "not-found",
-    component: NotFound,
+    component: notFound,
   },
 ];
 
