@@ -5,6 +5,7 @@ const postDetail = () => import("../views/post/pid.vue");
 const signin = () => import("../views/signin/index");
 const about = () => import("../views/about/index.vue");
 const NotFound = () => import("../views/404/index.vue");
+const DailyRead = () => import("../views/daily-articles/index.vue");
 
 const routes: RouteRecordRaw[] = [
   {
@@ -18,6 +19,12 @@ const routes: RouteRecordRaw[] = [
     name: "post-detail",
     component: postDetail,
     props: true,
+  },
+  {
+    path: "/daily-articles",
+    name: "daily-read",
+    component: DailyRead,
+    props: (r) => ({ query: r.query }),
   },
   {
     path: "/signin",

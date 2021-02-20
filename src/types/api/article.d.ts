@@ -43,4 +43,18 @@ declare namespace API.ARTICLE {
     Prev?: ArticleInfo;
     Next?: ArticleInfo;
   }
+  export interface MeiRiYiWenData {
+    content: string;
+    author: string;
+    title: string;
+    digest: string;
+    wx: number;
+    date: Dates;
+  }
+
+  export interface Dates {
+    curr: string;
+    next: string;
+    prev: string;
+  }
 }

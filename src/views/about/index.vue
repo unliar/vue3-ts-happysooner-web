@@ -10,6 +10,6 @@ export default defineComponent({
 
 <template>
     <DefaulLayout>
-        <div class="about-container">关于界面</div>
+        <div class="about-container">关于这一切 我无可奉告</div>
     </DefaulLayout>
 </template>

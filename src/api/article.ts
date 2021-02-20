@@ -31,3 +31,14 @@ export const GetArticleById = (pid: number | string) => {
     `${API_PROFIX}/writing/articles/${pid}`
   );
 };
+
+/**
+ * 获取每日一文文章
+ * @param type random or day
+ * @param date 20180811
+ */
+export const GetMeiRiYiWen = (type: string, date?: string) => {
+  return Axios.get<API.BaseResponse<API.ARTICLE.MeiRiYiWenData>>(
+    `${API_PROFIX}/proxy/meiriyiwen/${type}/articles?date=${date}`
+  );
+};
