@@ -33,7 +33,7 @@
                     <router-link
                         v-if="r.data?.Navigation?.Next?.Id"
                         :to="`/post/${r.data?.Navigation?.Next?.Id}`"
-                    >下一篇 « {{ r.data?.Navigation?.Next?.Title }}</router-link>
+                    >下一篇 » {{ r.data?.Navigation?.Next?.Title }}</router-link>
                 </div>
             </div>
         </main>
