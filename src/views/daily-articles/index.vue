@@ -1,9 +1,12 @@
 <template>
     <DefaultLayout>
-        <div style="padding: 30vh 0" v-if="r.loading">
-            <LoadingBall :loading="true"></LoadingBall>
-        </div>
-        <main v-else>
+        <LoadingBall
+            :loading="r.loading"
+            padding="30vh 0"
+            infoSize="18px"
+            info="努力加载中"
+        ></LoadingBall>
+        <main v-if="!r.loading">
             <h1 class="article-title">{{ r.data?.title }}</h1>
             <div>作者：{{ r.data?.author }}</div>
             <div class="article-container" v-html="r.data?.content"></div>
