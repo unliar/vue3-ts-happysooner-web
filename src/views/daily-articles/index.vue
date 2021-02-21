@@ -41,6 +41,7 @@ export default defineComponent({
         },
     },
     setup(props) {
+        const toast = useToast();
         const r = reactive<{
             data?: Partial<API.ARTICLE.MeiRiYiWenData>;
             loading: boolean;
@@ -69,7 +70,7 @@ export default defineComponent({
                     r.data = data?.Result;
                     r.q = req;
                     if (data.ErrorCode) {
-                        useToast().error(data.ErrorMsg);
+                        toast.error(data.ErrorMsg);
                     }
                 })
                 .finally(() => {
