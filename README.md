@@ -26,6 +26,13 @@ npm run dev
 
 2. 本项目的 github action 自动部署配置仅适用于本人。
 
+3. 本项目配置了代码格式化插件 prettier 和 commitlint, 请注意 commit message 规范。
+
+```
+// demo commit message
+git commit -m "feat: add a perfect feature"
+```
+
 ### 附录
 
 1. Vue history 路由 nginx 简要配置文件, 适用于单页面应用。
