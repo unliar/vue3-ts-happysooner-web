@@ -167,7 +167,7 @@ const LoadMore = () => {
             <div class="comment-btn" @click="ToLogin" v-else>登录发表评论</div>
         </div>
         <div class="comment-title">
-            <span>评论列表</span>
+            <span>文章交流区</span>
         </div>
         <div class="comment-list">
             <div
@@ -205,9 +205,9 @@ const LoadMore = () => {
                                     >{{ tx.Description }}</sup
                                 >
                             </span>
-                            <span class="time">
-                                {{ TimeFomat(i.CreatedAt) }}
-                            </span>
+                            <span class="time">{{
+                                TimeFomat(i.CreatedAt)
+                            }}</span>
                         </div>
                         <div class="main-content">{{ i.Content }}</div>
                     </div>
