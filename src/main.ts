@@ -10,7 +10,7 @@ import RouterInstance from "./router";
 import Store from "./store/index";
 import { AddNProgress } from "./utils/routerHooks";
 import Highlight from "./utils/highlight";
-
+import LoadingBall from "./components/common/LoadingBall";
 AddNProgress(RouterInstance);
 
 const options: PluginOptions = {
@@ -25,5 +25,6 @@ createApp(App)
     .use(head)
     .use(RouterInstance)
     .use(Highlight)
+    .use(LoadingBall)
     .use(Store)
     .mount("#vue-next");

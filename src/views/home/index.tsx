@@ -5,8 +5,7 @@ import { GetArticles } from "~/api/article";
 import ContentLayout from "~/layouts/Content";
 import DefaultLayout from "~/layouts/Default";
 import SimpleInfoItem from "~/components/article/SimpleInfoItem.vue";
-import LoadingBall from "~/components/common/LoadingBall.vue";
-
+import LoadingBall from "../../components/common/LoadingBall/index.vue";
 export default defineComponent({
     name: "home-views",
     props: {
@@ -101,6 +100,5 @@ export default defineComponent({
         ContentLayout,
         DefaultLayout,
         SimpleInfoItem,
-        LoadingBall,
     },
 });

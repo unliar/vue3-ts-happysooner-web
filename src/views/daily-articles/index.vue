@@ -29,13 +29,11 @@ import { useHead } from "@vueuse/head";
 
 import { GetMeiRiYiWen } from "~/api/article";
 import DefaultLayout from "~/layouts/Default";
-import LoadingBall from "~/components/common/LoadingBall.vue";
 import { useToast } from "vue-toastification";
 
 export default defineComponent({
     components: {
         DefaultLayout,
-        LoadingBall,
     },
     props: {
         query: {
