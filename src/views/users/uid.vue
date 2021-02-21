@@ -57,7 +57,7 @@ import { useHead } from "@vueuse/head";
 import { useStore } from "vuex";
 import { useToast } from "vue-toastification";
 // - - 项目内import
-import DefaultLayout from "~/layouts/Default";
+import DefaultLayout from "~/components/layouts/Default";
 import EmptyContent from "~/components/common/EmptyContent.vue";
 import SimpleInfoItem from "~/components/article/SimpleInfoItem.vue";
 import { GetUserInfoByID } from "~/api/user";

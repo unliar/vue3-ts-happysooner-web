@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import DefaulLayout from "~/layouts/Default/index";
+import DefaulLayout from "~/components/layouts/Default/index";
 </script>
 
 <template>
