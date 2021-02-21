@@ -157,8 +157,9 @@ const LoadMore = () => {
         <div class="comment-send">
             <div class="comment-input">
                 <textarea
-                    placeholder="说说你的看法吧~"
+                    placeholder="说说你的看法吧~ , ctrl + enter 可快速提交。"
                     v-model.trim="Comment.text"
+                    @keydown.ctrl.enter="SubmitComment"
                 ></textarea>
             </div>
             <div class="comment-btn" @click="SubmitComment" v-if="isAuthed">
@@ -205,9 +206,9 @@ const LoadMore = () => {
                                     >{{ tx.Description }}</sup
                                 >
                             </span>
-                            <span class="time">{{
-                                TimeFomat(i.CreatedAt)
-                            }}</span>
+                            <span class="time">
+                                {{ TimeFomat(i.CreatedAt) }}
+                            </span>
                         </div>
                         <div class="main-content">{{ i.Content }}</div>
                     </div>
