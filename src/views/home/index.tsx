@@ -2,8 +2,8 @@ import { defineComponent, watch, onMounted, reactive } from "vue";
 import { useHead } from "@vueuse/head";
 
 import { GetArticles } from "~/api/article";
-import ContentLayout from "~/layouts/Content";
-import DefaultLayout from "~/layouts/Default";
+import ContentLayout from "~/components/layouts/Content";
+import DefaultLayout from "~/components/layouts/Default";
 import SimpleInfoItem from "~/components/article/SimpleInfoItem.vue";
 import LoadingBall from "../../components/common/LoadingBall/index.vue";
 export default defineComponent({
