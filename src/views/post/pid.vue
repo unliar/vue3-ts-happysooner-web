@@ -54,8 +54,8 @@
         </main>
     </DefaultLayout>
 </template>
-<script lang="ts">
-import { computed, defineComponent, onMounted, reactive, watch } from "vue";
+<script lang="ts" setup>
+import { computed, defineProps, onMounted, reactive, watch } from "vue";
 import { useToast } from "vue-toastification";
 import { useHead } from "@vueuse/head";
 
@@ -65,84 +65,70 @@ import Comment from "~/components/article/Comment.vue";
 import { GetArticleById } from "~/api/article";
 import { FromNow } from "~/utils/time";
 
-export default defineComponent({
-    props: {
-        pid: {
-            required: true, // props 是否必要
-            type: Number, // props 类型
-            validator: (v: String) => !isNaN(+v), // 自定义校验器
-        },
+const props = defineProps({
+    pid: {
+        required: true, // props 是否必要
+        type: Number, // props 类型
+        validator: (v: String) => !isNaN(+v), // 自定义校验器
     },
-    setup(props) {
-        const toast = useToast();
-
-        const r = reactive<{
-            data?: Partial<API.ARTICLE.ArticleInfo>;
-            loading: boolean;
-            fromNow: string;
-        }>({
-            data: {},
-            loading: false,
-            fromNow: "",
-        });
-
-        useHead({
-            title: computed(() => `${r.data?.Title ?? ""}`),
-            meta: [
-                {
-                    name: `description`,
-                    content: computed(
-                        () =>
-                            `${r.data?.AuthorInfo?.Nickname}发表了${r.data?.Title},${r.data?.Summary}`
-                    ),
-                },
-                {
-                    name: "author",
-                    content: computed(() => `${r.data?.AuthorInfo?.Nickname}`),
-                },
-            ],
-        });
-        const fetchData = (id: number) => {
-            r.loading = true;
-            GetArticleById(id)
-                .then(data => {
-                    if (data?.Result?.Content) {
-                        data.Result.Content = markdownIt.render(
-                            data.Result.Content
-                        );
-                    } else {
-                        toast.error(data.ErrorMsg ?? "请求该文章出错");
-                        return;
-                    }
-                    r.data = data.Result;
-                    r.fromNow = FromNow(data.Result.CreatedAt);
-                })
-                .finally(() => {
-                    r.loading = false;
-                });
-        };
-
-        onMounted(async () => {
-            fetchData(props.pid);
-        });
-
-        watch(
-            () => props.pid,
-            next => {
-                fetchData(next);
-            }
-        );
-
-        return {
-            r,
-        };
-    },
-    components: {
-        DefaultLayout,
-        Comment,
-    },
-    directives: {},
 });
+
+const toast = useToast();
+
+const r = reactive<{
+    data?: Partial<API.ARTICLE.ArticleInfo>;
+    loading: boolean;
+    fromNow: string;
+}>({
+    data: {},
+    loading: false,
+    fromNow: "",
+});
+
+useHead({
+    title: computed(() => `${r.data?.Title ?? ""}`),
+    meta: [
+        {
+            name: `description`,
+            content: computed(
+                () =>
+                    `${r.data?.AuthorInfo?.Nickname}发表了${r.data?.Title},${r.data?.Summary}`
+            ),
+        },
+        {
+            name: "author",
+            content: computed(() => `${r.data?.AuthorInfo?.Nickname}`),
+        },
+    ],
+});
+const fetchData = (id: number) => {
+    r.loading = true;
+    GetArticleById(id)
+        .then(data => {
+            if (data?.Result?.Content) {
+                data.Result.Content = markdownIt.render(data.Result.Content);
+            } else {
+                toast.error(data.ErrorMsg ?? "请求该文章出错");
+                return;
+            }
+            r.data = data.Result;
+            r.fromNow = FromNow(data.Result.CreatedAt);
+        })
+        .finally(() => {
+            r.loading = false;
+        });
+};
+
+onMounted(async () => {
+    fetchData(props.pid);
+});
+
+watch(
+    () => props.pid,
+    next => {
+        fetchData(next);
+    }
+);
 </script>
 <style scoped>
 main {

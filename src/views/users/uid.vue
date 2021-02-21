@@ -51,8 +51,8 @@
         </main>
     </DefaultLayout>
 </template>
-<script lang="ts">
-import { defineComponent, reactive, onMounted, computed, watch } from "vue";
+<script lang="ts" setup>
+import { defineProps, reactive, onMounted, computed, watch } from "vue";
 import { useHead } from "@vueuse/head";
 import { useStore } from "vuex";
 import { useToast } from "vue-toastification";
@@ -61,141 +61,120 @@ import DefaultLayout from "~/layouts/Default";
 import EmptyContent from "~/components/common/EmptyContent.vue";
 import SimpleInfoItem from "~/components/article/SimpleInfoItem.vue";
 import { GetUserInfoByID } from "~/api/user";
-import { StoreType } from "~/store";
+import type { StoreType } from "~/store";
 import { MUTATIONS } from "~/store/type";
 import { GetArticles } from "~/api/article";
 
-export default defineComponent({
-    props: {
-        uid: {
-            required: true, // props 是否必要
-            type: Number, // props 类型
-            validator: (v: String) => !isNaN(+v), // 自定义校验器
-        },
-    },
-    setup(props) {
-        const store = useStore<StoreType>();
-        const toast = useToast();
-
-        const user = reactive<{
-            data: Partial<API.USERS.UserInfo>;
-        }>({
-            data: {},
-        });
-
-        const articles = reactive<{
-            list: API.ARTICLE.ArticleInfo[];
-            page: number;
-            loading: boolean;
-            loaded: boolean;
-        }>({
-            list: [],
-            page: 1,
-            loading: false,
-            loaded: false,
-        });
-
-        // 判断用户是否是
-        const isCurrentUser = computed(
-            () => store.state.User.Id === user.data.Id
-        );
-
-        useHead({
-            title: computed(() => `${user.data.Nickname}的个人中心`),
-        });
-
-        // 注销登录
-        const removeLogin = () => {
-            console.log("退出登录");
-            store.commit(MUTATIONS.RESET_USER_STORE);
-            toast.success("退出登录成功~");
-        };
-
-        // 获取用户信息
-        const fetchUserInfo = (uid: number) => {
-            GetUserInfoByID(uid).then(r => {
-                if (r.ErrorCode) {
-                    toast.error(r.ErrorMsg ?? "系统错误");
-                    return;
-                }
-                user.data = {
-                    ...(r.Result ?? {}),
-                };
-            });
-        };
-
-        // 获取文章列表
-        const fetchArticleList = (uid: number, page: number) => {
-            articles.loading = true;
-            page = page || 1;
-            GetArticles({ UID: uid, Page: page })
-                .then(r => {
-                    const list = r?.Result?.Articles ?? [];
-                    articles.page = page;
-                    articles.list = list;
-                    if (list.length === 0) {
-                        articles.loaded = true;
-                    } else {
-                        articles.loaded = false;
-                    }
-                })
-                .finally(() => {
-                    articles.loading = false;
-                });
-        };
-
-        // 加载更多
-        const loadMore = () => {
-            articles.loading = true;
-
-            GetArticles({
-                UID: user.data.Id,
-                Page: articles.page + 1,
-            })
-                .then(r => {
-                    const list = r.Result?.Articles ?? [];
-                    if (list.length === 0) {
-                        articles.loaded = true;
-                        return;
-                    }
-                    articles.page += 1;
-                    articles.list = [
-                        ...articles.list,
-                        ...(r.Result?.Articles ?? []),
-                    ];
-                })
-                .finally(() => {
-                    articles.loading = false;
-                });
-        };
-
-        onMounted(() => {
-            fetchUserInfo(props.uid);
-            fetchArticleList(props.uid, 1);
-        });
-
-        watch(
-            () => props.uid,
-            next => {
-                fetchUserInfo(next);
-                fetchArticleList(next, 1);
-            }
-        );
-
-        return {
-            user,
-            articles,
-            isCurrentUser,
-            removeLogin,
-            loadMore,
-        };
-    },
-    components: {
-        DefaultLayout,
-        SimpleInfoItem,
-        EmptyContent,
+const props = defineProps({
+    uid: {
+        required: true, // props 是否必要
+        type: Number, // props 类型
+        validator: (v: String) => !isNaN(+v), // 自定义校验器
     },
 });
+
+const store = useStore<StoreType>();
+const toast = useToast();
+
+const user = reactive<{
+    data: Partial<API.USERS.UserInfo>;
+}>({
+    data: {},
+});
+
+const articles = reactive<{
+    list: API.ARTICLE.ArticleInfo[];
+    page: number;
+    loading: boolean;
+    loaded: boolean;
+}>({
+    list: [],
+    page: 1,
+    loading: false,
+    loaded: false,
+});
+
+// 判断用户是否是
+const isCurrentUser = computed(() => store.state.User.Id === user.data.Id);
+
+useHead({
+    title: computed(() => `${user.data.Nickname}的个人中心`),
+});
+
+// 注销登录
+const removeLogin = () => {
+    console.log("退出登录");
+    store.commit(MUTATIONS.RESET_USER_STORE);
+    toast.success("退出登录成功~");
+};
+
+// 获取用户信息
+const fetchUserInfo = (uid: number) => {
+    GetUserInfoByID(uid).then(r => {
+        if (r.ErrorCode) {
+            toast.error(r.ErrorMsg ?? "系统错误");
+            return;
+        }
+        user.data = {
+            ...(r.Result ?? {}),
+        };
+    });
+};
+
+// 获取文章列表
+const fetchArticleList = (uid: number, page: number) => {
+    articles.loading = true;
+    page = page || 1;
+    GetArticles({ UID: uid, Page: page })
+        .then(r => {
+            const list = r?.Result?.Articles ?? [];
+            articles.page = page;
+            articles.list = list;
+            if (list.length === 0) {
+                articles.loaded = true;
+            } else {
+                articles.loaded = false;
+            }
+        })
+        .finally(() => {
+            articles.loading = false;
+        });
+};
+
+// 加载更多
+const loadMore = () => {
+    articles.loading = true;
+
+    GetArticles({
+        UID: user.data.Id,
+        Page: articles.page + 1,
+    })
+        .then(r => {
+            const list = r.Result?.Articles ?? [];
+            if (list.length === 0) {
+                articles.loaded = true;
+                return;
+            }
+            articles.page += 1;
+            articles.list = [...articles.list, ...(r.Result?.Articles ?? [])];
+        })
+        .finally(() => {
+            articles.loading = false;
+        });
+};
+
+onMounted(() => {
+    fetchUserInfo(props.uid);
+    fetchArticleList(props.uid, 1);
+});
+
+watch(
+    () => props.uid,
+    next => {
+        fetchUserInfo(next);
+        fetchArticleList(next, 1);
+    }
+);
 </script>
 
 <style scoped>
