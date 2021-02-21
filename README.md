@@ -28,6 +28,8 @@ npm run dev
 
 3. 本项目配置了代码格式化插件 prettier 和 commitlint, 请注意 commit message 规范。
 
+4. windows 环境可能存在 build 失败的问题, 请使用 docker 环境构建。
+
 ```
 git commit -m "feat: add a perfect feature"
 ```
