@@ -1,6 +1,6 @@
 ## vue3-ts-happysooner-web ![deploy](https://github.com/unliar/vue3-ts-happysooner-web/workflows/deploy/badge.svg)
 
-这是一个 happysooner.com 的 vite2 + vue3 精简项目, 主要目的是为了学习。
+这是一个 happysooner.com 站点的 Vite 2.0 + Vue 3.0 + Vuex 4.0 + Vue-Router 4.0 全家桶精简复刻项目, 主要目的是为了学习复健 Vue 3.0。
 
 线上地址 [https://vue-next.happysooner.com/](https://vue-next.happysooner.com/)
 
@@ -14,10 +14,37 @@ npm run dev
 
 ### 部署方式
 
-1. docker 方式已写好 dockerfile 文件
+1. docker 方式已写好 dockerfile 文件。
 
 2. 常规部署与常规 vue 项目相似。
 
 ### 注意事项
 
-1. 本项目的代码风格会存在各种混搭,比如 jsx、template , 其目的主要是为了实践,从工程的角度来说, 并不是最佳的, 多人协作最好还是保持一致的代码风格。
+1. 本项目的代码风格会存在各种混搭,比如 jsx、template, 其目的主要是为了实践, 从工程的角度来说, 并不是最佳的, 多人协作最好还是保持一致的代码风格。
+
+2. 本项目的 github action 自动部署配置仅适用于本人。
+
+### 附录
+
+1. Vue history 路由 nginx 简要配置文件, 适用于单页面应用。
+
+```
+server {
+
+    listen 80;
+
+    location / {
+        root /usr/share/nginx/html;
+        index index.html index.htm;
+        try_files $uri $uri/ /index.html;
+    }
+
+    error_page 500 502 503 504 /50x.html;
+
+    location = /50x.html {
+        root /usr/share/nginx/html;
+    }
+
+}
+
+```

@@ -4,17 +4,31 @@
 
 <script lang="ts">
 import { useHead } from "@vueuse/head";
-import { defineComponent, onMounted } from "vue";
+import { defineComponent, onMounted, onUpdated } from "vue";
+import { POSITION, useToast } from "vue-toastification";
 import { useStore } from "vuex";
+
+import GithubStar from "./components/common/GithubStar.vue";
 import { ACTIONS } from "~/store/type";
 export default defineComponent({
     name: "happy-app",
     setup() {
         const store = useStore();
+        const toast = useToast();
+
         useHead({
             title: "远浅 - 给世界献上美好的祝福 - Vue3实战项目",
         });
+
         onMounted(async () => {
+            // github star 弹窗
+            setTimeout(() => {
+                toast.info(GithubStar, {
+                    position: POSITION.BOTTOM_RIGHT,
+                    timeout: 30000,
+                });
+            }, 5000);
+
             // 应用初始化 Store 数据
             // 用户登录信息
             store.dispatch(ACTIONS.GET_AUTHED_USER_INFO);
