@@ -29,7 +29,6 @@ npm run dev
 3. 本项目配置了代码格式化插件 prettier 和 commitlint, 请注意 commit message 规范。
 
 ```
-// demo commit message
 git commit -m "feat: add a perfect feature"
 ```
 
