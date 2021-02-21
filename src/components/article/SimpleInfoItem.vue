@@ -1,23 +1,15 @@
-<script lang="ts">
-import { defineComponent } from "vue";
+<script lang="ts" setup>
+import { defineProps } from "vue";
 import { FromNow } from "~/utils/time";
 
-export default defineComponent({
-    name: "Simple-Info-item",
-    props: {
-        info: {
-            type: Object as () => API.ARTICLE.ArticleInfo,
-            required: true,
-        },
-    },
-    setup(props) {
-        const CreatedAt = FromNow((props as any).info.CreatedAt);
-        return {
-            info: props.info,
-            CreatedAt,
-        };
+const props = defineProps({
+    info: {
+        type: Object as () => API.ARTICLE.ArticleInfo,
+        required: true,
     },
 });
+
+const CreatedAt = FromNow(props.info.CreatedAt);
 </script>
 
 <template>

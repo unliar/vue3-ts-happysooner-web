@@ -1,34 +1,26 @@
-<script lang="ts">
-import { defineComponent, reactive, watch } from "vue";
+<script lang="ts" setup>
+import { defineProps, reactive, watch } from "vue";
 
-export default defineComponent({
-    props: {
-        size: String,
-        src: String,
-        scale: Number,
-    },
-    setup(props) {
-        const d = reactive({
-            scale: props.scale || 1,
-            size: props.size || "32px",
-            src:
-                props.src ||
-                `https://happysooner.com/api/v1/tools/ident-icon?key=happy`,
-        });
-
-        watch(
-            () => props.src,
-            next => {
-                d.src = next ?? "";
-            }
-        );
-
-        return {
-            d,
-        };
-    },
-    methods: {},
+const props = defineProps({
+    size: String,
+    src: String,
+    scale: Number,
 });
+
+const d = reactive({
+    scale: props.scale || 1,
+    size: props.size || "32px",
+    src:
+        props.src ||
+        `https://happysooner.com/api/v1/tools/ident-icon?key=happy`,
+});
+
+watch(
+    () => props.src,
+    next => {
+        d.src = next ?? "";
+    }
+);
 </script>
 
 <template>

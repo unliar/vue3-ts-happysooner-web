@@ -19,48 +19,40 @@
         </div>
     </header>
 </template>
-<script lang="ts">
-import { defineComponent, computed } from "vue";
+<script lang="ts" setup>
+import { computed, defineProps } from "vue";
+import { useRouter } from "vue-router";
 import { useStore } from "vuex";
-import { StoreType } from "~/store";
+import type { StoreType } from "~/store";
+
+const router = useRouter();
+
 // import FontIcon from "./FontIcon.vue"
-export default defineComponent({
-    name: "common-header",
-    props: {
-        title: {
-            type: String,
-            required: true,
-        },
-        brief: {
-            type: String,
-        },
+const props = defineProps({
+    title: {
+        type: String,
+        required: true,
     },
-    components: {},
-    setup(props, _) {
-        const store = useStore<StoreType>();
-        // 判断用户是否作者
-        const isAuthor = computed(
-            () => !!store.state.User?.Roles?.find(i => i.Title == "Author")
-        );
-        // 获取用户ID
-        const userId = computed(() => store.state.User.Id ?? 0);
-        // 获取用户头像
-        const avatar = computed(() => store.state.User.Avatar ?? "");
-        return {
-            title: props.title,
-            brief: props.brief,
-            isAuthor: isAuthor,
-            userId: userId,
-            avatar: avatar,
-        };
-    },
-    methods: {
-        ToIndex() {
-            this.$router.push("/");
-            // window.location.href = "/"
-        },
+    brief: {
+        type: String,
     },
 });
+const ToIndex = () => {
+    router.push("/");
+    // window.location.href = "/"
+};
+const store = useStore<StoreType>();
+// 判断用户是否作者
+const isAuthor = computed(
+    () => !!store.state.User?.Roles?.find(i => i.Title == "Author")
+);
+// 获取用户ID
+const userId = computed(() => store.state.User.Id ?? 0);
+// 获取用户头像
+const avatar = computed(() => store.state.User.Avatar ?? "");
+// props
+const title = props.title;
+const brief = props.brief;
 </script>
 
 <style scoped>

@@ -1,35 +1,28 @@
-<script lang="ts">
-import { defineComponent, reactive, watch } from "vue";
+<script lang="ts" setup>
+import { defineProps, reactive, watch } from "vue";
 
-export default defineComponent({
-    props: {
-        info: String,
-        color: String,
-        infoSize: String,
-        loading: Boolean,
-        padding: String,
-    },
-    setup(props) {
-        const r = reactive({
-            info: props.info ?? "努力加载中",
-            color: props.color ?? "#888",
-            infoSize: props.infoSize ?? "1rem",
-            loading: props.loading,
-            padding: props.padding ?? "30px 0",
-        });
-
-        watch(
-            () => props.loading,
-            cur => {
-                r.loading = cur;
-            }
-        );
-
-        return {
-            r,
-        };
-    },
+const props = defineProps({
+    info: String,
+    color: String,
+    infoSize: String,
+    loading: Boolean,
+    padding: String,
 });
+
+const r = reactive({
+    info: props.info ?? "努力加载中",
+    color: props.color ?? "#888",
+    infoSize: props.infoSize ?? "1rem",
+    loading: props.loading,
+    padding: props.padding ?? "30px 0",
+});
+
+watch(
+    () => props.loading,
+    cur => {
+        r.loading = cur;
+    }
+);
 </script>
 
 <template>
