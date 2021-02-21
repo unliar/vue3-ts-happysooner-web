@@ -1,15 +1,22 @@
 <script lang="ts" setup>
-import { onMounted, reactive, defineProps } from "vue";
+import { onMounted, reactive, defineProps, computed } from "vue";
+import { useRouter } from "vue-router";
 import { useToast } from "vue-toastification";
+import { useStore } from "vuex";
+import type { StoreType } from "~/store/index";
 import { GetCommentList, PostComment } from "~/api/article";
 import { DefaultFormat } from "~/utils/time";
-
-const toast = useToast();
 
 const props = defineProps({
     postId: Number,
     authorId: Number,
 });
+
+const toast = useToast();
+const router = useRouter();
+const store = useStore<StoreType>();
+
+const isAuthed = computed(() => store?.state?.User?.Id ?? 0 > 0);
 
 // 评论值
 // ref: Comment = ""
@@ -52,7 +59,17 @@ const SubmitComment = () => {
                     toast.warning("触发敏感词,请礼貌用语~");
                     return;
                 }
-                toast.warning(`发表出错: ${r.ErrorCode} ${r.ErrorMsg}`);
+
+                if (r.ErrorCode === 403) {
+                    toast.info("登录状态过期,跳转登录中...", {
+                        timeout: 1500,
+                        onClose() {
+                            router.push("/signin");
+                        },
+                    });
+                    return;
+                }
+                toast.warning(`评论出错: ${r.ErrorCode} ${r.ErrorMsg}`);
                 return;
             }
             toast.success("评论成功~");
@@ -78,6 +95,10 @@ const SubmitComment = () => {
         });
 };
 
+// 前往登录
+const ToLogin = () => {
+    router.push("/signin");
+};
 // init
 const TimeFomat = DefaultFormat;
 
@@ -140,7 +161,10 @@ const LoadMore = () => {
                     v-model.trim="Comment.text"
                 ></textarea>
             </div>
-            <div class="comment-btn" @click="SubmitComment">发表评论</div>
+            <div class="comment-btn" @click="SubmitComment" v-if="isAuthed">
+                发表评论
+            </div>
+            <div class="comment-btn" @click="ToLogin" v-else>登录发表评论</div>
         </div>
         <div class="comment-title">
             <span>评论列表</span>
@@ -181,9 +205,9 @@ const LoadMore = () => {
                                     >{{ tx.Description }}</sup
                                 >
                             </span>
-                            <span class="time">{{
-                                TimeFomat(i.CreatedAt)
-                            }}</span>
+                            <span class="time">
+                                {{ TimeFomat(i.CreatedAt) }}
+                            </span>
                         </div>
                         <div class="main-content">{{ i.Content }}</div>
                     </div>
