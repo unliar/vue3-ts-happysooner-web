@@ -17,9 +17,9 @@
                 <span>发表于: {{ r.fromNow }}</span>
                 <span>
                     分类:
-                    <router-link :to="`/?CategoryID=${r.data?.Category?.Id}`">
-                        {{ r.data?.Category?.CN }}
-                    </router-link>
+                    <router-link :to="`/?CategoryID=${r.data?.Category?.Id}`">{{
+                        r.data?.Category?.CN
+                    }}</router-link>
                 </span>
             </div>
             <div
@@ -47,6 +47,10 @@
                     </router-link>
                 </div>
             </div>
+            <Comment
+                :author-id="r.data?.AuthorInfo?.UID"
+                :post-id="r.data?.Id"
+            ></Comment>
         </main>
     </DefaultLayout>
 </template>
@@ -57,6 +61,7 @@ import { useHead } from "@vueuse/head";
 
 import markdownIt from "~/utils/md";
 import DefaultLayout from "~/layouts/Default";
+import Comment from "~/components/article/Comment.vue";
 import { GetArticleById } from "~/api/article";
 import { FromNow } from "~/utils/time";
 
@@ -134,6 +139,7 @@ export default defineComponent({
     },
     components: {
         DefaultLayout,
+        Comment,
     },
     directives: {},
 });

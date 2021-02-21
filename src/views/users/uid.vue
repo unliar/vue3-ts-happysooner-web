@@ -8,9 +8,9 @@
                 <div class="user-info-container">
                     <div class="user-info">
                         <span class="nickname-op">
-                            <span class="nickname">
-                                {{ user?.data.Nickname }}
-                            </span>
+                            <span class="nickname">{{
+                                user?.data.Nickname
+                            }}</span>
                         </span>
                         <span
                             class="op-btn"
@@ -58,7 +58,6 @@ import { useStore } from "vuex";
 import { useToast } from "vue-toastification";
 // - - 项目内import
 import DefaultLayout from "~/layouts/Default";
-import Avatar from "~/components/common/Avatar.vue";
 import EmptyContent from "~/components/common/EmptyContent.vue";
 import SimpleInfoItem from "~/components/article/SimpleInfoItem.vue";
 import { GetUserInfoByID } from "~/api/user";
@@ -193,7 +192,6 @@ export default defineComponent({
     },
     components: {
         DefaultLayout,
-        Avatar,
         SimpleInfoItem,
         EmptyContent,
     },

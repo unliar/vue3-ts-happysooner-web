@@ -24,7 +24,6 @@ import { defineComponent, computed } from "vue";
 import { useStore } from "vuex";
 import { StoreType } from "~/store";
 // import FontIcon from "./FontIcon.vue"
-import Avatar from "./Avatar.vue";
 export default defineComponent({
     name: "common-header",
     props: {
@@ -36,9 +35,7 @@ export default defineComponent({
             type: String,
         },
     },
-    components: {
-        Avatar,
-    },
+    components: {},
     setup(props, _) {
         const store = useStore<StoreType>();
         // 判断用户是否作者

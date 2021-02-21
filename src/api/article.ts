@@ -42,3 +42,34 @@ export const GetMeiRiYiWen = async (type: string, date?: string) => {
         `${API_PROFIX}/proxy/meiriyiwen/${type}/articles?date=${date}`
     ).then(r => r?.data);
 };
+
+/**
+ * 发表评论
+ * @param req
+ */
+export const PostComment = (req: API.ARTICLE.PostCommentRequest) =>
+    Axios.post<API.BaseResponse<null>>(
+        `${API_PROFIX}/writing/articles/${req.PostID}/comments`,
+        {
+            Content: req.Content,
+            AuthorUID: req.AuthorUID,
+            ReplyCommentID: req.ReplyCommentID || 0,
+            ReplyCommentUID: req.ReplyCommentUID || 0,
+        }
+    ).then(r => r?.data);
+
+/**
+ * 获取文章评论列表
+ *
+ * @param req
+ */
+export const GetCommentList = (req: API.ARTICLE.CommentQueryList) =>
+    Axios.get<API.BaseResponse<{ Comments?: API.ARTICLE.CommentItem[] }>>(
+        `${API_PROFIX}/writing/articles/${req.PostID}/comments`,
+        {
+            params: {
+                Page: req.Page,
+                Size: req.Size,
+            },
+        }
+    ).then(r => r?.data);

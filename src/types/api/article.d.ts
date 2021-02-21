@@ -57,4 +57,35 @@ declare namespace API.ARTICLE {
         next: string;
         prev: string;
     }
+    export interface PostCommentRequest {
+        PostID: number; // 文章ID
+        Content: string; // 评论
+        AuthorUID: number; // 作者ID
+        ReplyCommentID?: number; // 回复评论ID
+        ReplyCommentUID?: number; // 回复评论作者ID
+    }
+    // 评论item
+    export interface CommentItem {
+        Content: string;
+        Id: number;
+        CreatedAt: number;
+        CommentUserInfo: {
+            Nickname: string;
+            UID: number;
+            Avatar: string;
+            Roles: Role[];
+        };
+    }
+
+    export interface Role {
+        Title: string;
+        Description: string;
+        RID: number;
+    }
+
+    export interface CommentQueryList {
+        Page: number;
+        Size: number;
+        PostID: number;
+    }
 }
