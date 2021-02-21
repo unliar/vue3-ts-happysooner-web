@@ -3,4 +3,4 @@
 
 npx --no-install commitlint --edit 
 
-echo "✅   commitlint pass"
+echo "✅  commitlint pass"
