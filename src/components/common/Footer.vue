@@ -33,6 +33,11 @@
                 <span>
                     <router-link to="/daily-articles">随机阅读</router-link>
                 </span>
+                <span>
+                    <a href="https://github.com/unliar/vue3-ts-happysooner-web"
+                        >本站源码</a
+                    >
+                </span>
             </div>
 
             <div class="friend-link">
