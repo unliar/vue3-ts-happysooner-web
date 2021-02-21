@@ -2,6 +2,8 @@
 
 这是一个 happysooner.com 的 vue3 精简项目, 主要目的是为了学习 Vue3
 
+线上地址 [https://vue-next.happysooner.com/](https://vue-next.happysooner.com/)
+
 ### 开发流程
 
 ```

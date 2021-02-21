@@ -22,7 +22,7 @@
 <script lang="ts">
 import { defineComponent, computed } from "vue";
 import { useStore } from "vuex";
-import { StoreType } from "../../store";
+import { StoreType } from "~/store";
 // import FontIcon from "./FontIcon.vue"
 import Avatar from "./Avatar.vue";
 export default defineComponent({
