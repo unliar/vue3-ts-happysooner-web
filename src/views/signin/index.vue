@@ -72,109 +72,96 @@
     </div>
 </template>
 
-<script lang="ts">
-import { computed, defineComponent, ref, watch } from "vue";
+<script lang="ts" setup>
+import { computed, ref, watch } from "vue";
 import { useRouter } from "vue-router";
 import { useToast } from "vue-toastification";
 import { useStore } from "vuex";
 // 不经意的分割线
 import { GetAccountUnique, GetUserByToken, PostUser } from "~/api/user";
-import { StoreType } from "~/store";
+import type { StoreType } from "~/store";
 import { ACTIONS } from "~/store/type";
 import { SetTokenCookies } from "~/utils/cookie";
 import { ValidateLoginNameRules } from "~/utils/validate";
 
-export default defineComponent({
-    setup() {
-        const toast = useToast();
-        const store = useStore<StoreType>();
-        const router = useRouter();
+const toast = useToast();
+const store = useStore<StoreType>();
+const router = useRouter();
 
-        const account = ref("");
-        const nickname = ref("");
-        const password = ref("");
-        const isNewUser = ref(false);
-        const currentUserID = computed(() => store.state.User.Id);
+const account = ref("");
+const nickname = ref("");
+const password = ref("");
+const isNewUser = ref(false);
+const currentUserID = computed(() => store.state.User.Id);
 
-        watch(account, cur => {
-            if (!cur.trim()) {
-                return;
-            }
-            GetAccountUnique({
-                type: "loginName",
-                value: cur.trim(),
-            }).then(r => {
-                if (r.Result === 1000005) {
-                    isNewUser.value = false;
-                } else {
-                    isNewUser.value = true;
-                }
-            });
-        });
-
-        const Login = async () => {
-            const x = ValidateLoginNameRules(account.value.trim());
-            if (x) {
-                toast.error(x);
-                return;
-            }
-
-            const data = await GetUserByToken({
-                type: "loginName",
-                value: account.value.trim(),
-                password: password.value.trim(),
-            });
-
-            if (data?.ErrorCode || !data?.Result) {
-                toast.error(`${data.ErrorCode} ${data.ErrorMsg}`);
-                return;
-            }
-
-            // 设置用户登录状态
-            const Token = data.Result.Token;
-            const TokenExp = data.Result.TokenAvailableDays;
-            SetTokenCookies(Token, TokenExp);
-            store.dispatch(ACTIONS.GET_AUTHED_USER_INFO);
-            toast.success(`欢迎 ${data?.Result.UserInfo.Nickname} 前来观光`, {
-                onClose() {
-                    router.back();
-                },
-            });
-        };
-
-        const Regist = async () => {
-            const x = ValidateLoginNameRules(account.value.trim());
-            if (x) {
-                toast.error(x);
-                return;
-            }
-
-            const data = await PostUser({
-                type: "loginName",
-                value: account.value.trim(),
-                password: password.value.trim(),
-                nickname: nickname.value.trim(),
-            });
-
-            if (!data.ErrorCode) {
-                toast.success(`注册成功,即将自动登录~ ${account.value}`, {
-                    onClose() {
-                        Login();
-                    },
-                });
-            }
-        };
-        return {
-            account,
-            nickname,
-            password,
-            isNewUser,
-            currentUserID,
-            Login,
-            Regist,
-        };
-    },
+watch(account, cur => {
+    if (!cur.trim()) {
+        return;
+    }
+    GetAccountUnique({
+        type: "loginName",
+        value: cur.trim(),
+    }).then(r => {
+        if (r.Result === 1000005) {
+            isNewUser.value = false;
+        } else {
+            isNewUser.value = true;
+        }
+    });
 });
+
+const Login = async () => {
+    const x = ValidateLoginNameRules(account.value.trim());
+    if (x) {
+        toast.error(x);
+        return;
+    }
+
+    const data = await GetUserByToken({
+        type: "loginName",
+        value: account.value.trim(),
+        password: password.value.trim(),
+    });
+
+    if (data?.ErrorCode || !data?.Result) {
+        toast.error(`${data.ErrorCode} ${data.ErrorMsg}`);
+        return;
+    }
+
+    // 设置用户登录状态
+    const Token = data.Result.Token;
+    const TokenExp = data.Result.TokenAvailableDays;
+    SetTokenCookies(Token, TokenExp);
+    store.dispatch(ACTIONS.GET_AUTHED_USER_INFO);
+    toast.success(`欢迎 ${data?.Result.UserInfo.Nickname} 前来观光`, {
+        onClose() {
+            router.back();
+        },
+    });
+};
+
+const Regist = async () => {
+    const x = ValidateLoginNameRules(account.value.trim());
+    if (x) {
+        toast.error(x);
+        return;
+    }
+
+    const data = await PostUser({
+        type: "loginName",
+        value: account.value.trim(),
+        password: password.value.trim(),
+        nickname: nickname.value.trim(),
+    });
+
+    if (!data.ErrorCode) {
+        toast.success(`注册成功,即将自动登录~ ${account.value}`, {
+            onClose() {
+                Login();
+            },
+        });
+    }
+};
 </script>
 <style scoped>
 .signin-container {

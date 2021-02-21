@@ -23,74 +23,71 @@
     </DefaultLayout>
 </template>
 
-<script lang="ts">
-import { defineComponent, onMounted, watch, reactive, computed } from "vue";
+<script lang="ts" setup>
+import {
+    defineComponent,
+    defineProps,
+    onMounted,
+    watch,
+    reactive,
+    computed,
+} from "vue";
 import { useHead } from "@vueuse/head";
 
 import { GetMeiRiYiWen } from "~/api/article";
 import DefaultLayout from "~/layouts/Default";
 import { useToast } from "vue-toastification";
 
-export default defineComponent({
-    components: {
-        DefaultLayout,
-    },
-    props: {
-        query: {
-            type: Object as () => { date: string },
-        },
-    },
-    setup(props) {
-        const toast = useToast();
-        const r = reactive<{
-            data?: Partial<API.ARTICLE.MeiRiYiWenData>;
-            loading: boolean;
-            q: typeof props.query;
-        }>({
-            data: {},
-            loading: false,
-            q: props.query,
-        });
-        useHead({
-            title: computed(
-                () => `每日阅读 - ${r.data?.title} - ${r.data?.author}`
-            ),
-            meta: [
-                {
-                    name: `description`,
-                    content: computed(() => `${r.data?.digest}`),
-                },
-            ],
-        });
-        const getData = (req: typeof props.query) => {
-            r.loading = true;
-            const type = req?.date ? "day" : "random";
-            GetMeiRiYiWen(type, req?.date)
-                .then(data => {
-                    r.data = data?.Result;
-                    r.q = req;
-                    if (data.ErrorCode) {
-                        toast.error(data.ErrorMsg);
-                    }
-                })
-                .finally(() => {
-                    r.loading = false;
-                });
-        };
-        onMounted(() => {
-            getData(r.q);
-        });
-        watch(
-            () => props.query,
-            async (next, _) => {
-                await getData(next);
-            }
-        );
-        return {
-            r,
-        };
+const props = defineProps({
+    query: {
+        type: Object as () => { date: string },
     },
 });
+
+const toast = useToast();
+
+const r = reactive<{
+    data?: Partial<API.ARTICLE.MeiRiYiWenData>;
+    loading: boolean;
+    q: typeof props.query;
+}>({
+    data: {},
+    loading: false,
+    q: props.query,
+});
+useHead({
+    title: computed(() => `每日阅读 - ${r.data?.title} - ${r.data?.author}`),
+    meta: [
+        {
+            name: `description`,
+            content: computed(() => `${r.data?.digest}`),
+        },
+    ],
+});
+const getData = (req: typeof props.query) => {
+    r.loading = true;
+    const type = req?.date ? "day" : "random";
+    GetMeiRiYiWen(type, req?.date)
+        .then(data => {
+            r.data = data?.Result;
+            r.q = req;
+            if (data.ErrorCode) {
+                toast.error(data.ErrorMsg);
+            }
+        })
+        .finally(() => {
+            r.loading = false;
+        });
+};
+onMounted(() => {
+    getData(r.q);
+});
+watch(
+    () => props.query,
+    async (next, _) => {
+        await getData(next);
+    }
+);
 </script>
 
 <style scoped>

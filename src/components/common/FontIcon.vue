@@ -1,16 +1,11 @@
-<script lang="ts">
-import { defineComponent } from "vue";
+<script lang="ts" setup>
+import { defineProps, computed } from "vue";
 
-export default defineComponent({
-    props: {
-        iconClass: String,
-    },
-    setup(props, _) {
-        return {
-            iconClass: props.iconClass,
-        };
-    },
+const props = defineProps({
+    iconClass: String,
 });
+
+const iconClass = computed(() => props.iconClass);
 </script>
 
 <template>
