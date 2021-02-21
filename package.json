@@ -1,6 +1,12 @@
 {
     "name": "vue3-ts-happysooner-web",
     "version": "0.0.0",
+    "license": "MIT",
+    "author": {
+        "name": "unliar",
+        "email": "370732889@qq.com",
+        "url": "https://happysooner.com/about"
+    },
     "scripts": {
         "dev": "vite",
         "build": "vuedx-typecheck . && vite build",
