@@ -6,7 +6,6 @@ export default defineComponent({
         iconClass: String,
     },
     setup(props, _) {
-        console.log(props.iconClass);
         return {
             iconClass: props.iconClass,
         };

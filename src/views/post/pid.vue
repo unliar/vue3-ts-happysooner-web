@@ -1,9 +1,12 @@
 <template>
     <DefaultLayout>
-        <div v-if="r.loading" style="padding: 30vh 0">
-            <LoadingBall :loading="r.loading"></LoadingBall>
-        </div>
-        <main v-else>
+        <LoadingBall
+            :loading="r.loading"
+            info="努力加载文章中"
+            info-size="18px"
+            padding="30vh 0"
+        ></LoadingBall>
+        <main v-if="!r.loading">
             <h1 class="article-title">{{ r.data?.Title }}</h1>
             <div class="artilce-info">
                 <span>
@@ -14,9 +17,9 @@
                 <span>发表于: {{ r.fromNow }}</span>
                 <span>
                     分类:
-                    <router-link :to="`/?CategoryID=${r.data?.Category?.Id}`">
-                        {{ r.data?.Category?.CN }}
-                    </router-link>
+                    <router-link :to="`/?CategoryID=${r.data?.Category?.Id}`">{{
+                        r.data?.Category?.CN
+                    }}</router-link>
                 </span>
             </div>
             <div

@@ -61,7 +61,7 @@ export default defineComponent({
         let id: number;
         onMounted(() => {
             id = setInterval(() => {
-                const Y = new Date().getFullYear();
+                // const Y = new Date().getFullYear();
                 const start = 1567180800000;
                 const now = Date.now();
                 const leftTime = Math.floor((now - start) / 1000);

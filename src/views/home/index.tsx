@@ -58,18 +58,12 @@ export default defineComponent({
         return (
             <DefaultLayout>
                 <ContentLayout>
-                    {loading && (
-                        <div
-                            style={{
-                                padding: "30vh 0",
-                            }}
-                        >
-                            <LoadingBall
-                                // key={`${loading}`}
-                                loading={loading}
-                            ></LoadingBall>
-                        </div>
-                    )}
+                    <LoadingBall
+                        padding="30vh 0"
+                        loading={loading}
+                        infoSize="18px"
+                    ></LoadingBall>
+
                     {List.map(i => (
                         <SimpleInfoItem key={i.Id} info={i}></SimpleInfoItem>
                     ))}

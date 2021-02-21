@@ -11,14 +11,15 @@ export default defineComponent({
         const d = reactive({
             scale: props.scale || 1,
             size: props.size || "32px",
-            src: props.src || `https://happysooner.com/api/v1/tools/ident-icon`,
+            src:
+                props.src ||
+                `https://happysooner.com/api/v1/tools/ident-icon?key=happy`,
         });
 
         watch(
             () => props.src,
             next => {
-                d.src =
-                    next || `https://happysooner.com/api/v1/tools/ident-icon`;
+                d.src = next ?? "";
             }
         );
 
@@ -26,18 +27,12 @@ export default defineComponent({
             d,
         };
     },
-    methods: {
-        // x(e: Event) {
-        //     e.preventDefault();
-        //     console.error("qqqd");
-        //     (<HTMLInputElement>e.target).src = this.src
-        // }
-    },
+    methods: {},
 });
 </script>
 
 <template>
-    <img alt="avatar" :src="d.src || ''" :key="d.src" />
+    <img alt="avatar" :src="d.src" :key="d.src" />
 </template>
 
 <style scoped>

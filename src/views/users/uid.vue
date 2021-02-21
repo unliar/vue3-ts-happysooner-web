@@ -8,9 +8,9 @@
                 <div class="user-info-container">
                     <div class="user-info">
                         <span class="nickname-op">
-                            <span class="nickname">
-                                {{ user?.data.Nickname }}
-                            </span>
+                            <span class="nickname">{{
+                                user?.data.Nickname
+                            }}</span>
                         </span>
                         <span
                             class="op-btn"
@@ -41,8 +41,7 @@
                     加载更多
                 </div>
                 <LoadingBall
-                    v-if="articles.list.length > 0 && articles.loading"
-                    :loading="true"
+                    :loading="articles.list.length > 0 && articles.loading"
                 ></LoadingBall>
                 <EmptyContent
                     title="世界终有尽头~"

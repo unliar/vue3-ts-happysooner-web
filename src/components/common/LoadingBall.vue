@@ -1,20 +1,30 @@
 <script lang="ts">
-import { defineComponent, reactive } from "vue";
+import { defineComponent, reactive, watch } from "vue";
 
 export default defineComponent({
     props: {
         info: String,
         color: String,
-        size: String,
+        infoSize: String,
         loading: Boolean,
+        padding: String,
     },
     setup(props) {
         const r = reactive({
-            info: props.info,
+            info: props.info ?? "努力加载中",
             color: props.color ?? "#888",
-            size: props.size,
+            infoSize: props.infoSize ?? "1rem",
             loading: props.loading,
+            padding: props.padding ?? "30px 0",
         });
+
+        watch(
+            () => props.loading,
+            cur => {
+                r.loading = cur;
+            }
+        );
+
         return {
             r,
         };
@@ -23,8 +33,8 @@ export default defineComponent({
 </script>
 
 <template>
-    <div class="loading-container" v-if="r.loading === true">
-        <div class="text-info">{{ r.info || "努力加载中" }}</div>
+    <div class="loading-container" v-if="r.loading">
+        <div class="text-info">{{ r.info }}</div>
         <div class="balls">
             <div></div>
             <div></div>
@@ -35,12 +45,16 @@ export default defineComponent({
 <style scoped>
 div {
     --color: v-bind(r.color);
+    --size: v-bind(r.infoSize);
+    --padding: v-bind(r.padding);
 }
 .loading-container {
     display: flex;
     align-items: center;
     justify-content: center;
     margin: 10px 0;
+    padding: var(--padding);
+    font-size: var(--size);
 }
 .text-info {
     padding: 0 0.8em;
