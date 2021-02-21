@@ -50,7 +50,7 @@ const SubmitComment = () => {
     PostComment({
         PostID: props.postId || -1,
         AuthorUID: props.authorId || -1,
-        Content: Comment.text,
+        Content: `${Comment.text}      ____ From Vue-next`,
     })
         .then(r => {
             if (r?.ErrorCode) {
@@ -206,9 +206,9 @@ const LoadMore = () => {
                                     >{{ tx.Description }}</sup
                                 >
                             </span>
-                            <span class="time">
-                                {{ TimeFomat(i.CreatedAt) }}
-                            </span>
+                            <span class="time">{{
+                                TimeFomat(i.CreatedAt)
+                            }}</span>
                         </div>
                         <div class="main-content">{{ i.Content }}</div>
                     </div>
