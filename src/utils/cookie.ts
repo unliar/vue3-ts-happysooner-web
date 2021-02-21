@@ -14,5 +14,5 @@ export const RemoveTokenCookies = () => {
 
 // 获取cookie
 export const GetTokenCookies: () => string = () => {
-    return Cookies.get(TOKEN_NAME) || "";
+    return Cookies.get(TOKEN_NAME) || "no-token";
 };
