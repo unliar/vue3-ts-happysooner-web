@@ -27,7 +27,7 @@ export default defineComponent({
                     position: POSITION.BOTTOM_RIGHT,
                     timeout: 30000,
                 });
-            }, 5000);
+            }, 2000);
 
             // 应用初始化 Store 数据
             // 用户登录信息
