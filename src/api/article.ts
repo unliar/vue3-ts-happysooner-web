@@ -1,3 +1,4 @@
+import useFetch from "~/utils/useFetch";
 import { API_PROFIX } from "../constants";
 import Axios from "../utils/fetch";
 
@@ -31,6 +32,14 @@ export const GetArticleById = async (pid: number | string) => {
         `${API_PROFIX}/writing/articles/${pid}`
     ).then(r => r?.data);
 };
+/**
+ * 花式获取文章详情
+ * @param pid
+ */
+export const UseGetArticleById = (pid: number | string) =>
+    useFetch<API.BaseResponse<API.ARTICLE.ArticleInfo>>({
+        url: `${API_PROFIX}/writing/articles/${pid}`,
+    });
 
 /**
  * 获取每日一文文章
