@@ -1,21 +1,19 @@
 <template>
     <DefaultLayout>
         <LoadingBall
-            :loading="r.loading"
+            :loading="loading"
             padding="30vh 0"
             infoSize="18px"
             info="努力加载中"
         ></LoadingBall>
-        <main v-if="!r.loading">
-            <h1 class="article-title">{{ r.data?.title }}</h1>
-            <div>作者：{{ r.data?.author }}</div>
-            <div class="article-container" v-html="r.data?.content"></div>
+        <main v-if="!loading">
+            <h1 class="article-title">{{ title }}</h1>
+            <div>作者：{{ author }}</div>
+            <div class="article-container" v-html="content"></div>
             <div class="article-nav-container">
                 <div class="article-nav">
-                    <router-link
-                        :to="`/daily-articles?date=${r.data?.date?.prev}`"
-                    >
-                        <a>查看{{ r.data?.date?.prev }}的文章</a>
+                    <router-link :to="`/daily-articles?date=${prev}`">
+                        <a>查看{{ prev }}的文章</a>
                     </router-link>
                 </div>
             </div>
@@ -24,10 +22,10 @@
 </template>
 
 <script lang="ts" setup>
-import { defineProps, onMounted, reactive, computed } from "vue";
+import { defineProps, onMounted, reactive, computed, watch } from "vue";
 import { useHead } from "@vueuse/head";
 
-import { GetMeiRiYiWen } from "~/api/article";
+import { UseGetMeiRiYiWen } from "~/api/article";
 import DefaultLayout from "~/components/layouts/Default/index.vue";
 import { useToast } from "vue-toastification";
 
@@ -38,43 +36,42 @@ const props = defineProps({
 });
 
 const toast = useToast();
+const r = UseGetMeiRiYiWen(props.query?.date);
+// const r = reactive<{
+//     data?: Partial<API.ARTICLE.MeiRiYiWenData>;
+//     loading: boolean;
+//     q: typeof props.query;
+// }>({
+//     data: {},
+//     loading: false,
+//     q: props.query,
+// });
 
-const r = reactive<{
-    data?: Partial<API.ARTICLE.MeiRiYiWenData>;
-    loading: boolean;
-    q: typeof props.query;
-}>({
-    data: {},
-    loading: false,
-    q: props.query,
-});
+const title = computed(() => r.data.value.Result?.title);
+const author = computed(() => r.data.value.Result?.author);
+const content = computed(() => r.data.value.Result?.content);
+const prev = computed(() => r.data.value.Result?.date.prev);
+const loading = computed(() => r.loading).value;
+
 useHead({
-    title: computed(() => `每日阅读 - ${r.data?.title} - ${r.data?.author}`),
+    title: computed(
+        () =>
+            `每日阅读 - ${r.data.value.Result?.title} - ${r.data.value.Result?.author}`
+    ),
     meta: [
         {
             name: `description`,
-            content: computed(() => `${r.data?.digest}`),
+            content: computed(() => `${r.data.value.Result?.digest}`),
         },
     ],
 });
-const getData = (req: typeof props.query) => {
-    r.loading = true;
-    const type = req?.date ? "day" : "random";
-    GetMeiRiYiWen(type, req?.date)
-        .then(data => {
-            r.data = data?.Result;
-            r.q = req;
-            if (data.ErrorCode) {
-                toast.error(data.ErrorMsg);
-            }
-        })
-        .finally(() => {
-            r.loading = false;
-        });
-};
-onMounted(() => {
-    getData(r.q);
-});
+
+watch(
+    () => r.data.value.ErrorMsg,
+    c => {
+        toast.warning(c);
+    }
+);
 </script>
 
 <style scoped>

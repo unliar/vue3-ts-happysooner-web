@@ -23,16 +23,6 @@ export const GetArticles = (req: API.ARTICLE.GetArticleListRequest) =>
     ).then(r => r?.data);
 
 /**
- * 获取文章详情
- *
- * @param pid 文章ID
- */
-export const GetArticleById = async (pid: number | string) => {
-    return Axios.get<API.BaseResponse<API.ARTICLE.ArticleInfo>>(
-        `${API_PROFIX}/writing/articles/${pid}`
-    ).then(r => r?.data);
-};
-/**
  * 花式获取文章详情
  * @param pid
  */
@@ -42,14 +32,18 @@ export const UseGetArticleById = (pid: number | string) =>
     });
 
 /**
- * 获取每日一文文章
- * @param type random or day
- * @param date 20180811
+ * 花式获取每日一文文章v2
+ * @param type
+ * @param date
  */
-export const GetMeiRiYiWen = async (type: string, date?: string) => {
-    return Axios.get<API.BaseResponse<API.ARTICLE.MeiRiYiWenData>>(
-        `${API_PROFIX}/proxy/meiriyiwen/${type}/articles?date=${date}`
-    ).then(r => r?.data);
+export const UseGetMeiRiYiWen = (date?: string) => {
+    let t = "random";
+    if (date) {
+        t = "day";
+    }
+    return useFetch<API.BaseResponse<API.ARTICLE.MeiRiYiWenData>>({
+        url: `${API_PROFIX}/proxy/meiriyiwen/${t}/articles?date=${date}`,
+    });
 };
 
 /**
