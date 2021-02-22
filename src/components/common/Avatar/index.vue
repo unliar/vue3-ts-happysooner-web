@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { defineProps, reactive, watch } from "vue";
+import { computed, defineProps } from "vue";
 
 const props = defineProps({
     size: String,
@@ -7,29 +7,20 @@ const props = defineProps({
     scale: Number,
 });
 
-const d = reactive({
-    scale: props.scale || 1,
-    size: props.size || "32px",
-    src:
-        props.src ||
-        `https://happysooner.com/api/v1/tools/ident-icon?key=happy`,
-});
-
-watch(
-    () => props.src,
-    next => {
-        d.src = next ?? "";
-    }
+const src = computed(
+    () =>
+        props.src ?? "https://happysooner.com/api/v1/tools/ident-icon?key=happy"
 );
 </script>
 
 <template>
-    <img alt="avatar" :src="d.src" :key="d.src" />
+    <img alt="avatar" :src="src" :key="src" />
 </template>
 
 <style scoped>
 img {
-    --size: v-bind(d.size);
+    --size: v-bind(props.size);
+    --scale: v-bind(props.scale);
 }
 img {
     border-radius: 50%;
@@ -41,6 +32,6 @@ img {
 }
 img:hover {
     transition: transform 0.1s ease-in-out;
-    transform: scale(v-bind(scale));
+    transform: scale(var(--scale));
 }
 </style>
