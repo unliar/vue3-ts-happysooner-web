@@ -87,7 +87,7 @@ const user = UseGetUserInfoByID(props.uid);
 
 watch(
     () => user.data.value.ErrorMsg,
-    (c, p) => {
+    c => {
         c && toast.error(c);
     }
 );

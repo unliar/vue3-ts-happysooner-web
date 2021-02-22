@@ -22,7 +22,7 @@
 </template>
 
 <script lang="ts" setup>
-import { defineProps, onMounted, reactive, computed, watch } from "vue";
+import { defineProps, computed, watch } from "vue";
 import { useHead } from "@vueuse/head";
 
 import { UseGetMeiRiYiWen } from "~/api/article";
@@ -37,15 +37,6 @@ const props = defineProps({
 
 const toast = useToast();
 const r = UseGetMeiRiYiWen(props.query?.date);
-// const r = reactive<{
-//     data?: Partial<API.ARTICLE.MeiRiYiWenData>;
-//     loading: boolean;
-//     q: typeof props.query;
-// }>({
-//     data: {},
-//     loading: false,
-//     q: props.query,
-// });
 
 const title = computed(() => r.data.value.Result?.title);
 const author = computed(() => r.data.value.Result?.author);
