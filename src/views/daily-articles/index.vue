@@ -82,12 +82,6 @@ const getData = (req: typeof props.query) => {
 onMounted(() => {
     getData(r.q);
 });
-watch(
-    () => props.query,
-    async (next, _) => {
-        await getData(next);
-    }
-);
 </script>
 
 <style scoped>

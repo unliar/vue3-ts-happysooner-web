@@ -17,9 +17,9 @@
                 <span>发表于: {{ r.fromNow }}</span>
                 <span>
                     分类:
-                    <router-link :to="`/?CategoryID=${r.data?.Category?.Id}`">
-                        {{ r.data?.Category?.CN }}
-                    </router-link>
+                    <router-link :to="`/?CategoryID=${r.data?.Category?.Id}`">{{
+                        r.data?.Category?.CN
+                    }}</router-link>
                 </span>
             </div>
             <div
@@ -122,13 +122,6 @@ const fetchData = (id: number) => {
 onMounted(async () => {
     fetchData(props.pid);
 });
-
-watch(
-    () => props.pid,
-    next => {
-        fetchData(next);
-    }
-);
 </script>
 <style scoped>
 main {
