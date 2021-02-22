@@ -1,3 +1,8 @@
+<script lang="ts" setup>
+import Header from "~/components/common/Header.vue";
+import Footer from "~/components/common/Footer.vue";
+</script>
+
 <template>
     <div class="main-container">
         <div class="sticky-container">
@@ -9,7 +14,7 @@
     </div>
     <Footer></Footer>
 </template>
-<style scoped>
+<style>
 .main-container {
     min-height: calc(100vh - 80px);
 }

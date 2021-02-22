@@ -12,9 +12,9 @@
                         v-for="i in CategoryList"
                         :key="i.Id"
                     >
-                        <router-link :to="`/?CategoryID=${i.Id}`">{{
-                            i.CN
-                        }}</router-link>
+                        <router-link :to="`/?CategoryID=${i.Id}`">
+                            {{ i.CN }}
+                        </router-link>
                     </li>
                 </ul>
             </div>

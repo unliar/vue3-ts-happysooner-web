@@ -8,9 +8,9 @@
                 <div class="user-info-container">
                     <div class="user-info">
                         <span class="nickname-op">
-                            <span class="nickname">
-                                {{ user?.data.Nickname }}
-                            </span>
+                            <span class="nickname">{{
+                                user?.data.Nickname
+                            }}</span>
                         </span>
                         <span
                             class="op-btn"
@@ -171,13 +171,13 @@ onMounted(() => {
     fetchArticleList(props.uid, 1);
 });
 
-watch(
-    () => props.uid,
-    next => {
-        fetchUserInfo(next);
-        fetchArticleList(next, 1);
-    }
-);
+// watch(
+//     () => props.uid,
+//     next => {
+//         fetchUserInfo(next);
+//         fetchArticleList(next, 1);
+//     }
+// );
 </script>
 
 <style scoped>
