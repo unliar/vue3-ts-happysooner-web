@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { defineProps, reactive, watch } from "vue";
+import { defineProps, reactive, computed } from "vue";
 
 const props = defineProps({
     info: String,
@@ -17,16 +17,11 @@ const r = reactive({
     padding: props.padding ?? "30px 0",
 });
 
-watch(
-    () => props.loading,
-    cur => {
-        r.loading = cur;
-    }
-);
+const loading = computed(() => props.loading);
 </script>
 
 <template>
-    <div class="loading-container" v-if="r.loading">
+    <div class="loading-container" v-if="loading">
         <div class="text-info">{{ r.info }}</div>
         <div class="balls">
             <div></div>
