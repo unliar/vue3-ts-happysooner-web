@@ -24,15 +24,17 @@ npm run dev
 
 1. 本项目的代码风格会存在各种混搭,比如 jsx、template, 其目的主要是为了实践, 从工程的角度来说, 并不是最佳的, 多人协作最好还是保持一致的代码风格。
 
-2. 本项目的 github action 自动部署配置仅适用于本人。
+2. 本项目的 github action 自动部署配置仅适用于本项目。
 
 3. 本项目配置了代码格式化插件 prettier 和 commitlint, 请注意 commit message 规范。
-
-4. windows 环境可能存在 build 失败的问题, 请使用 docker 环境构建。
 
 ```
 git commit -m "feat: add a perfect feature"
 ```
+
+4. windows 环境可能存在 build 失败的问题, 请使用 docker 环境构建。
+
+5. vscode 请安装 [volar](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.volar)插件
 
 ### 附录
 
