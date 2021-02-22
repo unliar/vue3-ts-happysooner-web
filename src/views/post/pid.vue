@@ -42,7 +42,7 @@
     </DefaultLayout>
 </template>
 <script lang="ts" setup>
-import { computed, defineProps, onMounted, reactive, watch } from "vue";
+import { computed, defineProps, toRaw, watch, watchEffect } from "vue";
 import { useToast } from "vue-toastification";
 import { useHead } from "@vueuse/head";
 
@@ -83,9 +83,12 @@ const PrevId = computed(() => r.data.value.Result?.Navigation?.Prev?.Id);
 const NextId = computed(() => r.data.value.Result?.Navigation?.Next?.Id);
 const NextTitle = computed(() => r.data.value.Result?.Navigation?.Next?.Title);
 const PrevTitle = computed(() => r.data.value.Result?.Navigation?.Prev?.Title);
-const desc = computed(() => `${AuthorInfoNickname}发表了${Title},${Summary}`);
-useHead({
-    title: `${Title}`,
+const desc = computed(
+    () => `${AuthorInfoNickname.value}发表了${Title.value},${Summary.value}`
+);
+
+const h = useHead({
+    title: Title,
     meta: [
         {
             name: `description`,
