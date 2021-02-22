@@ -355,14 +355,4 @@ textarea:focus {
 .badge sup.role {
     background-color: #ff5b05;
 }
-
-.list-enter-active,
-.list-leave-active {
-    transition: all 1s ease;
-}
-.list-enter-from,
-.list-leave-to {
-    opacity: 0;
-    transform: translateX(30px);
-}
 </style>

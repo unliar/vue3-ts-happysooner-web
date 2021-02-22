@@ -80,13 +80,4 @@ onMounted(async () => {
     padding: 20px 0;
     text-align: center;
 }
-.list-enter-active,
-.list-leave-active {
-    transition: all 0.65s ease;
-}
-.list-enter-from,
-.list-leave-to {
-    opacity: 0;
-    transform: translateX(30px);
-}
 </style>

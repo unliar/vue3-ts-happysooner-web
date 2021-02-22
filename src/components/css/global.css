@@ -110,3 +110,14 @@ blockquote {
     color: #333;
     border-left: 10px solid #d6dbdf;
 }
+
+/* list 动画效果 */
+.list-enter-active,
+.list-leave-active {
+    transition: all 0.65s ease;
+}
+.list-enter-from,
+.list-leave-to {
+    opacity: 0;
+    transform: translateX(30px);
+}
