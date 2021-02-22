@@ -4,7 +4,7 @@
 
 <script lang="ts" setup>
 import { useHead } from "@vueuse/head";
-import { onMounted, ref, toRefs } from "vue";
+import { onMounted } from "vue";
 import { POSITION, useToast } from "vue-toastification";
 import { useStore } from "vuex";
 
