@@ -23,9 +23,11 @@ export default defineComponent({
             q: props.query || {},
             loading: false,
         });
+
         useHead({
             title: "远浅 - 给世界献上美好的祝福 - Vue3实战项目",
         });
+
         // 获取数据
         const getList = (req: API.ARTICLE.GetArticleListRequest) => {
             data.loading = true;
@@ -42,6 +44,7 @@ export default defineComponent({
         onMounted(async () => {
             await getList(props.query ?? {});
         });
+
         watch(
             () => props.query,
             async (next, _) => {
