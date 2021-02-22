@@ -3,14 +3,17 @@
         <main>
             <div class="user-header-container">
                 <div class="avatar-container">
-                    <Avatar size="150px" :src="user?.data?.Avatar" />
+                    <Avatar
+                        size="150px"
+                        :src="user.data.value.Result?.Avatar"
+                    />
                 </div>
                 <div class="user-info-container">
                     <div class="user-info">
                         <span class="nickname-op">
-                            <span class="nickname">
-                                {{ user?.data.Nickname }}
-                            </span>
+                            <span class="nickname">{{
+                                user.data.value.Result?.Nickname
+                            }}</span>
                         </span>
                         <span
                             class="op-btn"
@@ -20,9 +23,10 @@
                         >
                     </div>
                     <div>
-                        {{ user?.data.Location }} · {{ user?.data.Profession }}
+                        {{ user.data.value.Result?.Location }} ·
+                        {{ user.data.value.Result?.Profession }}
                     </div>
-                    <div>{{ user?.data.Brief }}</div>
+                    <div>{{ user.data.value.Result?.Brief }}</div>
                 </div>
             </div>
             <div class="user-article-cotainer">
@@ -55,7 +59,7 @@
     </DefaultLayout>
 </template>
 <script lang="ts" setup>
-import { defineProps, reactive, onMounted, computed } from "vue";
+import { defineProps, reactive, onMounted, computed, watch } from "vue";
 import { useHead } from "@vueuse/head";
 import { useStore } from "vuex";
 import { useToast } from "vue-toastification";
@@ -63,7 +67,7 @@ import { useToast } from "vue-toastification";
 import DefaultLayout from "~/components/layouts/Default/index.vue";
 import EmptyContent from "~/components/common/EmptyContent.vue";
 import SimpleInfoItem from "~/components/article/SimpleInfoItem.vue";
-import { GetUserInfoByID } from "~/api/user";
+import { UseGetUserInfoByID } from "~/api/user";
 import type { StoreType } from "~/store";
 import { MUTATIONS } from "~/store/type";
 import { GetArticles } from "~/api/article";
@@ -79,11 +83,14 @@ const props = defineProps({
 const store = useStore<StoreType>();
 const toast = useToast();
 
-const user = reactive<{
-    data: Partial<API.USERS.UserInfo>;
-}>({
-    data: {},
-});
+const user = UseGetUserInfoByID(props.uid);
+
+watch(
+    () => user.data.value.ErrorMsg,
+    (c, p) => {
+        c && toast.error(c);
+    }
+);
 
 const articles = reactive<{
     list: API.ARTICLE.ArticleInfo[];
@@ -98,10 +105,12 @@ const articles = reactive<{
 });
 
 // 判断用户是否是
-const isCurrentUser = computed(() => store.state.User.Id === user.data.Id);
+const isCurrentUser = computed(
+    () => store.state.User.Id === user.data.value.Result?.Id
+);
 
 useHead({
-    title: computed(() => `${user.data.Nickname}的个人中心`),
+    title: computed(() => `${user.data.value.Result?.Nickname}的个人中心`),
 });
 
 // 注销登录
@@ -109,19 +118,6 @@ const removeLogin = () => {
     console.log("退出登录");
     store.commit(MUTATIONS.RESET_USER_STORE);
     toast.success("退出登录成功~");
-};
-
-// 获取用户信息
-const fetchUserInfo = (uid: number) => {
-    GetUserInfoByID(uid).then(r => {
-        if (r.ErrorCode) {
-            toast.error(r.ErrorMsg ?? "系统错误");
-            return;
-        }
-        user.data = {
-            ...(r.Result ?? {}),
-        };
-    });
 };
 
 // 获取文章列表
@@ -149,7 +145,7 @@ const loadMore = () => {
     articles.loading = true;
 
     GetArticles({
-        UID: user.data.Id,
+        UID: user.data.value.Result?.Id,
         Page: articles.page + 1,
     })
         .then(r => {
@@ -167,7 +163,6 @@ const loadMore = () => {
 };
 
 onMounted(() => {
-    fetchUserInfo(props.uid);
     fetchArticleList(props.uid, 1);
 });
 </script>

@@ -7,20 +7,22 @@ const useFetch = <T extends Object>(config: AxiosRequestConfig) => {
     const r = reactive<{
         data: T;
         loading: boolean;
-        err?: Error;
     }>({
-        data: undefined as any,
+        data: {} as any,
         loading: false,
-        err: undefined,
     });
 
     const fn = async (x: AxiosRequestConfig) => {
         r.loading = true;
         try {
             const data = await Axios(x).then(t => t?.data as typeof t.data);
-            r.data = data;
+            r.data = data ?? {};
         } catch (error) {
-            r.err = error;
+            const d: any = {
+                ErrorCode: -1,
+                ErrorMsg: error?.message ?? "系统错误",
+            };
+            r.data = d;
         }
         r.loading = false;
     };
