@@ -70,6 +70,7 @@ export default defineComponent({
                         style={{
                             padding: "20px",
                             textAlign: "center",
+                            display: loading ? "none" : undefined,
                         }}
                     >
                         {q.Page && q.Page >= 2 ? (
