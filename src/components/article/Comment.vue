@@ -24,16 +24,16 @@ const Comment = reactive<{
     text: string;
     submitting: boolean;
     list: API.ARTICLE.CommentItem[];
-    listLoading: boolean;
     page: number;
     loaded: boolean;
+    listLoadingStatus: number; // 0 无loading, 1 init loading,2 loadmore loading
 }>({
     text: "",
     submitting: false,
     list: [],
-    listLoading: false,
     page: 1,
     loaded: false,
+    listLoadingStatus: 0,
 });
 
 // 提交评论
@@ -75,7 +75,7 @@ const SubmitComment = () => {
             toast.success("评论成功~");
             Comment.text = "";
 
-            Comment.listLoading = true;
+            Comment.listLoadingStatus = 1;
             GetCommentList({
                 Page: 1,
                 Size: 15,
@@ -86,7 +86,7 @@ const SubmitComment = () => {
                     Comment.list = comments;
                 })
                 .finally(() => {
-                    Comment.listLoading = false;
+                    Comment.listLoadingStatus = 0;
                 });
         })
         .finally(() => {
@@ -102,7 +102,7 @@ const ToLogin = () => {
 const TimeFomat = DefaultFormat;
 
 onMounted(() => {
-    Comment.listLoading = true;
+    Comment.listLoadingStatus = 2;
     Comment.page = 1;
     Comment.loaded = false;
     GetCommentList({
@@ -123,14 +123,14 @@ onMounted(() => {
             }
         })
         .finally(() => {
-            Comment.listLoading = false;
+            Comment.listLoadingStatus = 0;
         });
 });
 
 // 加载更多
 const LoadMore = () => {
     Comment.page += 1;
-    Comment.listLoading = true;
+    Comment.listLoadingStatus = 2;
     GetCommentList({
         PostID: props.postId || -1,
         Page: Comment.page,
@@ -146,7 +146,7 @@ const LoadMore = () => {
             Comment.list = [...Comment.list, ...comments];
         })
         .finally(() => {
-            Comment.listLoading = false;
+            Comment.listLoadingStatus = 0;
         });
 };
 </script>
@@ -221,18 +221,20 @@ const LoadMore = () => {
                 </div>
             </transition-group>
             <div
-                v-if="Comment.list.length === 0 && !Comment.listLoading"
+                v-if="Comment.list.length === 0 && !Comment.listLoadingStatus"
                 class="empty-content"
             >
                 暂无任何评论,快去发表吧~
             </div>
             <LoadingBall
-                :loading="Comment.list.length > 0 && Comment.listLoading"
+                :loading="
+                    Comment.list.length > 0 && Comment.listLoadingStatus == 2
+                "
             ></LoadingBall>
             <div
                 class="btn-next"
                 @click="LoadMore"
-                v-if="!Comment.loaded && !Comment.listLoading"
+                v-if="!Comment.loaded && !Comment.listLoadingStatus"
             >
                 查看更多
             </div>
