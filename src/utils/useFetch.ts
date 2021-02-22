@@ -3,7 +3,7 @@ import { reactive, watchEffect, toRefs } from "vue";
 import Axios from "./fetch";
 
 // 花里胡哨请求数据
-const useFetch = <T extends Object>(config: AxiosRequestConfig) => {
+const useFetch = <T = any>(config: AxiosRequestConfig) => {
     const r = reactive<{
         data: T;
         loading: boolean;
