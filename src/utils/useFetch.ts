@@ -3,13 +3,13 @@ import { reactive, watchEffect } from "vue";
 import Axios from "./fetch";
 
 // 花里胡哨请求数据
-const useFetch = <T = any>(config: AxiosRequestConfig) => {
+const useFetch = <T extends Object>(config: AxiosRequestConfig) => {
     const r = reactive<{
-        data?: T;
+        data: T;
         loading: boolean;
         err?: Error;
     }>({
-        data: undefined,
+        data: undefined as any,
         loading: false,
         err: undefined,
     });
@@ -17,7 +17,7 @@ const useFetch = <T = any>(config: AxiosRequestConfig) => {
     const fn = async (x: AxiosRequestConfig) => {
         r.loading = true;
         try {
-            const data = await Axios(x).then(t => t?.data as typeof r.data);
+            const data = await Axios(x).then(t => t?.data as typeof t.data);
             r.data = data;
         } catch (error) {
             r.err = error;
