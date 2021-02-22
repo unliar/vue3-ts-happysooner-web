@@ -17,9 +17,9 @@
                 <span>发表于: {{ fromNow }}</span>
                 <span>
                     分类:
-                    <router-link :to="`/?CategoryID=${CategoryId}`">{{
-                        CategoryCN
-                    }}</router-link>
+                    <router-link :to="`/?CategoryID=${CategoryId}`">
+                        {{ CategoryCN }}
+                    </router-link>
                 </span>
             </div>
             <div v-html="Content" class="article-container" v-highlight></div>
@@ -83,19 +83,17 @@ const PrevId = computed(() => r.data.value.Result?.Navigation?.Prev?.Id);
 const NextId = computed(() => r.data.value.Result?.Navigation?.Next?.Id);
 const NextTitle = computed(() => r.data.value.Result?.Navigation?.Next?.Title);
 const PrevTitle = computed(() => r.data.value.Result?.Navigation?.Prev?.Title);
-
+const desc = computed(() => `${AuthorInfoNickname}发表了${Title},${Summary}`);
 useHead({
     title: `${Title}`,
     meta: [
         {
             name: `description`,
-            content: computed(
-                () => `${AuthorInfoNickname}发表了${Title},${Summary}`
-            ),
+            content: desc,
         },
         {
             name: "author",
-            content: computed(() => `${AuthorInfoNickname}`),
+            content: AuthorInfoNickname,
         },
     ],
 });
