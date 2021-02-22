@@ -1,5 +1,5 @@
 <script lang="ts" setup="">
-import { defineProps, watch, onMounted, reactive } from "vue";
+import { defineProps, onMounted, reactive } from "vue";
 import { useHead } from "@vueuse/head";
 
 import { GetArticles } from "~/api/article";
@@ -41,14 +41,6 @@ const getList = (req: API.ARTICLE.GetArticleListRequest) => {
 onMounted(async () => {
     await getList(props.query ?? {});
 });
-
-watch(
-    () => props.query,
-    async (next, _) => {
-        data.q = next || {};
-        await getList(next ?? {});
-    }
-);
 </script>
 
 <template>

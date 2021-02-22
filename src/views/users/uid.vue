@@ -8,9 +8,9 @@
                 <div class="user-info-container">
                     <div class="user-info">
                         <span class="nickname-op">
-                            <span class="nickname">{{
-                                user?.data.Nickname
-                            }}</span>
+                            <span class="nickname">
+                                {{ user?.data.Nickname }}
+                            </span>
                         </span>
                         <span
                             class="op-btn"
@@ -55,7 +55,7 @@
     </DefaultLayout>
 </template>
 <script lang="ts" setup>
-import { defineProps, reactive, onMounted, computed, watch } from "vue";
+import { defineProps, reactive, onMounted, computed } from "vue";
 import { useHead } from "@vueuse/head";
 import { useStore } from "vuex";
 import { useToast } from "vue-toastification";
@@ -170,14 +170,6 @@ onMounted(() => {
     fetchUserInfo(props.uid);
     fetchArticleList(props.uid, 1);
 });
-
-// watch(
-//     () => props.uid,
-//     next => {
-//         fetchUserInfo(next);
-//         fetchArticleList(next, 1);
-//     }
-// );
 </script>
 
 <style scoped>

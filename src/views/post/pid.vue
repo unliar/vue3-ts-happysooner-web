@@ -17,9 +17,9 @@
                 <span>发表于: {{ r.fromNow }}</span>
                 <span>
                     分类:
-                    <router-link :to="`/?CategoryID=${r.data?.Category?.Id}`">{{
-                        r.data?.Category?.CN
-                    }}</router-link>
+                    <router-link :to="`/?CategoryID=${r.data?.Category?.Id}`">
+                        {{ r.data?.Category?.CN }}
+                    </router-link>
                 </span>
             </div>
             <div
@@ -55,7 +55,7 @@
     </DefaultLayout>
 </template>
 <script lang="ts" setup>
-import { computed, defineProps, onMounted, reactive, watch } from "vue";
+import { computed, defineProps, onMounted, reactive } from "vue";
 import { useToast } from "vue-toastification";
 import { useHead } from "@vueuse/head";
 

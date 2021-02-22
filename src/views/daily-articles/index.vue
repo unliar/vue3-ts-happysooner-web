@@ -24,14 +24,7 @@
 </template>
 
 <script lang="ts" setup>
-import {
-    defineComponent,
-    defineProps,
-    onMounted,
-    watch,
-    reactive,
-    computed,
-} from "vue";
+import { defineProps, onMounted, reactive, computed } from "vue";
 import { useHead } from "@vueuse/head";
 
 import { GetMeiRiYiWen } from "~/api/article";
