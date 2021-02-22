@@ -22,7 +22,7 @@ npm run dev
 
 ### 注意事项
 
-1. 本项目的代码风格会存在各种混搭,比如 <del>jsx</del>、template, 其目的主要是为了实践, 从工程的角度来说, 并不是最佳的, 多人协作最好还是保持一致的代码风格, 乖乖用 .Vue 文件去描述你的页面。
+1. 本项目的代码风格可能会存在各种混搭, 其目的主要是为了实践, 从工程的角度来说, 并不是最佳的, 多人协作最好还是保持一致的代码风格, 乖乖用 .Vue 文件去描述你的页面, 项目内的 tsx 文件因为手感水土不服基本处于废弃状态。
 
 2. 本项目的 github action 自动部署配置仅适用于本项目。
 
@@ -34,7 +34,7 @@ git commit -m "feat: add a perfect feature"
 
 4. windows 环境可能存在 build 失败的问题, 请使用 docker 环境构建。
 
-5. vscode 请安装 [volar](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.volar)插件
+5. vscode 请安装 [volar](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.volar) 插件
 
 ### 附录
 

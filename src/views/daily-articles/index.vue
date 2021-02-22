@@ -35,7 +35,7 @@ import {
 import { useHead } from "@vueuse/head";
 
 import { GetMeiRiYiWen } from "~/api/article";
-import DefaultLayout from "~/components/layouts/Default";
+import DefaultLayout from "~/components/layouts/Default/index.vue";
 import { useToast } from "vue-toastification";
 
 const props = defineProps({

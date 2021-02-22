@@ -17,9 +17,9 @@
                 <span>发表于: {{ r.fromNow }}</span>
                 <span>
                     分类:
-                    <router-link :to="`/?CategoryID=${r.data?.Category?.Id}`">{{
-                        r.data?.Category?.CN
-                    }}</router-link>
+                    <router-link :to="`/?CategoryID=${r.data?.Category?.Id}`">
+                        {{ r.data?.Category?.CN }}
+                    </router-link>
                 </span>
             </div>
             <div
@@ -60,7 +60,7 @@ import { useToast } from "vue-toastification";
 import { useHead } from "@vueuse/head";
 
 import markdownIt from "~/utils/md";
-import DefaultLayout from "~/components/layouts/Default";
+import DefaultLayout from "~/components/layouts/Default/index.vue";
 import Comment from "~/components/article/Comment.vue";
 import { GetArticleById } from "~/api/article";
 import { FromNow } from "~/utils/time";

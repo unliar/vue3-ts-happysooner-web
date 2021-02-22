@@ -3,8 +3,8 @@ import { defineProps, watch, onMounted, reactive } from "vue";
 import { useHead } from "@vueuse/head";
 
 import { GetArticles } from "~/api/article";
-import ContentLayout from "~/components/layouts/Content";
-import DefaultLayout from "~/components/layouts/Default";
+import ContentLayout from "~/components/layouts/Content/index.vue";
+import DefaultLayout from "~/components/layouts/Default/index.vue";
 import SimpleInfoItem from "~/components/article/SimpleInfoItem.vue";
 const props = defineProps({
     query: {
