@@ -8,9 +8,9 @@
                 <div class="user-info-container">
                     <div class="user-info">
                         <span class="nickname-op">
-                            <span class="nickname">{{
-                                user?.data.Nickname
-                            }}</span>
+                            <span class="nickname">
+                                {{ user?.data.Nickname }}
+                            </span>
                         </span>
                         <span
                             class="op-btn"
@@ -26,9 +26,12 @@
                 </div>
             </div>
             <div class="user-article-cotainer">
-                <template v-for="item in articles.list" :key="item.Id">
-                    <SimpleInfoItem :info="item"></SimpleInfoItem>
-                </template>
+                <transition-group name="list">
+                    <template v-for="item in articles.list" :key="item.Id">
+                        <SimpleInfoItem :info="item"></SimpleInfoItem>
+                    </template>
+                </transition-group>
+
                 <div
                     class="more-list"
                     @click="loadMore"
@@ -224,5 +227,14 @@ watch(
     text-align: center;
     padding: 20px;
     cursor: pointer;
+}
+.list-enter-active,
+.list-leave-active {
+    transition: all 1s ease;
+}
+.list-enter-from,
+.list-leave-to {
+    opacity: 0;
+    transform: translateX(30px);
 }
 </style>

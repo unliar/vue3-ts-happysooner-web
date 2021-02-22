@@ -76,7 +76,6 @@ const SubmitComment = () => {
             Comment.text = "";
 
             Comment.listLoading = true;
-            Comment.list = [];
             GetCommentList({
                 Page: 1,
                 Size: 15,
@@ -171,49 +170,57 @@ const LoadMore = () => {
             <span>文章交流区</span>
         </div>
         <div class="comment-list">
-            <div
-                class="comment-item"
-                v-for="(i, index) in Comment.list"
-                :key="i.Id"
-            >
-                <div class="comment-avatar">
-                    <router-link :to="`/users/${i.CommentUserInfo.UID}`">
-                        <Avatar size="32px" :src="i.CommentUserInfo.Avatar" />
-                    </router-link>
-                </div>
-                <div class="comment-content">
-                    <div class="main-comment">
-                        <div class="comment-user-info">
-                            <span class="floor"
-                                >#{{ Comment.list.length - index }}</span
-                            >
-                            <router-link
-                                :to="`/users/${i.CommentUserInfo.UID}`"
-                                >{{ i.CommentUserInfo.Nickname }}</router-link
-                            >
-                            <span class="badge">
-                                <sup
-                                    v-if="
-                                        i.CommentUserInfo.UID == $props.authorId
-                                    "
-                                    class="author"
-                                    >本文作者</sup
+            <transition-group name="list">
+                <div
+                    class="comment-item"
+                    v-for="(i, index) in Comment.list"
+                    :key="i.Id"
+                >
+                    <div class="comment-avatar">
+                        <router-link :to="`/users/${i.CommentUserInfo.UID}`">
+                            <Avatar
+                                size="32px"
+                                :src="i.CommentUserInfo.Avatar"
+                            />
+                        </router-link>
+                    </div>
+                    <div class="comment-content">
+                        <div class="main-comment">
+                            <div class="comment-user-info">
+                                <span class="floor"
+                                    >#{{ Comment.list.length - index }}</span
                                 >
-                                <sup
-                                    class="role"
-                                    v-for="tx in i.CommentUserInfo.Roles"
-                                    :key="tx.RID"
-                                    >{{ tx.Description }}</sup
+                                <router-link
+                                    :to="`/users/${i.CommentUserInfo.UID}`"
+                                    >{{
+                                        i.CommentUserInfo.Nickname
+                                    }}</router-link
                                 >
-                            </span>
-                            <span class="time">{{
-                                TimeFomat(i.CreatedAt)
-                            }}</span>
+                                <span class="badge">
+                                    <sup
+                                        v-if="
+                                            i.CommentUserInfo.UID ==
+                                            $props.authorId
+                                        "
+                                        class="author"
+                                        >本文作者</sup
+                                    >
+                                    <sup
+                                        class="role"
+                                        v-for="tx in i.CommentUserInfo.Roles"
+                                        :key="tx.RID"
+                                        >{{ tx.Description }}</sup
+                                    >
+                                </span>
+                                <span class="time">
+                                    {{ TimeFomat(i.CreatedAt) }}
+                                </span>
+                            </div>
+                            <div class="main-content">{{ i.Content }}</div>
                         </div>
-                        <div class="main-content">{{ i.Content }}</div>
                     </div>
                 </div>
-            </div>
+            </transition-group>
             <div
                 v-if="Comment.list.length === 0 && !Comment.listLoading"
                 class="empty-content"
@@ -348,5 +355,15 @@ textarea:focus {
 }
 .badge sup.role {
     background-color: #ff5b05;
+}
+
+.list-enter-active,
+.list-leave-active {
+    transition: all 1s ease;
+}
+.list-enter-from,
+.list-leave-to {
+    opacity: 0;
+    transform: translateX(30px);
 }
 </style>
