@@ -12,7 +12,6 @@ import { AddNProgress } from "./utils/routerHooks";
 import Highlight from "./utils/highlight";
 import LoadingBall from "./components/common/LoadingBall";
 import Avatar from "./components/common/Avatar";
-
 AddNProgress(RouterInstance);
 
 const options: PluginOptions = {

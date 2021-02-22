@@ -192,10 +192,9 @@ const LoadMore = () => {
                                 >
                                 <router-link
                                     :to="`/users/${i.CommentUserInfo.UID}`"
-                                    >{{
-                                        i.CommentUserInfo.Nickname
-                                    }}</router-link
                                 >
+                                    {{ i.CommentUserInfo.Nickname }}
+                                </router-link>
                                 <span class="badge">
                                     <sup
                                         v-if="
@@ -212,9 +211,9 @@ const LoadMore = () => {
                                         >{{ tx.Description }}</sup
                                     >
                                 </span>
-                                <span class="time">
-                                    {{ TimeFomat(i.CreatedAt) }}
-                                </span>
+                                <span class="time">{{
+                                    TimeFomat(i.CreatedAt)
+                                }}</span>
                             </div>
                             <div class="main-content">{{ i.Content }}</div>
                         </div>

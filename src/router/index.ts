@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 
-const homeComponent = () => import("~/views/home/index");
+const homeComponent = () => import("~/views/home/index.vue");
 const postDetail = () => import("~/views/post/pid.vue");
 const signin = () => import("~/views/signin/index.vue");
 const about = () => import("~/views/about/index.vue");

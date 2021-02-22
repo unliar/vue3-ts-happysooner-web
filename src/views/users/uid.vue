@@ -8,9 +8,9 @@
                 <div class="user-info-container">
                     <div class="user-info">
                         <span class="nickname-op">
-                            <span class="nickname">
-                                {{ user?.data.Nickname }}
-                            </span>
+                            <span class="nickname">{{
+                                user?.data.Nickname
+                            }}</span>
                         </span>
                         <span
                             class="op-btn"
@@ -230,7 +230,7 @@ watch(
 }
 .list-enter-active,
 .list-leave-active {
-    transition: all 1s ease;
+    transition: all 0.65s ease;
 }
 .list-enter-from,
 .list-leave-to {
