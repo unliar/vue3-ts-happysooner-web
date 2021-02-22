@@ -32,7 +32,6 @@ const useFetch = <T extends Object>(config: AxiosRequestConfig) => {
     });
 
     return {
-        fn,
         ...toRefs(r),
     };
 };
