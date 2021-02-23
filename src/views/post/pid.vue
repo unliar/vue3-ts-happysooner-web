@@ -6,39 +6,48 @@
             info-size="18px"
             padding="30vh 0"
         ></LoadingBall>
-        <main v-if="!loading">
-            <h1 class="article-title">{{ Title }}</h1>
-            <div class="artilce-info">
-                <span>
-                    <router-link :to="`/users/${AuthorInfoUID}`">
-                        <a>{{ AuthorInfoNickname }}</a>
-                    </router-link>
-                </span>
-                <span>发表于: {{ fromNow }}</span>
-                <span>
-                    分类:
-                    <router-link :to="`/?CategoryID=${CategoryId}`">
-                        {{ CategoryCN }}
-                    </router-link>
-                </span>
-            </div>
-            <div v-html="Content" class="article-container" v-highlight></div>
-            <div class="article-navi">
-                <div>
-                    <router-link v-if="PrevId" :to="`/post/${PrevId}`">
-                        上一篇 «
-                        {{ PrevTitle }}
-                    </router-link>
+        <transition name="content">
+            <main v-if="!loading">
+                <h1 class="article-title">{{ Title }}</h1>
+                <div class="artilce-info">
+                    <span>
+                        <router-link :to="`/users/${AuthorInfoUID}`">
+                            <a>{{ AuthorInfoNickname }}</a>
+                        </router-link>
+                    </span>
+                    <span>发表于: {{ fromNow }}</span>
+                    <span>
+                        分类:
+                        <router-link :to="`/?CategoryID=${CategoryId}`">{{
+                            CategoryCN
+                        }}</router-link>
+                    </span>
                 </div>
-                <div>
-                    <router-link v-if="NextId" :to="`/post/${NextId}`">
-                        下一篇 »
-                        {{ NextTitle }}
-                    </router-link>
+                <div
+                    v-html="Content"
+                    class="article-container"
+                    v-highlight
+                ></div>
+                <div class="article-navi">
+                    <div>
+                        <router-link v-if="PrevId" :to="`/post/${PrevId}`">
+                            上一篇 «
+                            {{ PrevTitle }}
+                        </router-link>
+                    </div>
+                    <div>
+                        <router-link v-if="NextId" :to="`/post/${NextId}`">
+                            下一篇 »
+                            {{ NextTitle }}
+                        </router-link>
+                    </div>
                 </div>
-            </div>
-            <Comment :author-id="AuthorInfoUID" :post-id="props.pid"></Comment>
-        </main>
+                <Comment
+                    :author-id="AuthorInfoUID"
+                    :post-id="props.pid"
+                ></Comment>
+            </main>
+        </transition>
     </DefaultLayout>
 </template>
 <script lang="ts" setup>
