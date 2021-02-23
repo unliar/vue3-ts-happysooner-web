@@ -3,7 +3,7 @@ import { reactive, watchEffect, toRefs } from "vue";
 import Axios from "./fetch";
 
 // 花里胡哨请求数据
-const useFetch = <T = any>(config: AxiosRequestConfig) => {
+const UseFetch = <T = any>(config: AxiosRequestConfig) => {
     const r = reactive<{
         data: API.BaseResponse<T>;
         loading: boolean;
@@ -34,4 +34,4 @@ const useFetch = <T = any>(config: AxiosRequestConfig) => {
     return toRefs(r);
 };
 
-export default useFetch;
+export default UseFetch;
