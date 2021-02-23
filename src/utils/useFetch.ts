@@ -15,10 +15,10 @@ const UseFetch = <T = any>(config: AxiosRequestConfig) => {
     const fn = async (x: AxiosRequestConfig) => {
         r.loading = true;
         try {
-            const data = await Axios(x).then(t => t?.data as typeof t.data);
+            const data = await Axios(x).then(t => t?.data);
             r.data = data;
         } catch (error) {
-            const d: API.BaseResponse<any> = {
+            const d = {
                 ErrorCode: -1,
                 ErrorMsg: error?.message ?? "系统错误",
             };
