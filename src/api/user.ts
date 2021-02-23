@@ -13,7 +13,7 @@ export const GetUserInfo = async () => {
  * @param UID
  */
 export const UseGetUserInfoByID = (UID: number) =>
-    useFetch<API.BaseResponse<API.USERS.UserInfo>>({
+    useFetch<API.USERS.UserInfo>({
         url: `${API_PROFIX}/account/users/${UID}`,
     });
 

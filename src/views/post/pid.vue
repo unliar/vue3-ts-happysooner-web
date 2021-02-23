@@ -17,9 +17,9 @@
                 <span>发表于: {{ fromNow }}</span>
                 <span>
                     分类:
-                    <router-link :to="`/?CategoryID=${CategoryId}`">
-                        {{ CategoryCN }}
-                    </router-link>
+                    <router-link :to="`/?CategoryID=${CategoryId}`">{{
+                        CategoryCN
+                    }}</router-link>
                 </span>
             </div>
             <div v-html="Content" class="article-container" v-highlight></div>
@@ -67,9 +67,7 @@ const r = UseGetArticleById(props.pid);
 const Content = computed(() =>
     markdownIt.render(r.data.value.Result?.Content ?? "")
 );
-const fromNow = computed(() =>
-    FromNow(r.data.value.Result?.CreatedAt ?? Date.now())
-);
+const fromNow = computed(() => FromNow(r.data.Result?.CreatedAt ?? Date.now()));
 const loading = computed(() => r.loading.value);
 const Title = computed(() => r.data.value.Result?.Title);
 const Summary = computed(() => r.data.value.Result?.Summary);
@@ -102,7 +100,7 @@ const h = useHead({
 });
 
 watch(
-    () => r.data.value.ErrorMsg,
+    () => r.data.ErrorMsg,
     (c, _) => {
         toast.error("请求出错:" + c);
     }

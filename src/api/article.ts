@@ -27,7 +27,7 @@ export const GetArticles = (req: API.ARTICLE.GetArticleListRequest) =>
  * @param pid
  */
 export const UseGetArticleById = (pid: number | string) =>
-    useFetch<API.BaseResponse<API.ARTICLE.ArticleInfo>>({
+    useFetch<API.ARTICLE.ArticleInfo>({
         url: `${API_PROFIX}/writing/articles/${pid}`,
     });
 
@@ -41,7 +41,7 @@ export const UseGetMeiRiYiWen = (date?: string) => {
     if (date) {
         t = "day";
     }
-    return useFetch<API.BaseResponse<API.ARTICLE.MeiRiYiWenData>>({
+    return useFetch<API.ARTICLE.MeiRiYiWenData>({
         url: `${API_PROFIX}/proxy/meiriyiwen/${t}/articles?date=${date}`,
     });
 };

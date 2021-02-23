@@ -5,10 +5,10 @@ import Axios from "./fetch";
 // 花里胡哨请求数据
 const useFetch = <T = any>(config: AxiosRequestConfig) => {
     const r = reactive<{
-        data: T;
+        data: API.BaseResponse<T>;
         loading: boolean;
     }>({
-        data: {} as any,
+        data: {},
         loading: false,
     });
 
@@ -16,9 +16,9 @@ const useFetch = <T = any>(config: AxiosRequestConfig) => {
         r.loading = true;
         try {
             const data = await Axios(x).then(t => t?.data as typeof t.data);
-            r.data = data ?? {};
+            r.data = data;
         } catch (error) {
-            const d: any = {
+            const d: API.BaseResponse<any> = {
                 ErrorCode: -1,
                 ErrorMsg: error?.message ?? "系统错误",
             };
@@ -31,9 +31,7 @@ const useFetch = <T = any>(config: AxiosRequestConfig) => {
         fn(config);
     });
 
-    return {
-        ...toRefs(r),
-    };
+    return toRefs(r);
 };
 
 export default useFetch;
