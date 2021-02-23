@@ -36,7 +36,7 @@ onMounted(async () => {
     // 用户主题信息
     store.dispatch(ACTIONS.GET_CATEGORY_LIST);
     // 高亮初始化
-    (window as any).hljs && (window as any).hljs.initHighlightingOnLoad();
+    (window as any)?.hljs?.initHighlightingOnLoad?.();
 });
 </script>
 

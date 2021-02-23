@@ -6,7 +6,7 @@ let Highlight: Vue.Plugin = {
         Vue.directive("highlight", {
             mounted: function (el) {
                 el.querySelectorAll("pre code").forEach((block: any) => {
-                    (window as any).hljs.highlightBlock(block);
+                    (window as any)?.hljs?.highlightBlock?.(block);
                 });
             },
         });
