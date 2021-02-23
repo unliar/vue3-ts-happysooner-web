@@ -36,31 +36,30 @@ const props = defineProps({
 });
 
 const toast = useToast();
-const r = UseGetMeiRiYiWen(props.query?.date);
+const { data, loading } = UseGetMeiRiYiWen(props.query?.date);
 
-const title = computed(() => r.data.value.Result?.title);
-const author = computed(() => r.data.value.Result?.author);
-const content = computed(() => r.data.value.Result?.content);
-const prev = computed(() => r.data.value.Result?.date.prev);
-const loading = computed(() => r.loading).value;
+const title = computed(() => data.value.Result?.title);
+const author = computed(() => data.value.Result?.author);
+const content = computed(() => data.value.Result?.content);
+const prev = computed(() => data.value.Result?.date.prev);
 
 useHead({
     title: computed(
         () =>
-            `每日阅读 - ${r.data.value.Result?.title} - ${r.data.value.Result?.author}`
+            `每日阅读 - ${data.value.Result?.title} - ${data.value.Result?.author}`
     ),
     meta: [
         {
             name: `description`,
-            content: computed(() => `${r.data.value.Result?.digest}`),
+            content: computed(() => `${data.value.Result?.digest}`),
         },
     ],
 });
 
 watch(
-    () => r.data.value.ErrorMsg,
+    () => data.value.ErrorMsg,
     c => {
-        toast.warning(c);
+        c && toast.warning(c);
     }
 );
 </script>

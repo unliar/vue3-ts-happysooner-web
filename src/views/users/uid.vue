@@ -3,17 +3,14 @@
         <main>
             <div class="user-header-container">
                 <div class="avatar-container">
-                    <Avatar
-                        size="150px"
-                        :src="user.data.value.Result?.Avatar"
-                    />
+                    <Avatar size="150px" :src="userData.Result?.Avatar" />
                 </div>
                 <div class="user-info-container">
                     <div class="user-info">
                         <span class="nickname-op">
-                            <span class="nickname">{{
-                                user.data.value.Result?.Nickname
-                            }}</span>
+                            <span class="nickname">
+                                {{ userData.Result?.Nickname }}
+                            </span>
                         </span>
                         <span
                             class="op-btn"
@@ -23,10 +20,10 @@
                         >
                     </div>
                     <div>
-                        {{ user.data.value.Result?.Location }} ·
-                        {{ user.data.value.Result?.Profession }}
+                        {{ userData.Result?.Location }} ·
+                        {{ userData.Result?.Profession }}
                     </div>
-                    <div>{{ user.data.value.Result?.Brief }}</div>
+                    <div>{{ userData.Result?.Brief }}</div>
                 </div>
             </div>
             <div class="user-article-cotainer">
@@ -83,10 +80,10 @@ const props = defineProps({
 const store = useStore<StoreType>();
 const toast = useToast();
 
-const user = UseGetUserInfoByID(props.uid);
+const { data: userData } = UseGetUserInfoByID(props.uid);
 
 watch(
-    () => user.data.value.ErrorMsg,
+    () => userData.value.ErrorMsg,
     c => {
         c && toast.error(c);
     }
@@ -106,11 +103,11 @@ const articles = reactive<{
 
 // 判断用户是否是
 const isCurrentUser = computed(
-    () => store.state.User.Id === user.data.value.Result?.Id
+    () => store.state.User.Id === userData.value.Result?.Id
 );
-
+const title = computed(() => `${userData.value.Result?.Nickname}的个人中心`);
 useHead({
-    title: computed(() => `${user.data.value.Result?.Nickname}的个人中心`),
+    title: title,
 });
 
 // 注销登录

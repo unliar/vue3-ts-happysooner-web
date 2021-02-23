@@ -17,9 +17,9 @@
                 <span>发表于: {{ fromNow }}</span>
                 <span>
                     分类:
-                    <router-link :to="`/?CategoryID=${CategoryId}`">{{
-                        CategoryCN
-                    }}</router-link>
+                    <router-link :to="`/?CategoryID=${CategoryId}`">
+                        {{ CategoryCN }}
+                    </router-link>
                 </span>
             </div>
             <div v-html="Content" class="article-container" v-highlight></div>
@@ -62,25 +62,26 @@ const props = defineProps({
 
 const toast = useToast();
 
-const r = UseGetArticleById(props.pid);
+const { data, loading } = UseGetArticleById(props.pid);
 
 const Content = computed(() =>
-    markdownIt.render(r.data.value.Result?.Content ?? "")
+    markdownIt.render(data.value.Result?.Content ?? "")
 );
-const fromNow = computed(() => FromNow(r.data.Result?.CreatedAt ?? Date.now()));
-const loading = computed(() => r.loading.value);
-const Title = computed(() => r.data.value.Result?.Title);
-const Summary = computed(() => r.data.value.Result?.Summary);
-const AuthorInfoUID = computed(() => r.data.value.Result?.AuthorInfo.UID);
+const fromNow = computed(() =>
+    FromNow(data.value.Result?.CreatedAt ?? Date.now())
+);
+const Title = computed(() => data.value.Result?.Title);
+const Summary = computed(() => data.value.Result?.Summary);
+const AuthorInfoUID = computed(() => data.value.Result?.AuthorInfo.UID);
 const AuthorInfoNickname = computed(
-    () => r.data.value.Result?.AuthorInfo.Nickname
+    () => data.value.Result?.AuthorInfo.Nickname
 );
-const CategoryId = computed(() => r.data.value.Result?.Category.Id);
-const CategoryCN = computed(() => r.data.value.Result?.Category.CN);
-const PrevId = computed(() => r.data.value.Result?.Navigation?.Prev?.Id);
-const NextId = computed(() => r.data.value.Result?.Navigation?.Next?.Id);
-const NextTitle = computed(() => r.data.value.Result?.Navigation?.Next?.Title);
-const PrevTitle = computed(() => r.data.value.Result?.Navigation?.Prev?.Title);
+const CategoryId = computed(() => data.value.Result?.Category.Id);
+const CategoryCN = computed(() => data.value.Result?.Category.CN);
+const PrevId = computed(() => data.value.Result?.Navigation?.Prev?.Id);
+const NextId = computed(() => data.value.Result?.Navigation?.Next?.Id);
+const NextTitle = computed(() => data.value.Result?.Navigation?.Next?.Title);
+const PrevTitle = computed(() => data.value.Result?.Navigation?.Prev?.Title);
 const desc = computed(
     () => `${AuthorInfoNickname.value}发表了${Title.value},${Summary.value}`
 );
@@ -100,7 +101,7 @@ const h = useHead({
 });
 
 watch(
-    () => r.data.ErrorMsg,
+    () => data?.value.ErrorMsg,
     (c, _) => {
         toast.error("请求出错:" + c);
     }
