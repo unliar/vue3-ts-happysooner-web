@@ -118,9 +118,7 @@ onMounted(() => {
             } else {
                 Comment.loaded = true;
             }
-            if (r.ErrorCode) {
-                toast.warning(r.ErrorMsg);
-            }
+            r.ErrorCode && toast.warning(r?.ErrorMsg ?? `${r.ErrorCode}`);
         })
         .finally(() => {
             Comment.listLoadingStatus = 0;
