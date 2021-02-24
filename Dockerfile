@@ -6,8 +6,6 @@ COPY . /app
 
 RUN npm i --registry https://registry.npm.taobao.org
 
-RUN npm test
-
 RUN npm run build
 
 FROM registry.cn-shenzhen.aliyuncs.com/happysooner/spa-history
