@@ -22,7 +22,6 @@ test("EmptyContent", () => {
             title: title,
         },
     });
-    console.log(element.innerHTML);
     expect(element.tagName).toEqual("DIV");
     expect(element.innerHTML).toContain(title);
 });
