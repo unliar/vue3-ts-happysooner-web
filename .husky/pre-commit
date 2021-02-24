@@ -3,6 +3,8 @@
 
 npm run lint
 
+npm run test
+
 git add .
 
 echo "✅  npm run lint pass"
