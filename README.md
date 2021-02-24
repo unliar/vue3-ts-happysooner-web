@@ -9,9 +9,20 @@
 ### 开发流程
 
 ```
+// 安装依赖
 npm i
 
+// 启动开发
 npm run dev
+
+// 启动测试
+npm test
+
+// 格式化所有
+npm run wlint
+
+// 格式化改动
+npm run lint
 ```
 
 ### 部署方式

@@ -14,7 +14,7 @@
         "lint": "pretty-quick --staged",
         "wlint": "prettier --write ./src",
         "postinstall": "husky install",
-        "test": "yarn jest"
+        "test": "jest"
     },
     "dependencies": {
         "@geist-ui/themes": "^1.0.1",
