@@ -142,7 +142,7 @@ const loadMore = () => {
     articles.loading = true;
 
     GetArticles({
-        UID: user.data.value.Result?.Id,
+        UID: userData.value.Result?.Id,
         Page: articles.page + 1,
     })
         .then(r => {
