@@ -4,7 +4,9 @@
 
 这是一个 happysooner.com 站点的 Vite 2.0 + Vue 3.0 + Vuex 4.0 + Vue-Router 4.0 全家桶精简复刻项目, 主要目的是为了学习复健 Vue 3.0。
 
-线上地址 [https://vue-next.happysooner.com/](https://vue-next.happysooner.com/)
+预览地址 - history 路由: [vue-next.happysooner.com/](https://vue-next.happysooner.com/)
+
+gh-pages - hash 路由: [unliar.github.io/vue3-ts-happysooner-web](https://unliar.github.io/vue3-ts-happysooner-web)
 
 ### 开发流程
 
