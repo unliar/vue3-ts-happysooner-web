@@ -9,7 +9,7 @@
     },
     "scripts": {
         "dev": "vite",
-        "build": "vuedx-typecheck . && vite build",
+        "build": "vite build",
         "serve": "vite preview",
         "lint": "pretty-quick --staged",
         "wlint": "prettier --write ./src",

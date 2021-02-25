@@ -45,7 +45,7 @@ npm run lint
 git commit -m "feat: add a perfect feature"
 ```
 
-4. windows 环境可能存在 build 失败的问题, 请使用 docker 环境构建。
+4. <del>windows 环境可能存在 build 失败的问题, 请使用 docker 环境构建</del> [vitejs/vite/issues/2109](https://github.com/vitejs/vite/issues/2109) 临时移除类型检测插件导致 windows build 失败的问题。
 
 5. vscode 请安装 [volar](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.volar) 插件
 
