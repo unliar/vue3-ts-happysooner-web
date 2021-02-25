@@ -1,4 +1,4 @@
-import { onBeforeMount } from "@vue/runtime-core";
+import { onBeforeMount } from "vue";
 
 /**
  * 插入百度统计脚本
