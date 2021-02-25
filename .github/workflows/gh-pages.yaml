@@ -18,12 +18,13 @@ jobs:
     name: Node Version ${{ matrix.node }}
     steps:
       - uses: actions/checkout@v2
+      - uses: FranzDiebold/github-env-vars-action@v2
       - uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node }}
       - name: build
         env:
-          BASE_URL: "https://unliar.github.io/vue3-ts-happysooner-web/"
+          BASE_URL: "https://$CI_REPOSITORY_OWNER.github.io/${{github.event.repository.name}}/"
         run: |
           npm install
           sed -i "s#history#hash#g" .env.production
@@ -40,7 +41,7 @@ jobs:
         with:
           msgtype: markdown
           content: "#### ✅ [${{github.repository}}](https://github.com/${{github.repository}})  gh-page 发布成功 \n
-          > 地址: [在线访问 👍](https://unliar.github.io/vue3-ts-happysooner-web/)
+          > 地址: [在线访问 👍](https://$CI_REPOSITORY_OWNER.github.io/${{github.event.repository.name}}/)
           "
       - name: wechat-work-bot-failed-build
         if: ${{ failure() }}
@@ -50,5 +51,5 @@ jobs:
         with:
           msgtype: markdown
           content: "#### ❌ [${{github.repository}}](https://github.com/${{github.repository}})  gh-page 发布失败 \n
-          > 地址: [在线访问 😅](https://unliar.github.io/vue3-ts-happysooner-web/)
+          > 地址: [在线访问 😅](https://$CI_REPOSITORY_OWNER.github.io/${{github.event.repository.name}}/)
           " 
