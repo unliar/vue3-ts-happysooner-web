@@ -9,14 +9,19 @@ import { POSITION, useToast } from "vue-toastification";
 import { useStore } from "vuex";
 import { useRoute } from "vue-router";
 
-import GithubStar from "./components/common/GithubStar.vue";
+import GithubStar from "~/components/common/GithubStar.vue";
 import { ACTIONS } from "~/store/type";
-
+import { useBaiduInit } from "./utils/pageView";
 const store = useStore();
 const toast = useToast();
 const route = useRoute();
+
+const id = import.meta.env.VITE_BAIDUTONGJI_ID as string;
+id && useBaiduInit(id);
+
 //强制渲染组件
 const key = computed(() => route.fullPath);
+
 useHead({
     title: "远浅 - 给世界献上美好的祝福 - Vue3实战项目",
 });
