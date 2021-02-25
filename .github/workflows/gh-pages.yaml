@@ -13,8 +13,6 @@ jobs:
       matrix:
         node: ["14"]
     name: Node Version ${{ matrix.node }}
-    env:
-      BASE_URL: https://unliar.github.io/vue3-ts-happysooner-web/
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
@@ -27,6 +25,8 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-
       - name: build
+        env:
+          BASE_URL: "https://unliar.github.io/vue3-ts-happysooner-web/"
         run: |
           npm install
           npm run build
