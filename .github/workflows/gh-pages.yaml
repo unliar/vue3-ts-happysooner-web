@@ -1,0 +1,43 @@
+name: site
+
+on: 
+  workflow_dispatch: 
+jobs:
+  
+  publish:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: ["14"]
+    name: Node Version ${{ matrix.node }}
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node }}
+      - name: build
+        run: |
+          npm install
+          npm run build
+      - uses: maxheld83/ghpages@v0.3.0
+        name: GitHub Pages Deploy
+        env:
+          BUILD_DIR: "dist/"
+          GH_PAT: ${{ secrets.GH_PAT }}
+      - name: wechat-work-bot-success
+        uses: chf007/action-wechat-work@master
+        env:
+          WECHAT_WORK_BOT_WEBHOOK: ${{secrets.WECHAT_WORK_BOT_WEBHOOK}}
+        with:
+          msgtype: markdown
+          content: "#### ✅ [${{github.repository}}](https://github.com/${{github.repository}})  gh-page 发布成功 \n
+          "
+      - name: wechat-work-bot-failed-build
+        if: ${{ failure() }}
+        uses: chf007/action-wechat-work@master
+        env:
+          WECHAT_WORK_BOT_WEBHOOK: ${{secrets.WECHAT_WORK_BOT_WEBHOOK}}
+        with:
+          msgtype: markdown
+          content: "#### ❎ [${{github.repository}}](https://github.com/${{github.repository}})  gh-page 发布失败 \n
+          " 
