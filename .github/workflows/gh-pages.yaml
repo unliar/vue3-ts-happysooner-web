@@ -1,6 +1,9 @@
 name: site
 
 on: 
+  push:
+     branches:
+      - test
   workflow_run:
     workflows: ["build-deploy"] 
     types:
@@ -18,12 +21,6 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node }}
-      - uses: actions/cache@v2
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
       - name: build
         env:
           BASE_URL: "https://unliar.github.io/vue3-ts-happysooner-web/"
