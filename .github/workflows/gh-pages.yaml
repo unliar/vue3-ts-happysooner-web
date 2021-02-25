@@ -13,6 +13,8 @@ jobs:
       matrix:
         node: ["14"]
     name: Node Version ${{ matrix.node }}
+    env:
+      BASE_URL: https://unliar.github.io/vue3-ts-happysooner-web/
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
@@ -27,7 +29,6 @@ jobs:
       - name: build
         run: |
           npm install
-          BASE_URL=https://unliar.github.io/vue3-ts-happysooner-web/
           npm run build
       - uses: maxheld83/ghpages@v0.3.0
         name: GitHub Pages Deploy
