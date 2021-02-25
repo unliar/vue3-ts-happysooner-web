@@ -1,7 +1,9 @@
 name: site
 
 on: 
-  workflow_dispatch: 
+  workflow_run:
+    workflows: ["build-deploy"] 
+    
 jobs:
   
   publish:
