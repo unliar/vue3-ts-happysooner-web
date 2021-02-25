@@ -27,6 +27,7 @@ jobs:
           VITE_R_MODE: "hash"
         run: |
           npm install
+          sed -i "s#history#hash#g" .env.production
           npm run build
       - uses: peaceiris/actions-gh-pages@v3
         name: GitHub Pages Deploy

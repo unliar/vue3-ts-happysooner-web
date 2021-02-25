@@ -58,8 +58,9 @@ const routes: RouteRecordRaw[] = [
 const RouterInstance = createRouter({
     // 通过构建环境变量判断是否是 hash 模式, - 由于我想要部署到 github page 才加了这么一段
     // 自主可控的服务器 使用 createWebHistory 比较美观
+    // 默认history模式
     history:
-        import.meta.env.VITE_R_MODE == "hash"
+        import.meta.env.VITE_ROUTER_MODE == "hash"
             ? createWebHashHistory()
             : createWebHistory(),
     routes,
