@@ -21,6 +21,7 @@ jobs:
       - name: build
         run: |
           npm install
+          BASE_URL=https://unliar.github.io/vue3-ts-happysooner-web/
           npm run build
       - uses: maxheld83/ghpages@v0.3.0
         name: GitHub Pages Deploy
