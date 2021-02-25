@@ -41,6 +41,6 @@ onMounted(async () => {
 </script>
 
 <style>
-@import url(./components/css/global.css);
-@import url(./components/css/highlight.css);
+@import url(./assets/css/global.css);
+@import url(./assets/css/highlight.css);
 </style>
