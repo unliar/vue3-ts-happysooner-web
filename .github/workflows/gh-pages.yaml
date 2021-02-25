@@ -24,7 +24,6 @@ jobs:
       - name: build
         env:
           BASE_URL: "https://unliar.github.io/vue3-ts-happysooner-web/"
-          VITE_R_MODE: "hash"
         run: |
           npm install
           sed -i "s#history#hash#g" .env.production
