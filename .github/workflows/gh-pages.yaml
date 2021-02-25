@@ -49,6 +49,6 @@ jobs:
           WECHAT_WORK_BOT_WEBHOOK: ${{secrets.WECHAT_WORK_BOT_WEBHOOK}}
         with:
           msgtype: markdown
-          content: "#### ❎ [${{github.repository}}](https://github.com/${{github.repository}})  gh-page 发布失败 \n
-          > 地址: [在线访问 👍](https://unliar.github.io/vue3-ts-happysooner-web/)
+          content: "#### ❌ [${{github.repository}}](https://github.com/${{github.repository}})  gh-page 发布失败 \n
+          > 地址: [在线访问 😅](https://unliar.github.io/vue3-ts-happysooner-web/)
           " 
