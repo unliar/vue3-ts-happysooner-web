@@ -40,6 +40,7 @@ jobs:
         with:
           msgtype: markdown
           content: "#### ✅ [${{github.repository}}](https://github.com/${{github.repository}})  gh-page 发布成功 \n
+          > 地址: [在线访问 👍](https://unliar.github.io/vue3-ts-happysooner-web/)
           "
       - name: wechat-work-bot-failed-build
         if: ${{ failure() }}
@@ -49,4 +50,5 @@ jobs:
         with:
           msgtype: markdown
           content: "#### ❎ [${{github.repository}}](https://github.com/${{github.repository}})  gh-page 发布失败 \n
+          > 地址: [在线访问 👍](https://unliar.github.io/vue3-ts-happysooner-web/)
           " 
