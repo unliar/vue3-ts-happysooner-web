@@ -9,14 +9,25 @@ import DefaulLayout from "~/components/layouts/Default/index.vue";
             <div class="about-item-container">
                 <h2>技术相关</h2>
                 <p>
-                    这是一个前端采用ssr渲染,后端使用微服务架构搭建的网站。
-                    代码存贮于github私有仓库,拥有完整的
+                    本站是
+                    <a href="https://happysooner.com">happysooner.com</a>
+                    的Vue复刻版。
+                </p>
+                <p>
+                    这是一个前端采用 Vue 全家桶,后端使用微服务架构搭建的网站。
+                </p>
+                <p>
+                    代码存贮于
+                    <a href="https://github.com/unliar/vue3-ts-happysooner-web">
+                        Github</a
+                    >
+                    拥有完整的
                     <a
                         href="https://mp.weixin.qq.com/s/bJtO5Y54XIB8qfJR6ownyg"
                         target="_blank"
-                        >自动化构建部署流程</a
+                        >Github Action</a
                     >
-                    。
+                    自动化构建部署流程 。
                 </p>
                 <p>
                     大致架构图:
@@ -25,8 +36,8 @@ import DefaulLayout from "~/components/layouts/Default/index.vue";
                     />
                 </p>
                 <p>
-                    前端: React.js@latest、Next.js@latest、React
-                    Hook、TypeScript@latest、Vue@next
+                    前端: Vite 2.0、 Vue 3.0 、 Vuex 4.0 、 Vue-Router
+                    4.0、TypeScript@latest、Vue@next
                 </p>
                 <p>后端: Golang、Go-Micro、MySQL、NSQ、Consul</p>
                 <p>
