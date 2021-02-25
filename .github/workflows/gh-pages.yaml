@@ -24,7 +24,7 @@ jobs:
           node-version: ${{ matrix.node }}
       - name: build
         env:
-          BASE_URL: "https://${{env.CI_REPOSITORY_OWNER}}.github.io/${{github.event.repository.name}}/"
+          BASE_URL: "https://${{env.CI_REPOSITORY_OWNER}}.github.io/${{env.CI_REPOSITORY}}/"
         run: |
           npm install
           sed -i "s#history#hash#g" .env.production
@@ -40,8 +40,8 @@ jobs:
           WECHAT_WORK_BOT_WEBHOOK: ${{secrets.WECHAT_WORK_BOT_WEBHOOK}}
         with:
           msgtype: markdown
-          content: "#### ✅ [${{github.repository}}](https://github.com/${{github.repository}})  gh-page 发布成功 \n
-          > 地址: [在线访问 👍](https://${{env.CI_REPOSITORY_OWNER}}.github.io/${{github.event.repository.name}}/)
+          content: "#### ✅ [${{github.repository}}](https://github.com/${{env.CI_REPOSITORY}})  gh-page 发布成功 \n
+          > 地址: [在线访问 👍](https://${{env.CI_REPOSITORY_OWNER}}.github.io/${{env.CI_REPOSITORY_NAME}}/)
           "
       - name: wechat-work-bot-failed-build
         if: ${{ failure() }}
@@ -50,6 +50,6 @@ jobs:
           WECHAT_WORK_BOT_WEBHOOK: ${{secrets.WECHAT_WORK_BOT_WEBHOOK}}
         with:
           msgtype: markdown
-          content: "#### ❌ [${{github.repository}}](https://github.com/${{github.repository}})  gh-page 发布失败 \n
-          > 地址: [在线访问 😅](https://${{env.CI_REPOSITORY_OWNER}}.github.io/${{github.event.repository.name}}/)
+          content: "#### ❌ [${{github.repository}}](https://github.com/${{env.CI_REPOSITORY}})  gh-page 发布失败 \n
+          > 地址: [在线访问 😅](https://${{env.CI_REPOSITORY_OWNER}}.github.io/${{env.CI_REPOSITORY_NAME}}/)
           " 
