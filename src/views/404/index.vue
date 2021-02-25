@@ -2,6 +2,7 @@
 import { useHead } from "@vueuse/head";
 import { onMounted, onUnmounted, ref } from "vue";
 import { useRouter } from "vue-router";
+const router = useRouter();
 
 const sec = ref(5);
 let id: number;
@@ -11,7 +12,6 @@ useHead({
 });
 
 onMounted(() => {
-    const router = useRouter();
     id = setInterval(() => {
         sec.value = sec.value - 1;
         if (sec.value <= 0) {
