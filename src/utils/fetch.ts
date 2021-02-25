@@ -10,17 +10,10 @@ const Axios = axios.create({
     withCredentials: true,
 });
 
-Axios.interceptors.request.use(
-    req => {
-        req.headers[HAPPY_AUTH_TOKEN] = GetTokenCookies();
-        return req;
-    },
-    err => ({
-        ErrorCode: -1,
-        ErrorMsg: JSON.stringify(err),
-        Result: null,
-    })
-);
+Axios.interceptors.request.use(req => {
+    req.headers[HAPPY_AUTH_TOKEN] = GetTokenCookies();
+    return req;
+});
 
 Axios.interceptors.response.use(
     res => {
