@@ -24,7 +24,7 @@ jobs:
           node-version: ${{ matrix.node }}
       - name: build
         env:
-          BASE_URL: "https://${{env.CI_REPOSITORY_OWNER}}.github.io/${{env.CI_REPOSITORY}}/"
+          BASE_URL: "https://${{env.CI_REPOSITORY_OWNER}}.github.io/${{env.CI_REPOSITORY_NAME}}/"
         run: |
           npm install
           sed -i "s#history#hash#g" .env.production
