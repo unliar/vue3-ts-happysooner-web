@@ -1,4 +1,9 @@
-import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
+import {
+    createRouter,
+    createWebHashHistory,
+    createWebHistory,
+    RouteRecordRaw,
+} from "vue-router";
 
 const homeComponent = () => import("~/views/home/index.vue");
 const postDetail = () => import("~/views/post/pid.vue");
@@ -51,7 +56,12 @@ const routes: RouteRecordRaw[] = [
 ];
 
 const RouterInstance = createRouter({
-    history: createWebHistory(),
+    // 通过构建环境变量判断是否是 hash 模式, - 由于我想要部署到 github page 才加了这么一段
+    // 自主可控的服务器 使用 createWebHistory 比较美观
+    history:
+        import.meta.env.VITE_R_MODE == "hash"
+            ? createWebHashHistory()
+            : createWebHistory(),
     routes,
     scrollBehavior: (to, _, savedPos) => {
         if (savedPos) {
