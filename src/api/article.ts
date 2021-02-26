@@ -38,9 +38,7 @@ export const UseGetArticleById = (pid: number | string) =>
  */
 export const UseGetMeiRiYiWen = (date?: string) => {
     let t = "random";
-    if (date) {
-        t = "day";
-    }
+    date && (t = "day");
     return useFetch<API.ARTICLE.MeiRiYiWenData>({
         url: `${API_PROFIX}/proxy/meiriyiwen/${t}/articles?date=${date}`,
     });
