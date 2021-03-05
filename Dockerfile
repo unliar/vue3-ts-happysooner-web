@@ -2,9 +2,9 @@ FROM node:lts as build-vue
 
 WORKDIR /app
 
-ADD package.json ./
+ADD package.json .npmrc ./
 
-RUN npm i --registry https://registry.npm.taobao.org
+RUN npm i
 
 COPY . /app
 
