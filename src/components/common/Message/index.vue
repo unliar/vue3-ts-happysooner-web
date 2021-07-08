@@ -10,30 +10,57 @@
 </template>
 <script lang="ts" setup>
 import { ref, onMounted, onBeforeUnmount, defineProps } from "vue";
-import type { MessageType } from "./type";
 // 是否可见
 const visible = ref(false);
-// 弹窗类型
-const type = ref<MessageType>("info");
-// 是否是html
-const isHTML = ref(false);
-// 消息类型
-const message = ref("");
-
-// 键盘esc消息
-const keyDown = () => {};
-
-// 关闭弹窗
-const close = () => {};
 
 const props = defineProps({
-    content: String, // 文字类型
+    /**
+     * 弹窗警告类型
+     */
+    type: {
+        validator: (v: string) => {
+            return ["info", "warn", "error", "success"].includes(v);
+        },
+    },
+    /**
+     * 弹窗文本内容
+     */
+    content: {
+        type: String,
+        require: true,
+    },
+    /**
+     * 是否是 HTML
+     */
     isHTML: Boolean, // 是否是html
-    duration: Number, // 显示时长
-    onClose: Function, // 关闭时的调用
+    /**
+     * 持续时长单位 秒
+     */
+    duration: {
+        type: Number,
+        default: 3, // 秒
+        validator: (v: number) => {
+            return +v > 0;
+        },
+    },
+    /**
+     * 弹窗关闭时的调用
+     */
+    onClose: Function,
 });
 
+// 开启弹窗
+const onOpen = () => {
+    setTimeout(() => {
+        visible.value = true;
+    }, 10);
+    setTimeout(() => {
+        visible.value = false;
+    }, props.duration * 1000);
+};
+
 onMounted(() => {
+    onOpen();
     console.log("message box onMounted");
 });
 onBeforeUnmount(() => {
