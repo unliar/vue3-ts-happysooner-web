@@ -39,7 +39,10 @@ const getList = (req: API.ARTICLE.GetArticleListRequest) => {
 };
 
 onMounted(async () => {
-    M();
+    M({
+        content: "222",
+        type: "error",
+    });
     await getList(props.query ?? {});
 });
 </script>

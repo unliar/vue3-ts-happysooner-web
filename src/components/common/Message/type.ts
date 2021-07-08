@@ -13,5 +13,6 @@ export type Options = {
     content: string; // 文字类型
     isHTML?: boolean; // 是否是html
     duration?: number; // 显示时长
-    onClose: () => void; // 关闭时的调用
+    onClose?: () => void; // 关闭时的调用
+    type?: MessageType;
 };

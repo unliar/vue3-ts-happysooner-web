@@ -47,7 +47,7 @@ const props = defineProps({
      */
     duration: {
         type: Number,
-        default: 3, // 秒
+        default: 30, // 秒
         validator: (v: number) => {
             return +v > 0;
         },
@@ -80,4 +80,37 @@ onBeforeUnmount(() => {
 });
 </script>
 
-<style scoped></style>
+<style scoped>
+.message-box {
+    position: fixed;
+    left: 50%;
+    top: 20px;
+    transform: translateX(-50%);
+    transition: opacity 0.3s, transform 0.4s, top 0.4s;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    background: #909399;
+}
+
+p {
+    margin: 0;
+}
+.message-box--info {
+    background: #909399;
+}
+.message-box--warn {
+    background: #f6a23c;
+}
+.message-box--error {
+    background: #f56c6c;
+}
+.message-box--success {
+    background: #67c23a;
+}
+.message-fade-enter-from,
+.message-fade-leave-to {
+    opacity: 0;
+    transform: translate(-50%, -100%);
+}
+</style>
