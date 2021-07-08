@@ -9,7 +9,7 @@
     </transition>
 </template>
 <script lang="ts" setup>
-import { ref, onMounted, onUnmounted } from "vue";
+import { ref, onMounted, onBeforeUnmount, defineProps } from "vue";
 import type { MessageType } from "./type";
 // 是否可见
 const visible = ref(false);
@@ -26,10 +26,20 @@ const keyDown = () => {};
 // 关闭弹窗
 const close = () => {};
 
+const props = defineProps({
+    content: String, // 文字类型
+    isHTML: Boolean, // 是否是html
+    duration: Number, // 显示时长
+    onClose: Function, // 关闭时的调用
+});
+
 onMounted(() => {
     console.log("message box onMounted");
 });
-onUnmounted(() => {
+onBeforeUnmount(() => {
+    if (typeof props.onClose === "function") {
+        props.onClose();
+    }
     console.log("message box onUnmounted");
 });
 </script>
