@@ -2,14 +2,22 @@
     <transition name="message-fade">
         <div v-show="visible" :class="['message-box', `message-box--${type}`]">
             <slot>
-                <p v-if="!isHTML" class="message-content">{{ message }}</p>
-                <p v-else v-html="message" class="message-content"></p>
+                <p v-if="!isHTML" class="message-content">
+                    {{ $props.content }}
+                </p>
+                <p v-else v-html="$props.content" class="message-content"></p>
             </slot>
         </div>
     </transition>
 </template>
 <script lang="ts" setup>
-import { ref, onMounted, onBeforeUnmount, defineProps } from "vue";
+import {
+    ref,
+    onMounted,
+    onBeforeUnmount,
+    defineProps,
+    getCurrentInstance,
+} from "vue";
 // 是否可见
 const visible = ref(false);
 
@@ -21,6 +29,7 @@ const props = defineProps({
         validator: (v: string) => {
             return ["info", "warn", "error", "success"].includes(v);
         },
+        default: "info",
     },
     /**
      * 弹窗文本内容
@@ -61,7 +70,7 @@ const onOpen = () => {
 
 onMounted(() => {
     onOpen();
-    console.log("message box onMounted");
+    console.log("message box onMounted", getCurrentInstance());
 });
 onBeforeUnmount(() => {
     if (typeof props.onClose === "function") {
