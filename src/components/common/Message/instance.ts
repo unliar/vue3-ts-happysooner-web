@@ -5,14 +5,15 @@ import type {
     MessageInstance,
     Options,
     InstanceComponent,
-    IntanceOptions,
+    InstanceOptions,
+    InstanceHandle,
 } from "./type";
 
 const isServer = typeof window === "undefined";
 
 const Queqe: InstanceQueqe = [];
 let seed = 5201414;
-const Message: MessageInstance = (opts: IntanceOptions) => {
+const Message: MessageInstance = (opts: InstanceOptions) => {
     if (isServer) return;
     let options: Options = {
         content: "",
@@ -60,7 +61,7 @@ const Message: MessageInstance = (opts: IntanceOptions) => {
         close: () => {
             (vm.component?.proxy as InstanceComponent).visible = false;
         },
-    };
+    } as InstanceHandle;
 };
 
 Message.closeAll = () => {
@@ -71,7 +72,7 @@ Message.closeAll = () => {
 };
 
 (["success", "warn", "info", "error"] as const).forEach(type => {
-    Message[type] = (options: IntanceOptions) => {
+    Message[type] = (options: InstanceOptions) => {
         if (typeof options === "string") {
             options = {
                 content: options,

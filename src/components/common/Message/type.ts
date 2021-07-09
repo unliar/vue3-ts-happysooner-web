@@ -3,12 +3,12 @@ import type { VNode, ComponentPublicInstance } from "vue";
 export type MessageType = "warn" | "error" | "success" | "info";
 
 export type MessageInstance = {
-    (opt: IntanceOptions): void;
-    warn(opt: IntanceOptions): void;
-    error(opt: IntanceOptions): void;
-    success(opt: IntanceOptions): void;
-    info(opt: IntanceOptions): void;
-    closeAll(): void;
+    (opt?: InstanceOptions): InstanceHandle;
+    warn: (opt: InstanceOptions) => InstanceHandle;
+    error: (opt: InstanceOptions) => InstanceHandle;
+    success: (opt: InstanceOptions) => InstanceHandle;
+    info: (opt: InstanceOptions) => InstanceHandle;
+    closeAll: () => void;
 };
 
 export type Options = {
@@ -25,4 +25,8 @@ export type InstanceComponent = ComponentPublicInstance<{ visible: boolean }>;
 
 export type InstanceQueqe = Array<VNode>;
 
-export type IntanceOptions = Options | string;
+export type InstanceOptions = Options | string;
+
+export interface InstanceHandle {
+    close: () => void;
+}
