@@ -3,12 +3,12 @@ import type { VNode, ComponentPublicInstance } from "vue";
 export type MessageType = "warn" | "error" | "success" | "info";
 
 export type MessageInstance = {
-    (opt?: InstanceOptions): InstanceHandle;
+    (opt: InstanceOptions): InstanceHandle;
     warn: (opt: InstanceOptions) => InstanceHandle;
     error: (opt: InstanceOptions) => InstanceHandle;
     success: (opt: InstanceOptions) => InstanceHandle;
     info: (opt: InstanceOptions) => InstanceHandle;
-    closeAll: () => void;
+    closeAll(): void;
 };
 
 export type Options = {

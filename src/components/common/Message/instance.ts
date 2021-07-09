@@ -6,7 +6,6 @@ import type {
     Options,
     InstanceComponent,
     InstanceOptions,
-    InstanceHandle,
 } from "./type";
 
 const isServer = typeof window === "undefined";
@@ -61,7 +60,7 @@ const Message: MessageInstance = (opts: InstanceOptions) => {
         close: () => {
             (vm.component?.proxy as InstanceComponent).visible = false;
         },
-    } as InstanceHandle;
+    } as any;
 };
 
 Message.closeAll = () => {
@@ -71,20 +70,71 @@ Message.closeAll = () => {
     }
 };
 
-(["success", "warn", "info", "error"] as const).forEach(type => {
-    Message[type] = (options: InstanceOptions) => {
-        if (typeof options === "string") {
-            options = {
-                content: options,
-                type,
-            };
-        } else {
-            options.type = type;
-        }
-        return Message(options);
-    };
-});
+// (["success", "warn", "info", "error"] as const).forEach(type => {
+//     Message[type] = (options: InstanceOptions) => {
+//         if (typeof options === "string") {
+//             options = {
+//                 content: options,
+//                 type,
+//             };
+//         } else {
+//             options.type = type;
+//         }
+//         return Message(options);
+//     };
+// });
 
+Message.warn = (options: InstanceOptions) => {
+    const t = "warn";
+    if (typeof options === "string") {
+        options = {
+            content: options,
+            type: t,
+        };
+    } else {
+        options.type = t;
+    }
+    return Message(options);
+};
+
+Message.info = (options: InstanceOptions) => {
+    const t = "info";
+    if (typeof options === "string") {
+        options = {
+            content: options,
+            type: t,
+        };
+    } else {
+        options.type = t;
+    }
+    return Message(options);
+};
+
+Message.error = (options: InstanceOptions) => {
+    const t = "error";
+    if (typeof options === "string") {
+        options = {
+            content: options,
+            type: t,
+        };
+    } else {
+        options.type = t;
+    }
+    return Message(options);
+};
+
+Message.success = (options: InstanceOptions) => {
+    const t = "success";
+    if (typeof options === "string") {
+        options = {
+            content: options,
+            type: t,
+        };
+    } else {
+        options.type = t;
+    }
+    return Message(options);
+};
 const remove = (id: string, userOnclose?: () => void) => {
     const index = Queqe.findIndex(vm => {
         const tid = vm.component?.props.id;
@@ -114,5 +164,6 @@ const remove = (id: string, userOnclose?: () => void) => {
 export default Message;
 
 export const useMessage = () => {
+    if (isServer) return;
     return Message;
 };
