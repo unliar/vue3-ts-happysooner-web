@@ -39,10 +39,13 @@ const getList = (req: API.ARTICLE.GetArticleListRequest) => {
 };
 
 onMounted(async () => {
-    M({
-        content: "222",
-        type: "error",
-    });
+    setInterval(() => {
+        M({
+            content: "222",
+            type: "success",
+            onClose: () => console.log("onclose gogogog"),
+        });
+    }, 3000);
     await getList(props.query ?? {});
 });
 </script>

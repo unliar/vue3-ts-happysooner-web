@@ -1,3 +1,5 @@
+import type { VNode } from "vue";
+
 export type MessageType = "warn" | "error" | "success" | "info";
 
 export type MessageInstance = {
@@ -15,4 +17,8 @@ export type Options = {
     duration?: number; // 显示时长
     onClose?: () => void; // 关闭时的调用
     type?: MessageType;
+    offset?: number; // 垂直偏移
+    id?: string;
 };
+
+export type InstanceQueqe = Array<VNode>;

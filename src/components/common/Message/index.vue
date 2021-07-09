@@ -1,6 +1,14 @@
 <template>
-    <transition name="message-fade">
-        <div v-show="visible" :class="['message-box', `message-box--${type}`]">
+    <transition
+        name="message-fade"
+        @before-leave="beforeLeave"
+        @after-leave="destroy"
+    >
+        <div
+            v-show="visible"
+            :class="['message-box', `message-box--${type}`]"
+            :style="computedStyle"
+        >
             <slot>
                 <p v-if="!isHTML" class="message-content">
                     {{ $props.content }}
@@ -16,11 +24,14 @@ import {
     onMounted,
     onBeforeUnmount,
     defineProps,
-    getCurrentInstance,
+    computed,
+    defineEmit,
 } from "vue";
 // 是否可见
 const visible = ref(false);
 
+const emit = defineEmit(["destroy"]);
+const destroy = () => emit("destroy");
 const props = defineProps({
     /**
      * 弹窗警告类型
@@ -47,7 +58,7 @@ const props = defineProps({
      */
     duration: {
         type: Number,
-        default: 30, // 秒
+        default: 3, // 秒
         validator: (v: number) => {
             return +v > 0;
         },
@@ -55,7 +66,23 @@ const props = defineProps({
     /**
      * 弹窗关闭时的调用
      */
-    onClose: Function,
+    onClose: {
+        type: Function,
+        require: true,
+        default: () => {},
+    },
+    /**
+     * zIndex
+     */
+    offset: { type: Number, default: 20 },
+    zIndex: { type: Number, default: 0 },
+    /**
+     * 标识id
+     */
+    id: {
+        type: String,
+        require: true,
+    },
 });
 
 // 开启弹窗
@@ -68,14 +95,22 @@ const onOpen = () => {
     }, props.duration * 1000);
 };
 
+const beforeLeave = () => {
+    props.onClose();
+};
+
+const computedStyle = computed(() => {
+    return {
+        top: `${props.offset}px`,
+        zIndex: props.zIndex,
+    };
+});
+
 onMounted(() => {
     onOpen();
-    console.log("message box onMounted", getCurrentInstance());
+    console.log("message box onMounted");
 });
 onBeforeUnmount(() => {
-    if (typeof props.onClose === "function") {
-        props.onClose();
-    }
     console.log("message box onUnmounted");
 });
 </script>
@@ -84,13 +119,19 @@ onBeforeUnmount(() => {
 .message-box {
     position: fixed;
     left: 50%;
-    top: 20px;
     transform: translateX(-50%);
     transition: opacity 0.3s, transform 0.4s, top 0.4s;
     overflow: hidden;
     display: flex;
     align-items: center;
-    background: #909399;
+    background: #edf2fc;
+    padding: 15px 15px 15px 20px;
+    min-width: 280px;
+    font-size: 16px;
+    color: #606266;
+    border: 1px solid #ebeef5;
+    border-radius: 4px;
+    overflow: hidden;
 }
 
 p {
