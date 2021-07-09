@@ -1,4 +1,4 @@
-import { createVNode, render } from "vue";
+import { createVNode, render, getCurrentInstance } from "vue";
 import Ins from "./index.vue";
 import type {
     InstanceQueqe,
@@ -29,7 +29,6 @@ const Message: MessageInstance = (opts: InstanceOptions) => {
     const ContainerClassName = "happy__message_container_" + id;
     let container = document.createElement("div");
     container.className = ContainerClassName;
-
     let offset = options.offset || 20;
     console.log("配置高度", offset);
     Queqe.forEach(v => {
@@ -50,7 +49,6 @@ const Message: MessageInstance = (opts: InstanceOptions) => {
     // console.log(options, Queqe);
     const vm = createVNode(Ins, options);
     (vm.props as any).onDestroy = () => {
-        console.log("销毁实例");
         render(null, container);
     };
     render(vm, container);
@@ -69,20 +67,6 @@ Message.closeAll = () => {
         instance.ctx.close();
     }
 };
-
-// (["success", "warn", "info", "error"] as const).forEach(type => {
-//     Message[type] = (options: InstanceOptions) => {
-//         if (typeof options === "string") {
-//             options = {
-//                 content: options,
-//                 type,
-//             };
-//         } else {
-//             options.type = type;
-//         }
-//         return Message(options);
-//     };
-// });
 
 Message.warn = (options: InstanceOptions) => {
     const t = "warn";
@@ -149,10 +133,6 @@ const remove = (id: string, userOnclose?: () => void) => {
     const len = Queqe.length;
     if (len < 1) return;
     for (let i = index; i < len; i++) {
-        console.log(
-            "更改队列里全部高度 fixed 高度 全部减去 - " + removedHeight,
-            Queqe
-        );
         const pos =
             parseInt((Queqe[i] as any).el.style["top"], 10) -
             removedHeight -
@@ -164,6 +144,5 @@ const remove = (id: string, userOnclose?: () => void) => {
 export default Message;
 
 export const useMessage = () => {
-    if (isServer) return;
     return Message;
 };

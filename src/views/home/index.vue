@@ -41,6 +41,7 @@ const getList = (req: API.ARTICLE.GetArticleListRequest) => {
 onMounted(async () => {
     const m = useMessage();
     m.info("ddd");
+    m.info("ccc");
     await getList(props.query ?? {});
 });
 </script>
