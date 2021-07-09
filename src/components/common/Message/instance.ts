@@ -1,4 +1,4 @@
-import { createVNode, render, getCurrentInstance } from "vue";
+import { createVNode, render } from "vue";
 import Ins from "./index.vue";
 import type {
     InstanceQueqe,
@@ -11,7 +11,7 @@ import type {
 const isServer = typeof window === "undefined";
 
 const Queqe: InstanceQueqe = [];
-let seed = 5201414;
+let seed = 5201314;
 const Message: MessageInstance = (opts: InstanceOptions) => {
     if (isServer) return;
     let options: Options = {
@@ -24,18 +24,17 @@ const Message: MessageInstance = (opts: InstanceOptions) => {
         if (opts.length == 0) throw new Error("不能弹出空消息框");
         options.content == opts;
     }
+
     const id = "message_" + seed++;
 
     const ContainerClassName = "happy__message_container_" + id;
     let container = document.createElement("div");
     container.className = ContainerClassName;
     let offset = options.offset || 20;
-    console.log("配置高度", offset);
+
     Queqe.forEach(v => {
-        console.log("实例高度", v.el?.offsetHeight);
         offset += (v.el?.offsetHeight || 0) + 16;
     });
-    console.log(Queqe, offset);
     offset += 16;
     const userOnClose = options.onClose;
     options = {

@@ -40,8 +40,9 @@ const getList = (req: API.ARTICLE.GetArticleListRequest) => {
 
 onMounted(async () => {
     const m = useMessage();
-    m.info("ddd");
-    m.info("ccc");
+    setInterval(() => {
+        m.success("qaq");
+    }, 1500);
     await getList(props.query ?? {});
 });
 </script>
