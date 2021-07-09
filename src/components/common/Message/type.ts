@@ -1,13 +1,13 @@
-import type { VNode } from "vue";
+import type { VNode, ComponentPublicInstance } from "vue";
 
 export type MessageType = "warn" | "error" | "success" | "info";
 
 export type MessageInstance = {
-    (opt: Options): void;
-    warn(opt: Options): void;
-    error(opt: Options): void;
-    success(opt: Options): void;
-    info(opt: Options): void;
+    (opt: IntanceOptions): void;
+    warn(opt: IntanceOptions): void;
+    error(opt: IntanceOptions): void;
+    success(opt: IntanceOptions): void;
+    info(opt: IntanceOptions): void;
     closeAll(): void;
 };
 
@@ -21,4 +21,8 @@ export type Options = {
     id?: string;
 };
 
+export type InstanceComponent = ComponentPublicInstance<{ visible: boolean }>;
+
 export type InstanceQueqe = Array<VNode>;
+
+export type IntanceOptions = Options | string;

@@ -1,12 +1,18 @@
 import { createVNode, render } from "vue";
 import Ins from "./index.vue";
-import type { InstanceQueqe, MessageInstance, Options } from "./type";
+import type {
+    InstanceQueqe,
+    MessageInstance,
+    Options,
+    InstanceComponent,
+    IntanceOptions,
+} from "./type";
 
 const isServer = typeof window === "undefined";
 
 const Queqe: InstanceQueqe = [];
 let seed = 5201414;
-const Message: MessageInstance = (opts: Options | String) => {
+const Message: MessageInstance = (opts: IntanceOptions) => {
     if (isServer) return;
     let options: Options = {
         content: "",
@@ -50,17 +56,33 @@ const Message: MessageInstance = (opts: Options | String) => {
     render(vm, container);
     Queqe.push(vm);
     document.body.appendChild(container.firstElementChild as Element);
+    return {
+        close: () => {
+            (vm.component?.proxy as InstanceComponent).visible = false;
+        },
+    };
 };
 
-Message.closeAll = () => {};
+Message.closeAll = () => {
+    for (let i = Queqe.length - 1; i >= 0; i--) {
+        const instance = Queqe[i].component as any;
+        instance.ctx.close();
+    }
+};
 
-Message.success = () => {};
-
-Message.warn = () => {};
-
-Message.info = () => {};
-
-Message.error = () => {};
+(["success", "warn", "info", "error"] as const).forEach(type => {
+    Message[type] = (options: IntanceOptions) => {
+        if (typeof options === "string") {
+            options = {
+                content: options,
+                type,
+            };
+        } else {
+            options.type = type;
+        }
+        return Message(options);
+    };
+});
 
 const remove = (id: string, userOnclose?: () => void) => {
     const index = Queqe.findIndex(vm => {
@@ -76,8 +98,15 @@ const remove = (id: string, userOnclose?: () => void) => {
     const len = Queqe.length;
     if (len < 1) return;
     for (let i = index; i < len; i++) {
-        console.log("更改 fixed 高度 全部减去 - " + removedHeight, Queqe);
-        let top = [];
+        console.log(
+            "更改队列里全部高度 fixed 高度 全部减去 - " + removedHeight,
+            Queqe
+        );
+        const pos =
+            parseInt((Queqe[i] as any).el.style["top"], 10) -
+            removedHeight -
+            16;
+        (Queqe[i] as any).component.props.offset = pos;
     }
 };
 
