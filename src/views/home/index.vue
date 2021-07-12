@@ -1,7 +1,6 @@
 <script lang="ts" setup="">
 import { defineProps, onMounted, reactive } from "vue";
 import { useHead } from "@vueuse/head";
-import M, { useMessage } from "~/components/common/Message/instance";
 import { GetArticles } from "~/api/article";
 import ContentLayout from "~/components/layouts/Content/index.vue";
 import DefaultLayout from "~/components/layouts/Default/index.vue";
@@ -39,10 +38,6 @@ const getList = (req: API.ARTICLE.GetArticleListRequest) => {
 };
 
 onMounted(async () => {
-    const m = useMessage();
-    setInterval(() => {
-        m.success("qaq");
-    }, 1500);
     await getList(props.query ?? {});
 });
 </script>
