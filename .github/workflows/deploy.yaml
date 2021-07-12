@@ -57,8 +57,6 @@ jobs:
 
       - name: k3s-apply-deployment
         uses: steebchen/kubectl@v2.0.0
-        env:
-          KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
         with:
           config: ${{ secrets.KUBE_CONFIG_DATA }}
           command: apply -f ./chart/config.yaml
