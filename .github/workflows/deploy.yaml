@@ -56,11 +56,12 @@ jobs:
           sed -i "s#BOT_API#${{ secrets.BOT_API }}#g" ./chart/config.yaml
 
       - name: k3s-apply-deployment
-        uses: steebchen/kubectl@master
+        uses: steebchen/kubectl@v2.0.0
         env:
           KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
         with:
-          args: apply -f ./chart/config.yaml
+          config: ${{ secrets.KUBE_CONFIG_DATA }}
+          command: apply -f ./chart/config.yaml
       - name: wechat-work-bot-success-deploy
         if: ${{ success() }}
         uses: chf007/action-wechat-work@master
