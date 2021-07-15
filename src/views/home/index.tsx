@@ -1,4 +1,3 @@
-import { defineComponent, watch, onMounted, reactive } from "vue";
 import { useHead } from "@vueuse/head";
 
 import { GetArticles } from "~/api/article";

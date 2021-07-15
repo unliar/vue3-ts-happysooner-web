@@ -19,14 +19,6 @@
     </transition>
 </template>
 <script lang="ts" setup>
-import {
-    ref,
-    onMounted,
-    onBeforeUnmount,
-    defineProps,
-    computed,
-    defineEmit,
-} from "vue";
 // 是否可见
 const visible = ref(false);
 

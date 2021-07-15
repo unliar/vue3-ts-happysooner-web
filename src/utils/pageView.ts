@@ -1,5 +1,3 @@
-import { onBeforeMount } from "vue";
-
 /**
  * 插入百度统计脚本
  * @param id

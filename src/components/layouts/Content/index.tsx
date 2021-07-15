@@ -1,4 +1,3 @@
-import { defineComponent, computed } from "vue";
 import { useStore } from "vuex";
 
 import { StoreType } from "~/store";

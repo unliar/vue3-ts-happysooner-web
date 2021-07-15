@@ -51,7 +51,6 @@
     </DefaultLayout>
 </template>
 <script lang="ts" setup>
-import { computed, defineProps, watch } from "vue";
 import { useToast } from "vue-toastification";
 import { useHead } from "@vueuse/head";
 

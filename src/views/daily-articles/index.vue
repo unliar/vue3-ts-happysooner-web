@@ -22,7 +22,6 @@
 </template>
 
 <script lang="ts" setup>
-import { defineProps, computed, watch } from "vue";
 import { useHead } from "@vueuse/head";
 
 import { UseGetMeiRiYiWen } from "~/api/article";

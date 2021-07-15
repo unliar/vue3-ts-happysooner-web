@@ -1,6 +1,5 @@
 <script lang="ts" setup>
 import { useHead } from "@vueuse/head";
-import { onMounted, onUnmounted, ref } from "vue";
 import { useRouter } from "vue-router";
 const router = useRouter();
 

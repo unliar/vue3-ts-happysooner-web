@@ -1,5 +1,4 @@
-<script lang="ts" setup="">
-import { defineProps, onMounted, reactive } from "vue";
+<script lang="ts" setup>
 import { useHead } from "@vueuse/head";
 import { GetArticles } from "~/api/article";
 import ContentLayout from "~/components/layouts/Content/index.vue";

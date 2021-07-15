@@ -1,5 +1,4 @@
 import { AxiosRequestConfig } from "axios";
-import { reactive, watchEffect, toRefs } from "vue";
 import Axios from "./fetch";
 
 // 花里胡哨请求数据

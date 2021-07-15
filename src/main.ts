@@ -1,5 +1,6 @@
 import { createApp } from "vue";
 import { createHead } from "@vueuse/head";
+import "vue-global-api";
 import Toast, { PluginOptions, POSITION } from "vue-toastification";
 import "vue-toastification/dist/index.css";
 import "@geist-ui/themes";

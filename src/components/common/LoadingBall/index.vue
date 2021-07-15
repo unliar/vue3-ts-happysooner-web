@@ -1,6 +1,4 @@
 <script lang="ts" setup>
-import { defineProps, reactive, computed } from "vue";
-
 const props = defineProps({
     info: String,
     color: String,

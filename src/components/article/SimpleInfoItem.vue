@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import { defineProps } from "vue";
 import { FromNow } from "~/utils/time";
 
 const props = defineProps({

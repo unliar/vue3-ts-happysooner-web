@@ -73,7 +73,6 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, ref, watch } from "vue";
 import { useRouter } from "vue-router";
 import { useToast } from "vue-toastification";
 import { useStore } from "vuex";
