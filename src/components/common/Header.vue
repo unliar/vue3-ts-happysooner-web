@@ -20,7 +20,6 @@
     </header>
 </template>
 <script lang="ts" setup>
-import { computed, defineProps } from "vue";
 import { useRouter } from "vue-router";
 import { useStore } from "vuex";
 import type { StoreType } from "~/store";
