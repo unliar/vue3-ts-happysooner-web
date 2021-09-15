@@ -9,7 +9,6 @@ import "@geist-ui/typography";
 
 import App from "./App.vue";
 import RouterInstance from "./router";
-import Store from "./store/index";
 import { AddNProgress } from "./utils/routerHooks";
 import Highlight from "./utils/highlight";
 import LoadingBall from "./components/common/LoadingBall";
@@ -40,5 +39,4 @@ createApp(App)
     .use(Highlight)
     .use(LoadingBall)
     .use(Avatar)
-    .use(Store)
     .mount("#vue-next");

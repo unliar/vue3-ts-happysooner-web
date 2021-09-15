@@ -2,7 +2,7 @@
 
 ![vue3-ts-happysooner-web](https://socialify.git.ci/unliar/vue3-ts-happysooner-web/image?description=1&descriptionEditable=a%20website%20build%20with%20Vite%202.0%20Vue%203.0%20Vuex%204.0%20Vue-Router%204.0&font=Source%20Code%20Pro&forks=1&issues=1&language=1&owner=1&pattern=Signal&pulls=1&stargazers=1&theme=Dark)
 
-这是一个 happysooner.com 站点的 Vite 2.0 + Vue 3.0 + Vuex 4.0 + Vue-Router 4.0 全家桶精简复刻项目, 主要目的是为了学习复健 Vue 3.0。
+这是一个 happysooner.com 站点的 Vite 2.0 + Vue 3.0 + Pinia + Vue-Router 4.0 全家桶精简复刻项目, 主要目的是为了学习复健 Vue 3.2。
 
 预览地址 - history 路由: [vue-next.happysooner.com/](https://vue-next.happysooner.com/)
 
