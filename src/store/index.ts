@@ -12,7 +12,7 @@ export type StoreType = {
 };
 
 /**
- * @deprecated 废弃
+ * @deprecated 废弃 现在的状态管理已使用 https://pinia.esm.dev/
  */
 const Store = createStore<StoreType>({
     state() {
