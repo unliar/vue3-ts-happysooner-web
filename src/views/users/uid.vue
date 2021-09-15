@@ -57,7 +57,8 @@
 </template>
 <script lang="ts" setup>
 import { useHead } from "@vueuse/head";
-import { useStore } from "vuex";
+import { useStore } from "~/store/pinia";
+
 import { useToast } from "vue-toastification";
 // - - 项目内import
 import DefaultLayout from "~/components/layouts/Default/index.vue";
@@ -76,7 +77,7 @@ const props = defineProps({
     },
 });
 
-const store = useStore<StoreType>();
+const store = useStore();
 const toast = useToast();
 
 const { data: userData } = UseGetUserInfoByID(props.uid);
@@ -102,7 +103,7 @@ const articles = reactive<{
 
 // 判断用户是否是
 const isCurrentUser = computed(
-    () => store.state.User.Id === userData.value.Result?.Id
+    () => store.User.Id === userData.value.Result?.Id
 );
 const title = computed(() => `${userData.value.Result?.Nickname}的个人中心`);
 useHead({
@@ -112,7 +113,7 @@ useHead({
 // 注销登录
 const removeLogin = () => {
     console.log("退出登录");
-    store.commit(MUTATIONS.RESET_USER_STORE);
+    store.ResetUserStore();
     toast.success("退出登录成功~");
 };
 

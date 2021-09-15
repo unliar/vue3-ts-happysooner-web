@@ -75,7 +75,8 @@
 <script lang="ts" setup>
 import { useRouter } from "vue-router";
 import { useToast } from "vue-toastification";
-import { useStore } from "vuex";
+import { useStore } from "~/store/pinia";
+
 // 不经意的分割线
 import { GetAccountUnique, GetUserByToken, PostUser } from "~/api/user";
 import type { StoreType } from "~/store";
@@ -84,14 +85,14 @@ import { SetTokenCookies } from "~/utils/cookie";
 import { ValidateLoginNameRules } from "~/utils/validate";
 
 const toast = useToast();
-const store = useStore<StoreType>();
+const store = useStore();
 const router = useRouter();
 
 const account = ref("");
 const nickname = ref("");
 const password = ref("");
 const isNewUser = ref(false);
-const currentUserID = computed(() => store.state.User.Id);
+const currentUserID = computed(() => store.User.Id);
 
 watch(account, cur => {
     if (!cur.trim()) {
@@ -131,7 +132,8 @@ const Login = async () => {
     const Token = data.Result.Token;
     const TokenExp = data.Result.TokenAvailableDays;
     SetTokenCookies(Token, TokenExp);
-    store.dispatch(ACTIONS.GET_AUTHED_USER_INFO);
+    // 获取用户信息
+    store.GetAuthedUserInfo();
     toast.success(`欢迎 ${data?.Result.UserInfo.Nickname} 前来观光`, {
         onClose() {
             router.back();

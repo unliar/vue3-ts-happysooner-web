@@ -5,11 +5,10 @@
 <script lang="ts" setup>
 import { useHead } from "@vueuse/head";
 import { POSITION, useToast } from "vue-toastification";
-import { useStore } from "vuex";
+import { useStore } from "~/store/pinia";
 import { useRoute } from "vue-router";
 
 import GithubStar from "~/components/common/GithubStar.vue";
-import { ACTIONS } from "~/store/type";
 import { useBaiduInit } from "./utils/pageView";
 const store = useStore();
 const toast = useToast();
@@ -36,9 +35,10 @@ onMounted(async () => {
 
     // 应用初始化 Store 数据
     // 用户登录信息
-    store.dispatch(ACTIONS.GET_AUTHED_USER_INFO);
+    store.GetAuthedUserInfo();
+
     // 用户主题信息
-    store.dispatch(ACTIONS.GET_CATEGORY_LIST);
+    store.GetCategoryList();
     // 高亮初始化
     (window as any)?.hljs?.initHighlightingOnLoad?.();
 });

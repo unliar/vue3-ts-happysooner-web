@@ -1,14 +1,12 @@
-import { useStore } from "vuex";
-
-import { StoreType } from "~/store";
+import { useStore } from "~/store/pinia";
 
 import "./index.css";
 const DefaultLayout = defineComponent({
     name: "content-layout",
     setup() {
-        const store = useStore<StoreType>();
+        const store = useStore();
         return {
-            CategoryList: computed(() => store.state.Article.CategoryList),
+            CategoryList: computed(() => store.Article.CategoryList),
         };
     },
     render() {

@@ -21,8 +21,7 @@
 </template>
 <script lang="ts" setup>
 import { useRouter } from "vue-router";
-import { useStore } from "vuex";
-import type { StoreType } from "~/store";
+import { useStore } from "~/store/pinia";
 
 const router = useRouter();
 
@@ -40,15 +39,15 @@ const ToIndex = () => {
     router.push("/");
     // window.location.href = "/"
 };
-const store = useStore<StoreType>();
+const store = useStore();
 // 判断用户是否作者
 const isAuthor = computed(
-    () => !!store.state.User?.Roles?.find(i => i.Title == "Author")
+    () => !!store.User?.Roles?.find(i => i.Title == "Author")
 );
 // 获取用户ID
-const userId = computed(() => store.state.User.Id ?? 0);
+const userId = computed(() => store.User.Id ?? 0);
 // 获取用户头像
-const avatar = computed(() => store.state.User.Avatar ?? "");
+const avatar = computed(() => store.User.Avatar ?? "");
 // props
 const title = props.title;
 const brief = props.brief;

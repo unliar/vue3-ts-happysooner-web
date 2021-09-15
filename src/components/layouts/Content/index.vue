@@ -23,13 +23,11 @@
 </template>
 
 <script lang="ts" setup>
-import { useStore } from "vuex";
+import { useStore } from "~/store/pinia";
 
-import type { StoreType } from "~/store";
+const store = useStore();
 
-const store = useStore<StoreType>();
-
-const CategoryList = computed(() => store.state.Article.CategoryList);
+const CategoryList = computed(() => store.Article.CategoryList);
 </script>
 
 <style scoped>

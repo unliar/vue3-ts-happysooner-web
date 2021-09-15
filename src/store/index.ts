@@ -11,6 +11,9 @@ export type StoreType = {
     };
 };
 
+/**
+ * @deprecated 废弃
+ */
 const Store = createStore<StoreType>({
     state() {
         return {

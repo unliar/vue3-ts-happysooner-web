@@ -1,8 +1,8 @@
 <script lang="ts" setup>
 import { useRouter } from "vue-router";
 import { useToast } from "vue-toastification";
-import { useStore } from "vuex";
-import type { StoreType } from "~/store/index";
+import { useStore } from "~/store/pinia";
+
 import { GetCommentList, PostComment } from "~/api/article";
 import { DefaultFormat } from "~/utils/time";
 
@@ -13,9 +13,9 @@ const props = defineProps({
 
 const toast = useToast();
 const router = useRouter();
-const store = useStore<StoreType>();
+const store = useStore();
 
-const isAuthed = computed(() => store?.state?.User?.Id ?? 0 > 0);
+const isAuthed = computed(() => store?.User?.Id ?? 0 > 0);
 
 // 评论值
 // ref: Comment = ""
