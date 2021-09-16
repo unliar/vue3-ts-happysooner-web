@@ -51,14 +51,14 @@ spec:
                               command:
                                   - sh
                                   - "-c"
-                                  - wget --output-document=/dev/null "BOT_API?title=✅%20$(hostname)&desc=位于节点**${MICRO_NODE_NAME}**的服务启动"
+                                  - wget --output-document=/dev/null "BOT_API?title=✅%20$(hostname)&desc=位于节点**${MICRO_NODE_NAME}**的服务启动" || true
 
                       preStop:
                           exec:
                               command:
                                   - sh
                                   - "-c"
-                                  - wget --output-document=/dev/null "BOT_API?title=❌%20$(hostname)&desc=位于节点**${MICRO_NODE_NAME}**的服务移除"
+                                  - wget --output-document=/dev/null "BOT_API?title=❌%20$(hostname)&desc=位于节点**${MICRO_NODE_NAME}**的服务移除" || true
 
 ---
 apiVersion: v1
