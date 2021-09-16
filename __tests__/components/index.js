@@ -1,3 +1,4 @@
+import "vue-global-api";
 import { mount } from "@vue/test-utils";
 import Avatar from "../../src/components/common/Avatar/index.vue";
 import EmptyContent from "../../src/components/common/EmptyContent.vue";
