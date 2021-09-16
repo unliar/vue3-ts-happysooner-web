@@ -14,7 +14,7 @@
         "lint": "pretty-quick --staged",
         "wlint": "prettier --write ./src",
         "postinstall": "husky install",
-        "test": "jest"
+        "test": "jest --coverage"
     },
     "dependencies": {
         "@geist-ui/themes": "^1.0.1",
