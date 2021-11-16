@@ -38,6 +38,9 @@
                         >本站源码</a
                     >
                 </span>
+                <span>
+                    <a href="https://t.me/happy_naive">TG频道</a>
+                </span>
             </div>
 
             <div class="friend-link">
