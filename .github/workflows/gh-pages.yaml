@@ -34,22 +34,23 @@ jobs:
         with:
           publish_dir: "dist/"
           github_token: ${{ secrets.GITHUB_TOKEN }}
-      - name: wechat-work-bot-success
-        uses: chf007/action-wechat-work@master
-        env:
-          WECHAT_WORK_BOT_WEBHOOK: ${{secrets.WECHAT_WORK_BOT_WEBHOOK}}
+          
+      - name: feishu-bot-message
+        if: always()
+        uses: foxundermoon/feishu-action@v2
         with:
-          msgtype: markdown
-          content: "#### ✅ [${{github.repository}}](https://github.com/${{env.CI_REPOSITORY}})  gh-page 发布成功 \n
-          > 地址: [在线访问 👍](https://${{env.CI_REPOSITORY_OWNER}}.github.io/${{env.CI_REPOSITORY_NAME}}/)
-          "
-      - name: wechat-work-bot-failed-build
-        if: ${{ failure() }}
-        uses: chf007/action-wechat-work@master
-        env:
-          WECHAT_WORK_BOT_WEBHOOK: ${{secrets.WECHAT_WORK_BOT_WEBHOOK}}
-        with:
-          msgtype: markdown
-          content: "#### ❌ [${{github.repository}}](https://github.com/${{env.CI_REPOSITORY}})  gh-page 发布失败 \n
-          > 地址: [在线访问 😅](https://${{env.CI_REPOSITORY_OWNER}}.github.io/${{env.CI_REPOSITORY_NAME}}/)
-          " 
+          url: ${{ secrets.FEISHU_BOT_WEBHOOK_URL }}
+          msg_type: text
+          content: |
+            text: |
+              ⭕️ 部署状态 - From Github Action 
+              
+              repository: https://github.com/${{ github.repository }}
+
+              committer: https://github.com/${{ github.actor }}
+              
+              compare: ${{ github.event.compare }}
+
+              job status: ${{ job.status }}
+              
+              online: https://${{env.CI_REPOSITORY_OWNER}}.github.io/${{env.CI_REPOSITORY_NAME}}/
