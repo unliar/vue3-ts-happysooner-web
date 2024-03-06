@@ -77,8 +77,8 @@ spec: #这是关于该 Service 的定义，描述了 Service 如何选择 Pod，
           nodePort: 31003 #通过任意节点的 32600 端口访问 Service
           targetPort: 80 #将请求转发到匹配 Pod 的端口
     type: NodePort #Serive的类型，ClusterIP/NodePort/LoaderBalancer
-    topologyKeys:
-        - "kubernetes.io/hostname"
-        - "topology.kubernetes.io/zone"
-        - "topology.kubernetes.io/region"
-        - "*"
+    # topologyKeys:
+    #     - "kubernetes.io/hostname"
+    #     - "topology.kubernetes.io/zone"
+    #     - "topology.kubernetes.io/region"
+    #     - "*"
