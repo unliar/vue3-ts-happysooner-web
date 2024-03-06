@@ -51,7 +51,7 @@ git commit -m "feat: add a perfect feature"
 
 ### 附录
 
-1. Vue history 路由 nginx 简要配置文件, 适用于单页面应用。
+1. Vue history 路由 nginx 简要配置文件, 适用于单页面应用 。
 
 ```
 server {
