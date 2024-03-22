@@ -2,9 +2,9 @@ FROM node:lts as build-vue
 
 WORKDIR /app
 
-ADD package.json .npmrc ./
+ADD package.json pnpm-lock.yaml .npmrc ./
 
-RUN npm i
+RUN npm i -g pnpm && pnpm i
 
 COPY . /app
 
